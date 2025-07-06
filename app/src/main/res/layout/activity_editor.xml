@@ -1,46 +1,202 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_height="match_parent"
   android:layout_width="match_parent"
-  android:orientation="vertical"
+  android:fitsSystemWindows="true"
   tools:context="com.chaidarun.chronofile.EditorActivity"
 >
   <com.google.android.material.appbar.AppBarLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:theme="@style/AppTheme.AppBarOverlay"
+    android:fitsSystemWindows="true"
+    app:liftOnScroll="true"
   >
-    <androidx.appcompat.widget.Toolbar
-      android:background="?attr/colorPrimary"
-      android:elevation="4dp"
+    <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/editorToolbar"
       android:layout_height="?attr/actionBarSize"
       android:layout_width="match_parent"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
       app:title="Settings"
+      app:navigationIcon="?attr/homeAsUpIndicator"
     />
   </com.google.android.material.appbar.AppBarLayout>
-  <TextView
-    android:id="@+id/editorInstructions"
-    android:layout_height="wrap_content"
+  
+  <androidx.core.widget.NestedScrollView
+    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:padding="16dp"
-  />
-  <EditText
-    android:background="@color/colorPrimary"
-    android:focusedByDefault="true"
-    android:fontFamily="monospace"
-    android:gravity="top"
-    android:id="@+id/editorText"
-    android:inputType="textMultiLine"
-    android:layout_height="0dp"
-    android:layout_weight="1"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  >
+    <LinearLayout
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:padding="16dp"
+    >
+      <!-- Activity Groups Section -->
+      <com.google.android.material.card.MaterialCardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        style="?attr/materialCardViewElevatedStyle"
+      >
+        <LinearLayout
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:orientation="vertical"
+          android:padding="16dp"
+        >
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Activity Groups"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:layout_marginBottom="8dp"
+          />
+          
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Group similar activities together for better chart organization"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="16dp"
+          />
+          
+          <!-- Groups List -->
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/groupsList"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp"
+          />
+          
+          <!-- Add Group Button -->
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/addGroupButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Add Group"
+            app:icon="@android:drawable/ic_input_add"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      
+      <!-- Advanced Settings Section -->
+      <com.google.android.material.card.MaterialCardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        style="?attr/materialCardViewElevatedStyle"
+      >
+        <LinearLayout
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:orientation="vertical"
+          android:padding="16dp"
+        >
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Advanced Settings"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:layout_marginBottom="8dp"
+          />
+          
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Edit raw JSON configuration for advanced customization"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="16dp"
+          />
+          
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/editJsonButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Edit JSON Config"
+            app:icon="@android:drawable/ic_menu_edit"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+  
+  <!-- Hidden JSON Editor -->
+  <LinearLayout
+    android:id="@+id/jsonEditorContainer"
     android:layout_width="match_parent"
-    android:padding="16dp"
-    android:scrollbars="vertical"
-    android:textSize="15sp"
-  />
-</LinearLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/colorSurface"
+    android:visibility="gone"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+  >
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/jsonEditorToolbar"
+      android:layout_height="?attr/actionBarSize"
+      android:layout_width="match_parent"
+      app:title="JSON Configuration"
+      app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
+    />
+    
+    <TextView
+      android:id="@+id/editorInstructions"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:padding="16dp"
+      android:textAppearance="?attr/textAppearanceBodyMedium"
+      android:textColor="?attr/colorOnSurfaceVariant"
+    />
+    
+    <EditText
+      android:id="@+id/editorText"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_width="match_parent"
+      android:layout_margin="16dp"
+      android:background="@color/colorSurfaceContainer"
+      android:fontFamily="monospace"
+      android:gravity="top"
+      android:inputType="textMultiLine"
+      android:padding="16dp"
+      android:scrollbars="vertical"
+      android:textSize="14sp"
+      android:textColor="?attr/colorOnSurface"
+    />
+    
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="end"
+      android:padding="16dp"
+    >
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/jsonCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Cancel"
+        style="@style/Widget.Material3.Button.TextButton"
+      />
+      
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/jsonSaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+      />
+    </LinearLayout>
+  </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

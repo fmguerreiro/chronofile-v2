@@ -5,44 +5,350 @@ package com.chaidarun.chronofile
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.NavUtils
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chaidarun.chronofile.databinding.ActivityEditorBinding
+import com.chaidarun.chronofile.databinding.ItemActivityGroupBinding
+import com.google.android.material.chip.Chip
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class EditorActivity : BaseActivity() {
   private val binding by viewBinding(ActivityEditorBinding::inflate)
+  private lateinit var groupsAdapter: ActivityGroupsAdapter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.editorToolbar)
-    binding.editorInstructions.apply {
-      text =
-        HtmlCompat.fromHtml(
-          "If you'd like to aggregate multiple activity types into a single one for charting purposes, you can define such groups in the <a href=\"https://en.wikipedia.org/wiki/JSON#Syntax\">JSON</a> config object below. Example:<br /><br />{\"activityGroups\":{\"Chores\":[\"Cook\",\"Laundry\"],\"Exercise\":[\"Football\",\"Yoga\"]}}",
-          HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
-      movementMethod = LinkMovementMethod.getInstance() // https://stackoverflow.com/a/4303608
-    }
-    binding.editorText.setText(Store.state.config?.serialize() ?: "")
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    
+    setupGroupsList()
+    setupButtons()
+    setupJsonEditor()
   }
-
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_editor, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.action_editor_cancel -> Log.i(TAG, "Canceled config file edit")
-      R.id.action_editor_save -> {
-        Store.dispatch(Action.SetConfigFromText(binding.editorText.text.toString()))
-        Log.i(TAG, "Edited config file")
+  
+  private fun setupGroupsList() {
+    groupsAdapter = ActivityGroupsAdapter { action ->
+      when (action) {
+        is GroupAction.Edit -> showEditGroupDialog(action.groupName, action.activities)
+        is GroupAction.Delete -> showDeleteGroupDialog(action.groupName)
+        is GroupAction.AddActivity -> showAddActivityDialog(action.groupName)
+        is GroupAction.RemoveActivity -> removeActivityFromGroup(action.groupName, action.activity)
       }
-      else -> return super.onOptionsItemSelected(item)
     }
+    
+    binding.groupsList.apply {
+      layoutManager = LinearLayoutManager(this@EditorActivity)
+      adapter = groupsAdapter
+    }
+    
+    // Load current groups
+    loadGroups()
+  }
+  
+  private fun setupButtons() {
+    binding.addGroupButton.setOnClickListener {
+      showAddGroupDialog()
+    }
+    
+    binding.editJsonButton.setOnClickListener {
+      showJsonEditor()
+    }
+    
+    binding.jsonCancelButton.setOnClickListener {
+      hideJsonEditor()
+    }
+    
+    binding.jsonSaveButton.setOnClickListener {
+      saveJsonConfig()
+    }
+    
+    binding.jsonEditorToolbar.setNavigationOnClickListener {
+      hideJsonEditor()
+    }
+  }
+  
+  private fun setupJsonEditor() {
+    binding.editorInstructions.apply {
+      text = HtmlCompat.fromHtml(
+        "Advanced users can directly edit the JSON configuration. Use this to configure activity groups, NFC tags, and weekly goals.<br /><br />Example:<br />{\"activityGroups\":{\"Exercise\":[\"Gym\",\"Running\"],\"Work\":[\"Coding\",\"Meetings\"]}}",
+        HtmlCompat.FROM_HTML_MODE_LEGACY
+      )
+      movementMethod = LinkMovementMethod.getInstance()
+    }
+  }
+  
+  private fun loadGroups() {
+    val config = Store.state.config
+    val groups = mutableMapOf<String, MutableList<String>>()
+    
+    // Extract groups from current config
+    config?.let { cfg ->
+      val jsonString = cfg.serialize()
+      try {
+        val jsonMap = com.google.gson.Gson().fromJson(jsonString, Map::class.java) as? Map<String, Any>
+        val activityGroups = jsonMap?.get("activityGroups") as? Map<String, List<String>>
+        activityGroups?.forEach { (groupName, activities) ->
+          groups[groupName] = activities.toMutableList()
+        }
+      } catch (e: Exception) {
+        Log.w(TAG, "Failed to parse activity groups", e)
+      }
+    }
+    
+    groupsAdapter.updateGroups(groups)
+  }
+  
+  private fun saveGroups(groups: Map<String, List<String>>) {
+    val currentConfig = Store.state.config
+    val configMap = if (currentConfig != null) {
+      try {
+        val gson = com.google.gson.Gson()
+        gson.fromJson(currentConfig.serialize(), Map::class.java) as MutableMap<String, Any>
+      } catch (e: Exception) {
+        mutableMapOf<String, Any>()
+      }
+    } else {
+      mutableMapOf<String, Any>()
+    }
+    
+    if (groups.isNotEmpty()) {
+      configMap["activityGroups"] = groups
+    } else {
+      configMap.remove("activityGroups")
+    }
+    
+    val gson = com.google.gson.GsonBuilder()
+      .disableHtmlEscaping()
+      .setPrettyPrinting()
+      .create()
+    
+    val newConfigJson = gson.toJson(configMap)
+    Store.dispatch(Action.SetConfigFromText(newConfigJson))
+    Log.i(TAG, "Updated activity groups")
+  }
+  
+  private fun showAddGroupDialog() {
+    val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_group, null)
+    val groupNameInput = dialogView.findViewById<TextInputEditText>(R.id.groupNameInput)
+    val activitiesInput = dialogView.findViewById<TextInputEditText>(R.id.activitiesInput)
+    
+    AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setTitle("Add Activity Group")
+      .setView(dialogView)
+      .setPositiveButton("Add") { _, _ ->
+        val groupName = groupNameInput.text.toString().trim()
+        val activitiesText = activitiesInput.text.toString().trim()
+        val activities = if (activitiesText.isNotEmpty()) {
+          activitiesText.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+        } else {
+          emptyList()
+        }
+        
+        if (groupName.isNotEmpty()) {
+          addGroup(groupName, activities)
+        }
+      }
+      .setNegativeButton("Cancel", null)
+      .show()
+  }
+  
+  private fun showEditGroupDialog(groupName: String, activities: List<String>) {
+    val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_group, null)
+    val groupNameInput = dialogView.findViewById<TextInputEditText>(R.id.groupNameInput)
+    val activitiesInput = dialogView.findViewById<TextInputEditText>(R.id.activitiesInput)
+    
+    groupNameInput.setText(groupName)
+    activitiesInput.setText(activities.joinToString(", "))
+    
+    AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setTitle("Edit Activity Group")
+      .setView(dialogView)
+      .setPositiveButton("Save") { _, _ ->
+        val newGroupName = groupNameInput.text.toString().trim()
+        val activitiesText = activitiesInput.text.toString().trim()
+        val newActivities = if (activitiesText.isNotEmpty()) {
+          activitiesText.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+        } else {
+          emptyList()
+        }
+        
+        if (newGroupName.isNotEmpty()) {
+          editGroup(groupName, newGroupName, newActivities)
+        }
+      }
+      .setNegativeButton("Cancel", null)
+      .show()
+  }
+  
+  private fun showDeleteGroupDialog(groupName: String) {
+    AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setTitle("Delete Group")
+      .setMessage("Are you sure you want to delete the \"$groupName\" group?")
+      .setPositiveButton("Delete") { _, _ ->
+        deleteGroup(groupName)
+      }
+      .setNegativeButton("Cancel", null)
+      .show()
+  }
+  
+  private fun showAddActivityDialog(groupName: String) {
+    val input = EditText(this)
+    input.hint = "Activity name"
+    
+    AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setTitle("Add Activity to $groupName")
+      .setView(input)
+      .setPositiveButton("Add") { _, _ ->
+        val activity = input.text.toString().trim()
+        if (activity.isNotEmpty()) {
+          addActivityToGroup(groupName, activity)
+        }
+      }
+      .setNegativeButton("Cancel", null)
+      .show()
+  }
+  
+  private fun addGroup(groupName: String, activities: List<String>) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    currentGroups[groupName] = activities
+    saveGroups(currentGroups)
+    loadGroups()
+  }
+  
+  private fun editGroup(oldGroupName: String, newGroupName: String, activities: List<String>) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    currentGroups.remove(oldGroupName)
+    currentGroups[newGroupName] = activities
+    saveGroups(currentGroups)
+    loadGroups()
+  }
+  
+  private fun deleteGroup(groupName: String) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    currentGroups.remove(groupName)
+    saveGroups(currentGroups)
+    loadGroups()
+  }
+  
+  private fun addActivityToGroup(groupName: String, activity: String) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    val activities = currentGroups[groupName]?.toMutableList() ?: mutableListOf()
+    if (!activities.contains(activity)) {
+      activities.add(activity)
+      currentGroups[groupName] = activities
+      saveGroups(currentGroups)
+      loadGroups()
+    }
+  }
+  
+  private fun removeActivityFromGroup(groupName: String, activity: String) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    val activities = currentGroups[groupName]?.toMutableList() ?: return
+    activities.remove(activity)
+    currentGroups[groupName] = activities
+    saveGroups(currentGroups)
+    loadGroups()
+  }
+  
+  private fun showJsonEditor() {
+    binding.editorText.setText(Store.state.config?.serialize() ?: "")
+    binding.jsonEditorContainer.visibility = View.VISIBLE
+  }
+  
+  private fun hideJsonEditor() {
+    binding.jsonEditorContainer.visibility = View.GONE
+  }
+  
+  private fun saveJsonConfig() {
+    Store.dispatch(Action.SetConfigFromText(binding.editorText.text.toString()))
+    Log.i(TAG, "Saved JSON config")
+    hideJsonEditor()
+    loadGroups() // Refresh the groups list
+  }
+
+  override fun onSupportNavigateUp(): Boolean {
     NavUtils.navigateUpFromSameTask(this)
     return true
+  }
+}
+
+sealed class GroupAction {
+  data class Edit(val groupName: String, val activities: List<String>) : GroupAction()
+  data class Delete(val groupName: String) : GroupAction()
+  data class AddActivity(val groupName: String) : GroupAction()
+  data class RemoveActivity(val groupName: String, val activity: String) : GroupAction()
+}
+
+class ActivityGroupsAdapter(
+  private val onAction: (GroupAction) -> Unit
+) : RecyclerView.Adapter<ActivityGroupViewHolder>() {
+  
+  private var groups = mutableMapOf<String, List<String>>()
+  
+  fun updateGroups(newGroups: Map<String, List<String>>) {
+    groups.clear()
+    groups.putAll(newGroups)
+    notifyDataSetChanged()
+  }
+  
+  fun getGroups(): Map<String, List<String>> = groups.toMap()
+  
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityGroupViewHolder {
+    val binding = ItemActivityGroupBinding.inflate(
+      LayoutInflater.from(parent.context), parent, false
+    )
+    return ActivityGroupViewHolder(binding, onAction)
+  }
+  
+  override fun onBindViewHolder(holder: ActivityGroupViewHolder, position: Int) {
+    val groupName = groups.keys.elementAt(position)
+    val activities = groups[groupName] ?: emptyList()
+    holder.bind(groupName, activities)
+  }
+  
+  override fun getItemCount(): Int = groups.size
+}
+
+class ActivityGroupViewHolder(
+  private val binding: ItemActivityGroupBinding,
+  private val onAction: (GroupAction) -> Unit
+) : RecyclerView.ViewHolder(binding.root) {
+  
+  fun bind(groupName: String, activities: List<String>) {
+    binding.groupName.text = groupName
+    
+    // Setup action buttons
+    binding.editGroupButton.setOnClickListener {
+      onAction(GroupAction.Edit(groupName, activities))
+    }
+    
+    binding.deleteGroupButton.setOnClickListener {
+      onAction(GroupAction.Delete(groupName))
+    }
+    
+    binding.addActivityButton.setOnClickListener {
+      onAction(GroupAction.AddActivity(groupName))
+    }
+    
+    // Setup activity chips
+    binding.activitiesChipGroup.removeAllViews()
+    activities.forEach { activity ->
+      val chip = Chip(binding.root.context).apply {
+        text = activity
+        isCloseIconVisible = true
+        setOnCloseIconClickListener {
+          onAction(GroupAction.RemoveActivity(groupName, activity))
+        }
+      }
+      binding.activitiesChipGroup.addView(chip)
+    }
   }
 }
