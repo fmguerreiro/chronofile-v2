@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <color name="colorPrimary">#284759</color>
-  <color name="colorPrimaryDark">#1c3645</color>
-  <color name="colorAccent">#81c784</color>
-  <color name="colorFadedText">#3b5a6b</color>
+  <!-- Material 3 Color Scheme -->
+  <!-- Primary colors -->
+  <color name="colorPrimary">#006493</color>
+  <color name="colorOnPrimary">#FFFFFF</color>
+  <color name="colorPrimaryContainer">#CAE6FF</color>
+  <color name="colorOnPrimaryContainer">#001E30</color>
+  
+  <!-- Secondary colors -->
+  <color name="colorSecondary">#50606E</color>
+  <color name="colorOnSecondary">#FFFFFF</color>
+  <color name="colorSecondaryContainer">#D3E5F5</color>
+  <color name="colorOnSecondaryContainer">#0C1D29</color>
+  
+  <!-- Tertiary colors -->
+  <color name="colorTertiary">#65587B</color>
+  <color name="colorOnTertiary">#FFFFFF</color>
+  <color name="colorTertiaryContainer">#EBDDFF</color>
+  <color name="colorOnTertiaryContainer">#201634</color>
+  
+  <!-- Error colors -->
+  <color name="colorError">#BA1A1A</color>
+  <color name="colorErrorContainer">#FFDAD6</color>
+  <color name="colorOnError">#FFFFFF</color>
+  <color name="colorOnErrorContainer">#410002</color>
+  
+  <!-- Background colors -->
+  <color name="colorBackground">#FAFCFF</color>
+  <color name="colorOnBackground">#191C1E</color>
+  
+  <!-- Surface colors -->
+  <color name="colorSurface">#FAFCFF</color>
+  <color name="colorOnSurface">#191C1E</color>
+  <color name="colorSurfaceVariant">#DDE3EA</color>
+  <color name="colorOnSurfaceVariant">#41484D</color>
+  
+  <!-- Outline colors -->
+  <color name="colorOutline">#71787E</color>
+  <color name="colorOutlineVariant">#C1C7CE</color>
+  
+  <!-- Legacy support -->
+  <color name="colorPrimaryDark">#004B70</color>
+  <color name="colorAccent">@color/colorSecondary</color>
+  <color name="colorFadedText">#71787E</color>
+  
+  <!-- Surface levels for elevation -->
+  <color name="colorSurfaceContainer">#ECEFF3</color>
+  <color name="colorSurfaceContainerHigh">#E6E8EC</color>
+  <color name="colorSurfaceContainerHighest">#E0E2E6</color>
 </resources>

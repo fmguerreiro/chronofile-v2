@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(keytool:*)",
+      "Bash(jenv versions:*)",
+      "Bash(/usr/libexec/java_home:*)",
+      "Bash(brew install:*)",
+      "Bash(jenv local:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(adb shell am start:*)",
+      "Bash(adb install:*)",
+      "Bash(grep:*)"
+    ],
+    "deny": []
+  }
+}

@@ -15,12 +15,14 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaidarun.chronofile.databinding.ActivityMainBinding
+import java.util.Date
 import com.chaidarun.chronofile.databinding.FormNfcBinding
 import com.chaidarun.chronofile.databinding.FormSearchBinding
 
@@ -51,13 +53,21 @@ class MainActivity : BaseActivity() {
     binding.grantLocationButton.setOnClickListener {
       ActivityCompat.requestPermissions(this@MainActivity, APP_PERMISSIONS, PERMISSION_REQUEST_CODE)
     }
+    
+    // Set up FAB to show bottom sheet
+    binding.addEntryFab.setOnClickListener {
+      // For now, use the existing dialog approach
+      // In a future update, this could be replaced with a proper bottom sheet
+      showAddEntryDialog()
+    }
+    
     binding.addEntry.setOnClickListener {
       History.addEntry(
         binding.addEntryActivity.text.toString(),
         binding.addEntryNote.text.toString()
       )
-      binding.addEntryActivity.text.clear()
-      binding.addEntryNote.text.clear()
+      binding.addEntryActivity.text?.clear()
+      binding.addEntryNote.text?.clear()
       currentFocus?.clearFocus()
     }
     binding.addEntryActivity.addTextChangedListener(
@@ -246,6 +256,66 @@ class MainActivity : BaseActivity() {
   private fun hydrateStoreFromFiles() {
     Store.dispatch(Action.SetConfigFromFile(Config.fromFile()))
     Store.dispatch(Action.SetHistory(History.fromFile()))
+  }
+  
+  private fun showAddEntryDialog() {
+    val dialogView = layoutInflater.inflate(R.layout.form_entry, null)
+    val startTimeInput = dialogView.findViewById<EditText>(R.id.formEntryStartTime)
+    val activityInput = dialogView.findViewById<EditText>(R.id.formEntryActivity)
+    val noteInput = dialogView.findViewById<EditText>(R.id.formEntryNote)
+    
+    // Pre-fill start time with the last entry's end time
+    val currentHistory = Store.state.history
+    if (currentHistory != null) {
+      val lastEntryEndTime = currentHistory.currentActivityStartTime
+      startTimeInput.setText(formatTime(Date(lastEntryEndTime * 1000)))
+    }
+    
+    val dialog = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setTitle("Add Entry")
+      .setView(dialogView)
+      .setPositiveButton("Add") { _, _ ->
+        val startTime = startTimeInput.text.toString()
+        val activity = activityInput.text.toString()
+        val note = noteInput.text.toString()
+        if (activity.isNotBlank()) {
+          val currentState = Store.state.history
+          if (currentState != null) {
+            val currentActivityStartTime = currentState.currentActivityStartTime
+            
+            // First add the entry normally
+            Store.dispatch(Action.AddEntry(activity, note, null))
+            
+            // If the user changed the start time, edit it after adding
+            val defaultTime = formatTime(Date(currentActivityStartTime * 1000))
+            if (startTime != defaultTime) {
+              // Get the newly created entry's start time (which is the old currentActivityStartTime)
+              Store.dispatch(Action.EditEntry(
+                currentActivityStartTime, // This is the start time of the entry we just created
+                startTime,
+                activity,
+                note
+              ))
+            }
+          }
+        }
+      }
+      .setNegativeButton("Cancel", null)
+      .create()
+      
+    // Disable the Add button initially
+    dialog.setOnShowListener {
+      val addButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+      addButton.isEnabled = false
+      
+      activityInput.addTextChangedListener(
+        afterTextChanged = {
+          addButton.isEnabled = activityInput.text.toString().isNotBlank()
+        }
+      )
+    }
+    
+    dialog.show()
   }
 
   companion object {

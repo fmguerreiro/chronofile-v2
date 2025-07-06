@@ -1,35 +1,98 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:clipToPadding="false"
-  android:layout_height="wrap_content"
   android:layout_width="match_parent"
-  android:paddingEnd="20dp"
-  android:paddingStart="16dp"
+  android:layout_height="wrap_content"
+  android:layout_marginHorizontal="16dp"
+  android:layout_marginVertical="4dp"
+  android:checkable="true"
+  android:clickable="true"
+  android:focusable="true"
+  app:cardCornerRadius="16dp"
+  app:cardElevation="1dp"
+  style="?attr/materialCardViewElevatedStyle"
 >
-  <TextView
-    android:id="@+id/entryActivity"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    tools:text="Sleep"
-  />
-  <TextView
-    android:id="@+id/entryNote"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_weight="1"
-    android:layout_width="0dp"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    android:textColor="@color/colorFadedText"
-    tools:text="REM"
-  />
-  <TextView
-    android:id="@+id/entryDuration"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    tools:text="Dec 31"
-  />
-</LinearLayout>
+    android:padding="16dp"
+  >
+    <!-- Activity Icon -->
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/iconContainer"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      app:cardCornerRadius="12dp"
+      app:cardElevation="0dp"
+      app:cardBackgroundColor="?attr/colorPrimaryContainer"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+    >
+      <TextView
+        android:id="@+id/activityIcon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="📝"
+        android:textColor="?attr/colorOnPrimaryContainer"
+      />
+    </com.google.android.material.card.MaterialCardView>
+    
+    <!-- Content -->
+    <LinearLayout
+      android:id="@+id/contentLayout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:layout_marginEnd="12dp"
+      android:orientation="vertical"
+      app:layout_constraintStart_toEndOf="@id/iconContainer"
+      app:layout_constraintEnd_toStartOf="@id/durationChip"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+    >
+      <TextView
+        android:id="@+id/entryActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
+        tools:text="Work"
+      />
+      
+      <TextView
+        android:id="@+id/entryNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Working on the new feature implementation"
+      />
+    </LinearLayout>
+    
+    <!-- Duration Chip -->
+    <com.google.android.material.chip.Chip
+      android:id="@+id/durationChip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAppearance="?attr/textAppearanceLabelLarge"
+      app:chipBackgroundColor="?attr/colorSecondaryContainer"
+      app:chipStrokeWidth="0dp"
+      app:chipMinHeight="32dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      tools:text="2h 30m"
+    />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

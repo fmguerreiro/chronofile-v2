@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:gravity="center"
-  android:layout_height="wrap_content"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingHorizontal="32dp"
+  android:paddingVertical="4dp"
 >
   <TextView
     android:id="@+id/time"
-    android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    android:textColor="@color/colorFadedText"
+    android:layout_height="wrap_content"
+    android:textAppearance="?attr/textAppearanceLabelMedium"
+    android:textColor="?attr/colorOnSurfaceVariant"
+    android:drawablePadding="8dp"
+    android:gravity="center_vertical"
+    tools:text="9:00 AM"
   />
 </LinearLayout>

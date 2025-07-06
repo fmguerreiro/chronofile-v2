@@ -260,14 +260,43 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
 
       with(itemView) {
         binding.entryActivity.text = activity
-        binding.entryNote.text = note
-        binding.entryDuration.text = formatDuration(itemEnd - itemStart)
+        
+        // Show/hide note based on content
+        if (note.isNullOrEmpty()) {
+          binding.entryNote.visibility = View.GONE
+        } else {
+          binding.entryNote.visibility = View.VISIBLE
+          binding.entryNote.text = note
+        }
+        
+        // Set duration in chip
+        binding.durationChip.text = formatDuration(itemEnd - itemStart)
+        
+        // Set activity icon based on activity name
+        binding.activityIcon.text = getActivityIcon(activity)
+        
         setOnClickListener { History.addEntry(activity, note) }
         setOnLongClickListener {
           (context as AppCompatActivity).startActionMode(actionModeCallback)
           selectedEntry = entry
           true
         }
+      }
+    }
+    
+    private fun getActivityIcon(activity: String): String {
+      return when (activity.lowercase()) {
+        "work" -> "💼"
+        "sleep" -> "😴"
+        "eat", "food", "meal" -> "🍽️"
+        "exercise", "gym", "sport" -> "🏃"
+        "commute", "travel", "drive" -> "🚗"
+        "meeting" -> "👥"
+        "study", "learn" -> "📚"
+        "relax", "rest" -> "🛋️"
+        "social" -> "👫"
+        "shopping" -> "🛍️"
+        else -> "📝"
       }
     }
   }

@@ -1,41 +1,130 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-    <item name="android:actionModeBackground">@color/colorPrimary</item>
-    <item
-      name="android:datePickerDialogTheme"
-    >@style/MyDatePickerDialogTheme</item>
-    <item name="android:fontFamily">@font/exo2</item>
-    <item name="android:windowBackground">@color/colorPrimaryDark</item>
-    <item
-      name="android:windowOptOutEdgeToEdgeEnforcement"
-      tools:targetApi="35"
-    >true</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="colorButtonNormal">@color/colorAccent</item>
+  <!-- Material 3 Theme -->
+  <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorOnPrimary">@color/colorOnPrimary</item>
+    <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
+    <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+    
+    <item name="colorSecondary">@color/colorSecondary</item>
+    <item name="colorOnSecondary">@color/colorOnSecondary</item>
+    <item name="colorSecondaryContainer">@color/colorSecondaryContainer</item>
+    <item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainer</item>
+    
+    <item name="colorTertiary">@color/colorTertiary</item>
+    <item name="colorOnTertiary">@color/colorOnTertiary</item>
+    <item name="colorTertiaryContainer">@color/colorTertiaryContainer</item>
+    <item name="colorOnTertiaryContainer">@color/colorOnTertiaryContainer</item>
+    
+    <item name="colorError">@color/colorError</item>
+    <item name="colorErrorContainer">@color/colorErrorContainer</item>
+    <item name="colorOnError">@color/colorOnError</item>
+    <item name="colorOnErrorContainer">@color/colorOnErrorContainer</item>
+    
+    <item name="android:colorBackground">@color/colorBackground</item>
+    <item name="colorOnBackground">@color/colorOnBackground</item>
+    <item name="colorSurface">@color/colorSurface</item>
+    <item name="colorOnSurface">@color/colorOnSurface</item>
+    <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
+    <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
+    
+    <item name="colorOutline">@color/colorOutline</item>
+    <item name="colorOutlineVariant">@color/colorOutlineVariant</item>
+    
+    <item name="android:fontFamily">@font/exo2</item>
+    <item name="fontFamily">@font/exo2</item>
+    
+    <!-- Shape -->
+    <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Chronofile.SmallComponent</item>
+    <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Chronofile.MediumComponent</item>
+    <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Chronofile.LargeComponent</item>
+    
+    <!-- Typography -->
+    <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Chronofile.HeadlineLarge</item>
+    <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Chronofile.HeadlineMedium</item>
+    <item name="textAppearanceBodyLarge">@style/TextAppearance.Chronofile.BodyLarge</item>
+    <item name="textAppearanceBodyMedium">@style/TextAppearance.Chronofile.BodyMedium</item>
+    <item name="textAppearanceLabelLarge">@style/TextAppearance.Chronofile.LabelLarge</item>
+    
+    <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
   </style>
-  <style name="AppTheme.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowActionModeOverlay">true</item>
-    <item name="android:itemBackground">@color/colorPrimaryDark</item>
-    <item name="windowNoTitle">true</item>
+  
+  <!-- Shape Appearances -->
+  <style name="ShapeAppearance.Chronofile.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">8dp</item>
   </style>
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat" />
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat" />
-  <style name="MyAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-    <item name="android:background">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+  
+  <style name="ShapeAppearance.Chronofile.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">16dp</item>
   </style>
-  <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Dialog">
-    <item name="android:background">@color/colorPrimaryDark</item>
-    <item name="android:colorAccent">@color/colorAccent</item>
+  
+  <style name="ShapeAppearance.Chronofile.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">24dp</item>
   </style>
-  <style name="MainActivityButton">
+  
+  <!-- Text Appearances -->
+  <style name="TextAppearance.Chronofile.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+    <item name="fontFamily">@font/exo2</item>
+  </style>
+  
+  <style name="TextAppearance.Chronofile.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+    <item name="fontFamily">@font/exo2</item>
+  </style>
+  
+  <style name="TextAppearance.Chronofile.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+    <item name="fontFamily">@font/exo2</item>
+  </style>
+  
+  <style name="TextAppearance.Chronofile.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+    <item name="fontFamily">@font/exo2</item>
+  </style>
+  
+  <style name="TextAppearance.Chronofile.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+    <item name="fontFamily">@font/exo2</item>
+  </style>
+  
+  <!-- Component Styles -->
+  <style name="Widget.Chronofile.Button" parent="Widget.Material3.Button">
+    <item name="android:textStyle">bold</item>
+  </style>
+  
+  <style name="Widget.Chronofile.Button.TextButton" parent="Widget.Material3.Button.TextButton">
+    <item name="android:textStyle">bold</item>
+  </style>
+  
+  <style name="Widget.Chronofile.CardView" parent="Widget.Material3.CardView.Elevated">
+    <item name="cardElevation">2dp</item>
+    <item name="cardCornerRadius">16dp</item>
+    <item name="cardUseCompatPadding">true</item>
+  </style>
+  
+  <!-- Legacy compatibility -->
+  <style name="AppTheme.NoActionBar" parent="AppTheme" />
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.ActionBar" />
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3" />
+  
+  <style name="MainActivityButton" parent="Widget.Chronofile.Button">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
-    <item name="android:textColor">@color/colorPrimaryDark</item>
-    <item name="android:textStyle">bold</item>
+  </style>
+  
+  <!-- Dialog Themes -->
+  <style name="MyAlertDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorSecondary">@color/colorSecondary</item>
+    <item name="colorSurface">@color/colorSurface</item>
+    <item name="colorOnSurface">@color/colorOnSurface</item>
+    <item name="dialogCornerRadius">16dp</item>
+  </style>
+  
+  <style name="MyDatePickerDialogTheme" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorOnPrimary">@color/colorOnPrimary</item>
+    <item name="colorSurface">@color/colorSurface</item>
+    <item name="colorOnSurface">@color/colorOnSurface</item>
   </style>
 </resources>

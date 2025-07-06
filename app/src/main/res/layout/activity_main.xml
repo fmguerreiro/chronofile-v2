@@ -5,115 +5,196 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_height="match_parent"
   android:layout_width="match_parent"
+  android:fitsSystemWindows="true"
   tools:context="com.chaidarun.chronofile.MainActivity"
 >
   <com.google.android.material.appbar.AppBarLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:theme="@style/AppTheme.AppBarOverlay"
+    android:fitsSystemWindows="true"
+    app:liftOnScroll="true"
   >
-    <androidx.appcompat.widget.Toolbar
-      android:background="?attr/colorPrimary"
-      android:elevation="4dp"
+    <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/toolbar"
       android:layout_height="?attr/actionBarSize"
       android:layout_width="match_parent"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
       app:title="Timeline"
+      app:titleCentered="true"
     />
   </com.google.android.material.appbar.AppBarLayout>
-  <LinearLayout
+  
+  <androidx.core.widget.NestedScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.chaidarun.chronofile.MainActivity"
-    tools:showIn="@layout/activity_main"
   >
     <LinearLayout
-      android:id="@+id/changeSaveDirBanner"
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
-      android:orientation="horizontal"
-      android:padding="16dp"
-      android:visibility="gone"
+      android:orientation="vertical"
     >
-      <TextView
-        android:gravity="bottom"
-        android:layout_gravity="fill"
+      <!-- Permission Banners -->
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/changeSaveDirBanner"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="0dp"
-        android:text="Choose a save directory. Otherwise your logged activities will be lost upon exit!"
-      />
-      <Button
-        android:id="@+id/changeSaveDirButton"
-        android:text="Go"
-        style="@style/MainActivityButton"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="?attr/colorErrorContainer"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+      >
+        <LinearLayout
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:orientation="horizontal"
+          android:padding="16dp"
+        >
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnErrorContainer"
+            android:text="Choose a save directory. Otherwise your logged activities will be lost upon exit!"
+          />
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/changeSaveDirButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Setup"
+            style="@style/Widget.Material3.Button.TonalButton"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/grantLocationBanner"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="?attr/colorTertiaryContainer"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+      >
+        <LinearLayout
+          android:layout_height="wrap_content"
+          android:layout_width="match_parent"
+          android:orientation="horizontal"
+          android:padding="16dp"
+        >
+          <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/colorOnTertiaryContainer"
+            android:text="Grant location permissions to record where your activities happen."
+          />
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/grantLocationButton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Grant"
+            style="@style/Widget.Material3.Button.TonalButton"
+          />
+        </LinearLayout>
+      </com.google.android.material.card.MaterialCardView>
+      
+      <!-- Timeline RecyclerView -->
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/historyList"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:nestedScrollingEnabled="false"
+        android:scrollbars="vertical"
       />
     </LinearLayout>
-    <LinearLayout
-      android:id="@+id/grantLocationBanner"
+  </androidx.core.widget.NestedScrollView>
+  
+  <!-- Modern FAB -->
+  <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    android:id="@+id/addEntryFab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+    android:text="Add Entry"
+    app:icon="@android:drawable/ic_input_add"
+  />
+  
+  <!-- Bottom Sheet for Adding Entry -->
+  <LinearLayout
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="?attr/colorSurface"
+    android:elevation="16dp"
+    android:padding="24dp"
+    android:visibility="gone"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+  >
+    <TextView
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:orientation="horizontal"
-      android:padding="16dp"
-      android:visibility="gone"
-    >
-      <TextView
-        android:gravity="bottom"
-        android:layout_gravity="fill"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="0dp"
-        android:text="Grant location permissions so we can record where your activities happen."
-      />
-      <Button
-        android:id="@+id/grantLocationButton"
-        android:text="Go"
-        style="@style/MainActivityButton"
-      />
-    </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/historyList"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:layout_width="match_parent"
-      android:scrollbars="vertical"
+      android:text="New Entry"
+      android:textAppearance="?attr/textAppearanceHeadlineMedium"
+      android:layout_marginBottom="16dp"
     />
-    <LinearLayout
-      android:background="@color/colorPrimary"
-      android:elevation="16dp"
-      android:layout_height="wrap_content"
+    
+    <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
-      android:outlineProvider="bounds"
-      android:padding="16dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="16dp"
+      android:hint="Activity"
+      style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
     >
-      <EditText
-        android:hint="Activity"
+      <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/addEntryActivity"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="0dp"
       />
-      <EditText
-        android:hint="Note"
+    </com.google.android.material.textfield.TextInputLayout>
+    
+    <com.google.android.material.textfield.TextInputLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="24dp"
+      android:hint="Note (optional)"
+      style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+    >
+      <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/addEntryNote"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_weight="1"
-        android:layout_width="0dp"
       />
-      <Button
-        android:alpha="0.5"
-        android:enabled="false"
+    </com.google.android.material.textfield.TextInputLayout>
+    
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="end"
+    >
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Cancel"
+        style="@style/Widget.Material3.Button.TextButton"
+      />
+      
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/addEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Add"
-        style="@style/MainActivityButton"
+        android:enabled="false"
       />
     </LinearLayout>
   </LinearLayout>
