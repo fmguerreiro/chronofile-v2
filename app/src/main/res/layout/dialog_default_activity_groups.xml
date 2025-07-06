@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="16dp"
+>
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Load Default Activity Groups"
+    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+    android:layout_marginBottom="16dp"
+  />
+  
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Choose a preset to get started with common activity groupings:"
+    android:textAppearance="?attr/textAppearanceBodyMedium"
+    android:textColor="?attr/colorOnSurfaceVariant"
+    android:layout_marginBottom="16dp"
+  />
+  
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/presetsRecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:nestedScrollingEnabled="false"
+  />
+  
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Note: This will add to your existing groups, not replace them."
+    android:textAppearance="?attr/textAppearanceBodySmall"
+    android:textColor="?attr/colorOnSurfaceVariant"
+    android:layout_marginTop="16dp"
+    android:fontStyle="italic"
+  />
+</LinearLayout>

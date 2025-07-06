@@ -58,6 +58,10 @@ class EditorActivity : BaseActivity() {
       showAddGroupDialog()
     }
     
+    binding.loadDefaultGroupsButton.setOnClickListener {
+      showDefaultGroupsDialog()
+    }
+    
     binding.editJsonButton.setOnClickListener {
       showJsonEditor()
     }
@@ -214,6 +218,61 @@ class EditorActivity : BaseActivity() {
       }
       .setNegativeButton("Cancel", null)
       .show()
+  }
+  
+  private fun showDefaultGroupsDialog() {
+    val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_default_activity_groups, null)
+    
+    val dialog = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+      .setView(dialogView)
+      .setNegativeButton("Cancel", null)
+      .create()
+    
+    val presetsRecyclerView = dialogView.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.presetsRecyclerView)
+    presetsRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
+    presetsRecyclerView.adapter = DefaultActivityGroupsAdapter { presetName, groups ->
+      loadDefaultGroups(presetName, groups)
+      dialog.dismiss()
+    }
+    
+    dialog.show()
+  }
+  
+  private fun loadDefaultGroups(presetName: String, defaultGroups: Map<String, List<String>>) {
+    val currentGroups = groupsAdapter.getGroups().toMutableMap()
+    var addedCount = 0
+    var skippedCount = 0
+    
+    defaultGroups.forEach { (groupName, activities) ->
+      if (currentGroups.containsKey(groupName)) {
+        // Merge activities into existing group
+        val existingActivities = currentGroups[groupName]?.toMutableList() ?: mutableListOf()
+        val newActivities = activities.filter { !existingActivities.contains(it) }
+        if (newActivities.isNotEmpty()) {
+          existingActivities.addAll(newActivities)
+          currentGroups[groupName] = existingActivities
+          addedCount++
+        } else {
+          skippedCount++
+        }
+      } else {
+        // Add new group
+        currentGroups[groupName] = activities
+        addedCount++
+      }
+    }
+    
+    saveGroups(currentGroups)
+    loadGroups()
+    
+    val message = when {
+      addedCount > 0 && skippedCount == 0 -> "Added $addedCount groups from $presetName preset"
+      addedCount > 0 && skippedCount > 0 -> "Added $addedCount groups, merged $skippedCount existing groups"
+      skippedCount > 0 -> "All groups from $presetName already exist"
+      else -> "No groups were added"
+    }
+    
+    App.toast(message)
   }
   
   private fun addGroup(groupName: String, activities: List<String>) {

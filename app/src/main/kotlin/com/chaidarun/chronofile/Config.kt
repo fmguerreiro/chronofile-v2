@@ -17,6 +17,10 @@ data class Config(
   private val unnormalizedActivityGroups: Map<String, List<String>>? = null,
   /** Map of NFC tag IDs to [activity, note] pairs as registered by the user. */
   @Expose @SerializedName("nfc") val nfcTags: Map<String, List<String>>? = null,
+  /** List of weekly goals for activity tracking. */
+  @Expose @SerializedName("weeklyGoals") val weeklyGoals: List<WeeklyGoal>? = null,
+  /** Whether to send Monday morning notifications with weekly results. */
+  @Expose @SerializedName("weeklyNotificationsEnabled") val weeklyNotificationsEnabled: Boolean = true,
 ) {
   private val activityGroups by lazy {
     mutableMapOf<String, String>().apply {

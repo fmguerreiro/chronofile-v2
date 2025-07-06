@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="24dp"
+>
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Edit Weekly Goal"
+    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+    android:layout_marginBottom="16dp"
+  />
+  
+  <com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:hint="Activity name"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+  >
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/editGoalActivity"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="text"
+    />
+  </com.google.android.material.textfield.TextInputLayout>
+  
+  <com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:hint="Target hours per week"
+    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+  >
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/editGoalHours"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="numberDecimal"
+    />
+  </com.google.android.material.textfield.TextInputLayout>
+  
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Example: 3.5 for 3 hours 30 minutes"
+    android:textAppearance="?attr/textAppearanceBodySmall"
+    android:textColor="?attr/colorOnSurfaceVariant"
+  />
+</LinearLayout>

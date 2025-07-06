@@ -109,6 +109,7 @@ class MainActivity : BaseActivity() {
       R.id.action_change_save_dir -> requestStorageAccess()
       R.id.action_settings -> startActivity(Intent(this, EditorActivity::class.java))
       R.id.action_stats -> startActivity(Intent(this, GraphActivity::class.java))
+      R.id.action_weekly_goals -> startActivity(Intent(this, WeeklyGoalsActivity::class.java))
       else -> return super.onOptionsItemSelected(item)
     }
     return true
@@ -161,6 +162,12 @@ class MainActivity : BaseActivity() {
     binding.historyList.adapter?.notifyDataSetChanged() // Reformat times in case time zone changed
     if (intent.action in NFC_INTENT_ACTIONS) {
       processNfcIntent(intent)
+    }
+    
+    // Setup weekly notifications if enabled
+    val config = Store.state.config
+    if (config?.weeklyNotificationsEnabled == true) {
+      WeeklyNotificationManager.scheduleWeeklyNotification(this)
     }
   }
 

@@ -26,6 +26,12 @@ class GraphActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.graphToolbar)
+    
+    // Set up back navigation
+    binding.graphToolbar.setNavigationOnClickListener {
+      onBackPressed()
+    }
+    
     binding.graphViewPager.run {
       adapter = GraphPagerAdapter(supportFragmentManager)
       currentItem = GraphPagerAdapter.Tab.PIE.ordinal
@@ -94,11 +100,18 @@ class GraphActivity : BaseActivity() {
         .show(supportFragmentManager, "datePicker")
     }
     binding.quickRange.setOnClickListener {
-      with(AlertDialog.Builder(this@GraphActivity, R.style.MyAlertDialogTheme)) {
-        setSingleChoiceItems(PresetRange.entries.map { it.text }.toTypedArray(), -1, null)
-        setPositiveButton("OK") { dialog, _ ->
+      val currentRange = getCurrentPresetRange()
+      val presetRanges = PresetRange.entries
+      val checkedItem = presetRanges.indexOf(currentRange).takeIf { it >= 0 } ?: -1
+      
+      with(com.google.android.material.dialog.MaterialAlertDialogBuilder(this@GraphActivity)) {
+        setTitle("Select Time Range")
+        setSingleChoiceItems(presetRanges.map { it.text }.toTypedArray(), checkedItem, null)
+        setPositiveButton("Apply") { dialog, _ ->
           val position = (dialog as AlertDialog).listView.checkedItemPosition
-          setPresetRange(Store.state.history!!, PresetRange.entries[position])
+          if (position >= 0) {
+            setPresetRange(Store.state.history!!, presetRanges[position])
+          }
         }
         setNegativeButton("Cancel", null)
         show()
@@ -113,6 +126,23 @@ class GraphActivity : BaseActivity() {
       Math.max(now - presetRange.duration, history.entries.getOrNull(0)?.startTime ?: 0)
     Store.dispatch(Action.SetGraphRangeStart(startTime))
     Store.dispatch(Action.SetGraphRangeEnd(now))
+  }
+  
+  private fun getCurrentPresetRange(): PresetRange? {
+    val history = Store.state.history ?: return null
+    val startTime = Store.state.graphConfig.startTime ?: return null
+    val endTime = Store.state.graphConfig.endTime ?: return null
+    val duration = endTime - startTime
+    
+    return PresetRange.entries.find { presetRange ->
+      val expectedDuration = when (presetRange) {
+        PresetRange.TODAY -> DAY_SECONDS
+        PresetRange.PAST_WEEK -> 7 * DAY_SECONDS
+        PresetRange.PAST_MONTH -> 30 * DAY_SECONDS
+        PresetRange.ALL_TIME -> endTime - (history.entries.firstOrNull()?.startTime ?: 0)
+      }
+      Math.abs(duration - expectedDuration) < DAY_SECONDS / 2
+    }
   }
 
   fun onCheckboxClicked(view: View) {

@@ -10,7 +10,15 @@
       "Bash(ls:*)",
       "Bash(adb shell am start:*)",
       "Bash(adb install:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(adb emu:*)",
+      "Bash(pkill:*)",
+      "Bash(adb:*)",
+      "Bash(make:*)",
+      "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew assembleDebug)",
+      "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew clean)",
+      "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew assembleDebug --stacktrace)",
+      "Bash(adb:*)"
     ],
     "deny": []
   }

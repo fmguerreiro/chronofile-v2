@@ -3,6 +3,9 @@
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
   <uses-permission android:name="android.permission.NFC" />
+  <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
   <application
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
@@ -49,9 +52,18 @@
       android:name=".GraphActivity"
       android:parentActivityName=".MainActivity"
     />
+    <activity
+      android:exported="false"
+      android:name=".WeeklyGoalsActivity"
+      android:parentActivityName=".MainActivity"
+    />
     <service
       android:exported="false"
       android:name=".FetchAddressIntentService"
+    />
+    <receiver
+      android:name=".WeeklyResultsReceiver"
+      android:exported="false"
     />
   </application>
 </manifest>

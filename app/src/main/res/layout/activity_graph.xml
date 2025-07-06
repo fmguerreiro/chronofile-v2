@@ -1,66 +1,114 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_height="match_parent"
   android:layout_width="match_parent"
-  android:orientation="vertical"
+  android:background="?attr/colorSurface"
 >
   <com.google.android.material.appbar.AppBarLayout
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:theme="@style/AppTheme.AppBarOverlay"
+    android:background="@android:color/transparent"
+    app:elevation="0dp"
   >
-    <androidx.appcompat.widget.Toolbar
-      android:background="?attr/colorPrimary"
-      android:elevation="4dp"
+    <com.google.android.material.appbar.MaterialToolbar
       android:id="@+id/graphToolbar"
       android:layout_height="?attr/actionBarSize"
       android:layout_width="match_parent"
-      app:popupTheme="@style/AppTheme.PopupOverlay"
       app:title="Statistics"
+      app:titleTextAppearance="?attr/textAppearanceHeadlineSmall"
+      app:navigationIcon="@drawable/ic_arrow_back"
+    />
+    <com.google.android.material.tabs.TabLayout
+      android:id="@+id/graphTabs"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      app:tabGravity="fill"
+      app:tabMode="fixed"
+      app:tabIndicatorColor="?attr/colorPrimary"
+      app:tabIndicatorHeight="3dp"
+      app:tabIndicatorFullWidth="false"
+      app:tabIndicatorAnimationMode="elastic"
+      app:tabSelectedTextColor="?attr/colorPrimary"
+      app:tabTextColor="?attr/colorOnSurfaceVariant"
+      android:background="?attr/colorSurface"
     />
   </com.google.android.material.appbar.AppBarLayout>
-  <com.google.android.material.tabs.TabLayout
-    android:id="@+id/graphTabs"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    app:tabGravity="center"
-    app:tabIndicatorFullWidth="false"
-    app:tabMode="fixed"
-    app:tabRippleColor="@null"
-  />
-  <androidx.viewpager.widget.ViewPager
-    android:id="@+id/graphViewPager"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:layout_width="match_parent"
-  />
+  
   <LinearLayout
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:padding="16dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
   >
-    <Button
-      android:background="@color/colorPrimary"
-      android:id="@+id/startDate"
-      android:layout_height="wrap_content"
+    <androidx.viewpager.widget.ViewPager
+      android:id="@+id/graphViewPager"
+      android:layout_height="0dp"
       android:layout_weight="1"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
     />
-    <TextView
-      android:id="@+id/quickRange"
+    
+    <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_width="wrap_content"
-      android:paddingHorizontal="12dp"
-      android:text="to"
-    />
-    <Button
-      android:background="@color/colorPrimary"
-      android:id="@+id/endDate"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:layout_width="0dp"
-    />
+      android:layout_margin="16dp"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="2dp"
+      app:strokeWidth="0dp"
+    >
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+      >
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Date Range"
+          android:textAppearance="?attr/textAppearanceLabelLarge"
+          android:textColor="?attr/colorOnSurfaceVariant"
+          android:layout_marginBottom="12dp"
+        />
+        
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+        >
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/startDate"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:icon="@android:drawable/ic_menu_today"
+            app:iconGravity="start"
+          />
+          
+          <com.google.android.material.chip.Chip
+            android:id="@+id/quickRange"
+            style="@style/Widget.Material3.Chip.Suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quick"
+            android:layout_marginHorizontal="8dp"
+            app:chipIcon="@android:drawable/ic_menu_recent_history"
+          />
+          
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/endDate"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:icon="@android:drawable/ic_menu_today"
+            app:iconGravity="start"
+          />
+        </LinearLayout>
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
   </LinearLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

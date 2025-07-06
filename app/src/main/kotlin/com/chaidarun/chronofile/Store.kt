@@ -40,6 +40,14 @@ sealed class Action {
   data class SetHistory(val history: History) : Action()
 
   data class SetSearchQuery(val query: String?) : Action()
+
+  data class AddWeeklyGoal(val goal: WeeklyGoal) : Action()
+
+  data class RemoveWeeklyGoal(val goalId: String) : Action()
+
+  data class UpdateWeeklyGoal(val goal: WeeklyGoal) : Action()
+
+  data class SetWeeklyNotificationsEnabled(val enabled: Boolean) : Action()
 }
 
 /** This class must be deeply immutable and preferably printable */
@@ -110,6 +118,35 @@ private val reducer: (State, Action) -> State = { state, action ->
         is Action.SetGraphStacking -> copy(graphConfig = graphConfig.copy(stacked = action.stacked))
         is Action.SetHistory -> copy(history = action.history)
         is Action.SetSearchQuery -> copy(searchQuery = action.query)
+        is Action.AddWeeklyGoal -> {
+          val oldConfig = config ?: Config()
+          val oldGoals = oldConfig.weeklyGoals ?: listOf()
+          val newConfig = oldConfig.copy(weeklyGoals = oldGoals + action.goal)
+          newConfig.save()
+          copy(config = newConfig)
+        }
+        is Action.RemoveWeeklyGoal -> {
+          val oldConfig = config ?: Config()
+          val oldGoals = oldConfig.weeklyGoals ?: listOf()
+          val newConfig = oldConfig.copy(weeklyGoals = oldGoals.filter { it.id != action.goalId })
+          newConfig.save()
+          copy(config = newConfig)
+        }
+        is Action.UpdateWeeklyGoal -> {
+          val oldConfig = config ?: Config()
+          val oldGoals = oldConfig.weeklyGoals ?: listOf()
+          val newConfig = oldConfig.copy(weeklyGoals = oldGoals.map { 
+            if (it.id == action.goal.id) action.goal else it 
+          })
+          newConfig.save()
+          copy(config = newConfig)
+        }
+        is Action.SetWeeklyNotificationsEnabled -> {
+          val oldConfig = config ?: Config()
+          val newConfig = oldConfig.copy(weeklyNotificationsEnabled = action.enabled)
+          newConfig.save()
+          copy(config = newConfig)
+        }
       }
 
     Log.i(TAG, "Reduced $action in ${System.currentTimeMillis() - start} ms")

@@ -11,6 +11,9 @@ class App : Application() {
   override fun onCreate() {
     instance = this
     super.onCreate()
+    
+    // Initialize notification channel
+    WeeklyNotificationManager.createNotificationChannel(this)
   }
 
   companion object {

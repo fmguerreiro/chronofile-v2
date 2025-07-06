@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+  <item
+    android:id="@+id/action_add_defaults"
+    android:title="Add Default Goals"
+    app:showAsAction="never"
+  />
+  <item
+    android:id="@+id/action_notifications"
+    android:title="Weekly Notifications"
+    android:checkable="true"
+    app:showAsAction="never"
+  />
+  <item
+    android:id="@+id/action_test_notification"
+    android:title="Test Notification"
+    app:showAsAction="never"
+  />
+  <item
+    android:id="@+id/action_clear_all"
+    android:title="Clear All Goals"
+    app:showAsAction="never"
+  />
+</menu>

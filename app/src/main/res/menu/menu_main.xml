@@ -12,6 +12,11 @@
     app:showAsAction="always"
   />
   <item
+    android:id="@+id/action_weekly_goals"
+    android:title="Weekly Goals"
+    app:showAsAction="never"
+  />
+  <item
     android:id="@+id/action_settings"
     android:title="Settings"
     app:showAsAction="never"
