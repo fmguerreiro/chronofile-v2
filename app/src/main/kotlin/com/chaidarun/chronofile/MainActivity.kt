@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaidarun.chronofile.databinding.ActivityMainBinding
 import java.util.Date
 import com.chaidarun.chronofile.databinding.FormNfcBinding
-import com.chaidarun.chronofile.databinding.FormSearchBinding
 
 class MainActivity : BaseActivity() {
   val binding by viewBinding(ActivityMainBinding::inflate)
@@ -108,23 +107,6 @@ class MainActivity : BaseActivity() {
           Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/artnc/chronofile#chronofile"))
         )
       R.id.action_change_save_dir -> requestStorageAccess()
-      R.id.action_search -> {
-        val formBinding = FormSearchBinding.inflate(LayoutInflater.from(this), null, false)
-        val view = formBinding.root
-        with(AlertDialog.Builder(this, R.style.MyAlertDialogTheme)) {
-          setTitle("Search timeline")
-          formBinding.formSearchQuery.setText(Store.state.searchQuery ?: "")
-          setView(view)
-          fun search(input: String?) {
-            val query = if (input.isNullOrBlank()) null else input.trim()
-            Store.dispatch(Action.SetSearchQuery(query))
-            binding.toolbar.title = if (query == null) "Timeline" else "\"$query\""
-          }
-          setPositiveButton("Go") { _, _ -> search(formBinding.formSearchQuery.text.toString()) }
-          setNegativeButton("Clear") { _, _ -> search(null) }
-          show()
-        }
-      }
       R.id.action_settings -> startActivity(Intent(this, EditorActivity::class.java))
       R.id.action_stats -> startActivity(Intent(this, GraphActivity::class.java))
       else -> return super.onOptionsItemSelected(item)
@@ -262,7 +244,10 @@ class MainActivity : BaseActivity() {
     val dialogView = layoutInflater.inflate(R.layout.form_entry, null)
     val startTimeInput = dialogView.findViewById<EditText>(R.id.formEntryStartTime)
     val activityInput = dialogView.findViewById<EditText>(R.id.formEntryActivity)
+    
+    // Hide the note field
     val noteInput = dialogView.findViewById<EditText>(R.id.formEntryNote)
+    noteInput.visibility = View.GONE
     
     // Pre-fill start time with the last entry's end time
     val currentHistory = Store.state.history
@@ -277,7 +262,7 @@ class MainActivity : BaseActivity() {
       .setPositiveButton("Add") { _, _ ->
         val startTime = startTimeInput.text.toString()
         val activity = activityInput.text.toString()
-        val note = noteInput.text.toString()
+        val note = "" // Empty note since we removed the field
         if (activity.isNotBlank()) {
           val currentState = Store.state.history
           if (currentState != null) {
