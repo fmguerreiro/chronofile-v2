@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaidarun.chronofile.databinding.ActivityMainBinding
 import java.util.Date
 import com.chaidarun.chronofile.databinding.FormNfcBinding
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class MainActivity : BaseActivity() {
   val binding by viewBinding(ActivityMainBinding::inflate)
@@ -46,6 +48,15 @@ class MainActivity : BaseActivity() {
     binding.historyList.layoutManager =
       LinearLayoutManager(this@MainActivity).apply { stackFromEnd = true }
     binding.historyList.adapter = HistoryListAdapter(this@MainActivity)
+    
+    // Listen for history changes to update frequent activities and suggestions
+    Store.observable
+      .map { it.history }
+      .distinctUntilChanged()
+      .subscribe { 
+        updateFrequentActivities()
+        updateActivitySuggestion()
+      }
 
     // Set up listeners
     binding.changeSaveDirButton.setOnClickListener { requestStorageAccess() }
@@ -53,11 +64,18 @@ class MainActivity : BaseActivity() {
       ActivityCompat.requestPermissions(this@MainActivity, APP_PERMISSIONS, PERMISSION_REQUEST_CODE)
     }
     
-    // Set up FAB to show bottom sheet
-    binding.addEntryFab.setOnClickListener {
-      // For now, use the existing dialog approach
-      // In a future update, this could be replaced with a proper bottom sheet
-      showAddEntryDialog()
+    
+    // Set up suggestion card listeners
+    binding.acceptSuggestionButton.setOnClickListener {
+      val suggestedActivity = binding.suggestedActivityText.text.toString()
+      if (suggestedActivity.isNotBlank()) {
+        History.addEntry(suggestedActivity, null)
+        hideSuggestionCard()
+      }
+    }
+    
+    binding.dismissSuggestionButton.setOnClickListener {
+      hideSuggestionCard()
     }
     
     binding.addEntry.setOnClickListener {
@@ -104,7 +122,7 @@ class MainActivity : BaseActivity() {
     when (item.itemId) {
       R.id.action_about ->
         startActivity(
-          Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/artnc/chronofile#chronofile"))
+          Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/fmguerreiro/chronofile-v2"))
         )
       R.id.action_change_save_dir -> requestStorageAccess()
       R.id.action_settings -> startActivity(Intent(this, EditorActivity::class.java))
@@ -163,6 +181,12 @@ class MainActivity : BaseActivity() {
     if (intent.action in NFC_INTENT_ACTIONS) {
       processNfcIntent(intent)
     }
+    
+    // Update frequent activities
+    updateFrequentActivities()
+    
+    // Update activity suggestions
+    updateActivitySuggestion()
     
     // Setup weekly notifications if enabled
     val config = Store.state.config
@@ -295,10 +319,14 @@ class MainActivity : BaseActivity() {
       .setNegativeButton("Cancel", null)
       .create()
       
-    // Disable the Add button initially
+    // Disable the Add button initially and set up auto-focus
     dialog.setOnShowListener {
       val addButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
       addButton.isEnabled = false
+      
+      // Auto-focus on activity input and show keyboard
+      activityInput.requestFocus()
+      dialog.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
       
       activityInput.addTextChangedListener(
         afterTextChanged = {
@@ -308,6 +336,187 @@ class MainActivity : BaseActivity() {
     }
     
     dialog.show()
+  }
+  
+  private fun updateFrequentActivities() {
+    val history = Store.state.history
+    binding.frequentActivitiesChipGroup.removeAllViews()
+    
+    if (history == null) {
+      return
+    }
+    
+    val intelligentActivities = history.getIntelligentActivitySuggestions()
+    val currentActivity = getCurrentActivity()
+    
+    // Populate chips at bottom with enhanced styling
+    intelligentActivities.forEach { activity ->
+      val chip = Chip(this).apply {
+        val icon = getActivityIcon(activity)
+        text = "$icon $activity"
+        isClickable = true
+        isFocusable = true
+        isCheckable = false
+        
+        // Enhanced chip styling
+        chipCornerRadius = 20f
+        val categoryColor = getActivityCategoryColor(activity)
+        chipBackgroundColor = ContextCompat.getColorStateList(this@MainActivity, categoryColor.background)
+        setTextColor(ContextCompat.getColor(this@MainActivity, categoryColor.text))
+        
+        // Compact padding and medium weight text
+        chipStartPadding = 8.dpToPx()
+        chipEndPadding = 8.dpToPx()
+        textStartPadding = 0f
+        textEndPadding = 0f
+        chipMinHeight = 36.dpToPx()
+        textSize = 13f
+        typeface = android.graphics.Typeface.DEFAULT_BOLD
+        
+        // Visual state indicator for current activity
+        if (activity == currentActivity) {
+          chipStrokeWidth = 2.dpToPx()
+          chipStrokeColor = ContextCompat.getColorStateList(this@MainActivity, R.color.colorPrimary)
+          alpha = 1.0f
+        } else {
+          chipStrokeWidth = 0f
+          alpha = 0.9f
+        }
+        
+        // Add click listener to quickly add this activity
+        setOnClickListener {
+          History.addEntry(activity, null)
+        }
+      }
+      binding.frequentActivitiesChipGroup.addView(chip)
+    }
+    
+    // Add inline plus button
+    addInlinePlusButton()
+  }
+  
+  private fun addInlinePlusButton() {
+    val plusChip = Chip(this).apply {
+      text = "+"
+      isClickable = true
+      isFocusable = true
+      isCheckable = false
+      
+      // Plus button styling - smaller and integrated
+      chipCornerRadius = 18f
+      chipBackgroundColor = ContextCompat.getColorStateList(this@MainActivity, R.color.colorSecondary)
+      setTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorOnSecondary))
+      
+      // Compact size
+      chipStartPadding = 4.dpToPx()
+      chipEndPadding = 4.dpToPx()
+      textStartPadding = 0f
+      textEndPadding = 0f
+      chipMinHeight = 32.dpToPx()
+      textSize = 16f
+      typeface = android.graphics.Typeface.DEFAULT_BOLD
+      
+      // Click to show add dialog
+      setOnClickListener {
+        showAddEntryDialog()
+      }
+    }
+    binding.frequentActivitiesChipGroup.addView(plusChip)
+  }
+  
+  private fun getCurrentActivity(): String? {
+    // Get the most recent activity if it's still active
+    val history = Store.state.history ?: return null
+    val entries = history.entries
+    if (entries.isEmpty()) return null
+    
+    val lastEntry = entries.last()
+    val now = epochSeconds()
+    val timeSinceLastEntry = now - history.currentActivityStartTime
+    
+    // Consider activity current if it was started less than 8 hours ago
+    return if (timeSinceLastEntry < 8 * 3600) {
+      lastEntry.activity
+    } else {
+      null
+    }
+  }
+  
+  private data class ActivityCategoryColor(val background: Int, val text: Int)
+  
+  private fun getActivityCategoryColor(activity: String): ActivityCategoryColor {
+    return when (activity.lowercase()) {
+      "work", "meeting", "email", "coding", "programming" -> 
+        ActivityCategoryColor(R.color.work_category_bg, R.color.work_category_text)
+      "break", "coffee", "lunch", "dinner", "eat", "food", "meal" -> 
+        ActivityCategoryColor(R.color.food_category_bg, R.color.food_category_text)
+      "exercise", "gym", "sport", "workout", "walk", "walking" -> 
+        ActivityCategoryColor(R.color.fitness_category_bg, R.color.fitness_category_text)
+      "sleep", "relax", "rest", "home" -> 
+        ActivityCategoryColor(R.color.personal_category_bg, R.color.personal_category_text)
+      "commute", "travel", "drive", "shopping" -> 
+        ActivityCategoryColor(R.color.transport_category_bg, R.color.transport_category_text)
+      "study", "learn", "reading" -> 
+        ActivityCategoryColor(R.color.learning_category_bg, R.color.learning_category_text)
+      else -> 
+        ActivityCategoryColor(R.color.other_category_bg, R.color.other_category_text)
+    }
+  }
+  
+  private fun getActivityIcon(activity: String): String {
+    return when (activity.lowercase()) {
+      "work" -> "💼"
+      "sleep" -> "😴"
+      "eat", "food", "meal", "lunch", "dinner", "breakfast" -> "🍽️"
+      "exercise", "gym", "sport", "workout" -> "🏃"
+      "commute", "travel", "drive" -> "🚗"
+      "meeting" -> "👥"
+      "study", "learn" -> "📚"
+      "relax", "rest" -> "🛋️"
+      "social" -> "👫"
+      "shopping" -> "🛍️"
+      "break", "coffee" -> "☕"
+      "home" -> "🏠"
+      "phone", "call" -> "📞"
+      "email" -> "📧"
+      "coding", "programming" -> "💻"
+      "music" -> "🎵"
+      "reading" -> "📖"
+      "cleaning" -> "🧹"
+      "cooking" -> "👨‍🍳"
+      "walk", "walking" -> "🚶"
+      else -> "📝"
+    }
+  }
+  
+  private fun Int.dpToPx(): Float {
+    return (this * resources.displayMetrics.density)
+  }
+  
+  private fun updateActivitySuggestion() {
+    val history = Store.state.history
+    if (history == null) {
+      hideSuggestionCard()
+      return
+    }
+    
+    val suggestedActivity = history.predictActivityForCurrentTime()
+    if (suggestedActivity != null) {
+      val confidence = history.getPredictionConfidence(suggestedActivity)
+      showSuggestionCard(suggestedActivity, confidence)
+    } else {
+      hideSuggestionCard()
+    }
+  }
+  
+  private fun showSuggestionCard(activity: String, confidence: Double) {
+    binding.suggestedActivityText.text = activity
+    binding.suggestionConfidenceText.text = "${(confidence * 100).toInt()}% confidence"
+    binding.activitySuggestionCard.visibility = View.VISIBLE
+  }
+  
+  private fun hideSuggestionCard() {
+    binding.activitySuggestionCard.visibility = View.GONE
   }
 
   companion object {

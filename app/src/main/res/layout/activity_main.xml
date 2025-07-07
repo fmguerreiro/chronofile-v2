@@ -24,11 +24,117 @@
     />
   </com.google.android.material.appbar.AppBarLayout>
   
-  <androidx.core.widget.NestedScrollView
-    android:layout_height="match_parent"
+  <LinearLayout
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
   >
+    
+    <!-- Activity Suggestion Card -->
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/activitySuggestionCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginBottom="8dp"
+      android:visibility="gone"
+      app:cardCornerRadius="16dp"
+      app:cardElevation="3dp"
+      app:cardBackgroundColor="?attr/colorSecondaryContainer"
+      style="?attr/materialCardViewElevatedStyle"
+    >
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+      >
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical"
+        >
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suggested Activity"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            android:alpha="0.8"
+          />
+          
+          <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp"
+          >
+            <TextView
+              android:id="@+id/suggestedActivityText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textAppearance="?attr/textAppearanceTitleMedium"
+              android:textColor="?attr/colorOnSecondaryContainer"
+              android:textStyle="bold"
+              android:text="Work"
+            />
+            
+            <TextView
+              android:id="@+id/suggestionConfidenceText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:textAppearance="?attr/textAppearanceLabelSmall"
+              android:textColor="?attr/colorOnSecondaryContainer"
+              android:alpha="0.7"
+              android:text="85% confidence"
+            />
+          </LinearLayout>
+        </LinearLayout>
+        
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+        >
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/dismissSuggestionButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="✕"
+            android:textSize="16sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            style="@style/Widget.Material3.Button.TextButton"
+            app:cornerRadius="20dp"
+          />
+          
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/acceptSuggestionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Start"
+            android:textColor="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimary"
+            style="@style/Widget.Material3.Button"
+          />
+        </LinearLayout>
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    
+    <androidx.core.widget.NestedScrollView
+      android:layout_height="0dp"
+      android:layout_width="match_parent"
+      android:layout_weight="1"
+    >
     <LinearLayout
       android:layout_height="wrap_content"
       android:layout_width="match_parent"
@@ -115,17 +221,34 @@
       />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
+  </LinearLayout>
   
-  <!-- Modern FAB -->
-  <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-    android:id="@+id/addEntryFab"
-    android:layout_width="wrap_content"
+  <!-- Bottom Actions Bar -->
+  <LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="16dp"
-    android:text="Add Entry"
-    app:icon="@android:drawable/ic_input_add"
-  />
+    android:layout_gravity="bottom"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:background="@drawable/bottom_bar_background"
+    android:elevation="8dp"
+  >
+    <!-- Frequent Activities with inline plus button -->
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:scrollbars="none"
+    >
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/frequentActivitiesChipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleLine="true"
+        app:chipSpacing="12dp"
+      />
+    </HorizontalScrollView>
+  </LinearLayout>
   
   <!-- Bottom Sheet for Adding Entry -->
   <LinearLayout

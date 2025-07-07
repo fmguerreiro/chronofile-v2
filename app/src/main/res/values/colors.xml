@@ -48,4 +48,39 @@
   <color name="colorSurfaceContainer">#ECEFF3</color>
   <color name="colorSurfaceContainerHigh">#E6E8EC</color>
   <color name="colorSurfaceContainerHighest">#E0E2E6</color>
+  
+  <!-- Widget colors -->
+  <color name="widget_background">#F8FAFC</color>
+  <color name="widget_border">#C1C7CE</color>
+  <color name="widget_button_background">#006493</color>
+  <color name="widget_button_text">#FFFFFF</color>
+  
+  <!-- Activity Category Colors -->
+  <!-- Work Category -->
+  <color name="work_category_bg">#E3F2FD</color>
+  <color name="work_category_text">#0D47A1</color>
+  
+  <!-- Food Category -->
+  <color name="food_category_bg">#FFF3E0</color>
+  <color name="food_category_text">#E65100</color>
+  
+  <!-- Fitness Category -->
+  <color name="fitness_category_bg">#E8F5E8</color>
+  <color name="fitness_category_text">#2E7D32</color>
+  
+  <!-- Personal Category -->
+  <color name="personal_category_bg">#F3E5F5</color>
+  <color name="personal_category_text">#7B1FA2</color>
+  
+  <!-- Transport Category -->
+  <color name="transport_category_bg">#FFF8E1</color>
+  <color name="transport_category_text">#F57F17</color>
+  
+  <!-- Learning Category -->
+  <color name="learning_category_bg">#E0F2F1</color>
+  <color name="learning_category_text">#00695C</color>
+  
+  <!-- Other Category -->
+  <color name="other_category_bg">#F5F5F5</color>
+  <color name="other_category_text">#424242</color>
 </resources>

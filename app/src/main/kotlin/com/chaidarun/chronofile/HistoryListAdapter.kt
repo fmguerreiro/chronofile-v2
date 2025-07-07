@@ -269,11 +269,16 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
           binding.entryNote.text = note
         }
         
-        // Set duration in chip
-        binding.durationChip.text = formatDuration(itemEnd - itemStart)
+        // Set duration text
+        binding.durationText.text = formatDuration(itemEnd - itemStart)
         
         // Set activity icon based on activity name
         binding.activityIcon.text = getActivityIcon(activity)
+        
+        // Apply visual weight based on duration
+        val durationSeconds = itemEnd - itemStart
+        val durationHours = durationSeconds / 3600.0
+        applyVisualWeight(durationHours, durationSeconds)
         
         setOnClickListener { History.addEntry(activity, note) }
         setOnLongClickListener {
@@ -284,20 +289,45 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
       }
     }
     
-    private fun getActivityIcon(activity: String): String {
-      return when (activity.lowercase()) {
-        "work" -> "💼"
-        "sleep" -> "😴"
-        "eat", "food", "meal" -> "🍽️"
-        "exercise", "gym", "sport" -> "🏃"
-        "commute", "travel", "drive" -> "🚗"
-        "meeting" -> "👥"
-        "study", "learn" -> "📚"
-        "relax", "rest" -> "🛋️"
-        "social" -> "👫"
-        "shopping" -> "🛍️"
-        else -> "📝"
+    private fun applyVisualWeight(durationHours: Double, durationSeconds: Long) {
+      // Calculate weight factors (0.0 to 1.0)
+      val heightWeight = minOf(1.0, durationHours / 8.0) // Cap at 8 hours for max height
+      val opacityWeight = minOf(1.0, durationHours / 4.0) // Cap at 4 hours for max opacity
+      val saturationWeight = minOf(1.0, durationHours / 6.0) // Cap at 6 hours for max saturation
+      
+      // Apply opacity to the entire card (0.7 to 1.0)
+      val alpha = 0.7f + (0.3f * opacityWeight.toFloat())
+      itemView.alpha = alpha
+      
+      // Apply saturation to the duration bar width (30dp to 80dp)
+      val minBarWidth = (30 * itemView.context.resources.displayMetrics.density).toInt()
+      val maxBarWidth = (80 * itemView.context.resources.displayMetrics.density).toInt()
+      val barWidth = minBarWidth + ((maxBarWidth - minBarWidth) * saturationWeight).toInt()
+      
+      binding.durationBar.layoutParams = binding.durationBar.layoutParams.apply {
+        width = barWidth
       }
+      
+      // Color intensity based on duration
+      val colorAlpha = (0.5f + (0.5f * saturationWeight.toFloat())).coerceIn(0.5f, 1.0f)
+      binding.durationBar.alpha = colorAlpha
+      
+      // Add subtle padding variations for longer activities (16dp to 24dp)
+      val basePadding = (16 * itemView.context.resources.displayMetrics.density).toInt()
+      val extraPadding = (8 * heightWeight * itemView.context.resources.displayMetrics.density).toInt()
+      val totalPadding = basePadding + extraPadding
+      
+      binding.entryContainer.setPadding(totalPadding, totalPadding, totalPadding, totalPadding)
+      
+      // Scale the card elevation slightly for longer activities
+      val baseElevation = 1f
+      val maxElevation = 4f
+      val cardElevation = baseElevation + ((maxElevation - baseElevation) * heightWeight.toFloat())
+      (itemView as? com.google.android.material.card.MaterialCardView)?.cardElevation = cardElevation
+    }
+    
+    private fun getActivityIcon(activity: String): String {
+      return EmojiDatabase.findByKeyword(activity)
     }
   }
 
