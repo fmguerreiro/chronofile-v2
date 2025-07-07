@@ -99,7 +99,9 @@ object EmojiDatabase {
     private val keywordMap = mutableMapOf<String, String>().apply {
         emojiData.forEach { entry ->
             entry.keywords.forEach { keyword ->
-                this[keyword] = entry.emoji
+                // Store both original and lemmatized versions
+                this[keyword.lowercase()] = entry.emoji
+                this[keyword.lemmatize()] = entry.emoji
             }
         }
     }

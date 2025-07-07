@@ -57,6 +57,11 @@ class MainActivity : BaseActivity() {
         updateFrequentActivities()
         updateActivitySuggestion()
       }
+    
+    // Set up FAB
+    binding.addEntryFab.setOnClickListener {
+      showAddEntryDialog()
+    }
 
     // Set up listeners
     binding.changeSaveDirButton.setOnClickListener { requestStorageAccess() }
@@ -371,16 +376,24 @@ class MainActivity : BaseActivity() {
         textEndPadding = 0f
         chipMinHeight = 36.dpToPx()
         textSize = 13f
-        typeface = android.graphics.Typeface.DEFAULT_BOLD
+        typeface = android.graphics.Typeface.create(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.NORMAL)
+        paint.isFakeBoldText = true // Creates medium weight effect
         
         // Visual state indicator for current activity
         if (activity == currentActivity) {
-          chipStrokeWidth = 2.dpToPx()
+          chipStrokeWidth = 3.dpToPx()
           chipStrokeColor = ContextCompat.getColorStateList(this@MainActivity, R.color.colorPrimary)
           alpha = 1.0f
+          elevation = 4.dpToPx()
+          // Add subtle animation effect
+          scaleX = 1.05f
+          scaleY = 1.05f
         } else {
           chipStrokeWidth = 0f
-          alpha = 0.9f
+          alpha = 0.85f
+          elevation = 0f
+          scaleX = 1.0f
+          scaleY = 1.0f
         }
         
         // Add click listener to quickly add this activity
@@ -390,38 +403,6 @@ class MainActivity : BaseActivity() {
       }
       binding.frequentActivitiesChipGroup.addView(chip)
     }
-    
-    // Add inline plus button
-    addInlinePlusButton()
-  }
-  
-  private fun addInlinePlusButton() {
-    val plusChip = Chip(this).apply {
-      text = "+"
-      isClickable = true
-      isFocusable = true
-      isCheckable = false
-      
-      // Plus button styling - smaller and integrated
-      chipCornerRadius = 18f
-      chipBackgroundColor = ContextCompat.getColorStateList(this@MainActivity, R.color.colorSecondary)
-      setTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorOnSecondary))
-      
-      // Compact size
-      chipStartPadding = 4.dpToPx()
-      chipEndPadding = 4.dpToPx()
-      textStartPadding = 0f
-      textEndPadding = 0f
-      chipMinHeight = 32.dpToPx()
-      textSize = 16f
-      typeface = android.graphics.Typeface.DEFAULT_BOLD
-      
-      // Click to show add dialog
-      setOnClickListener {
-        showAddEntryDialog()
-      }
-    }
-    binding.frequentActivitiesChipGroup.addView(plusChip)
   }
   
   private fun getCurrentActivity(): String? {
@@ -464,29 +445,7 @@ class MainActivity : BaseActivity() {
   }
   
   private fun getActivityIcon(activity: String): String {
-    return when (activity.lowercase()) {
-      "work" -> "💼"
-      "sleep" -> "😴"
-      "eat", "food", "meal", "lunch", "dinner", "breakfast" -> "🍽️"
-      "exercise", "gym", "sport", "workout" -> "🏃"
-      "commute", "travel", "drive" -> "🚗"
-      "meeting" -> "👥"
-      "study", "learn" -> "📚"
-      "relax", "rest" -> "🛋️"
-      "social" -> "👫"
-      "shopping" -> "🛍️"
-      "break", "coffee" -> "☕"
-      "home" -> "🏠"
-      "phone", "call" -> "📞"
-      "email" -> "📧"
-      "coding", "programming" -> "💻"
-      "music" -> "🎵"
-      "reading" -> "📖"
-      "cleaning" -> "🧹"
-      "cooking" -> "👨‍🍳"
-      "walk", "walking" -> "🚶"
-      else -> "📝"
-    }
+    return EmojiDatabase.findByKeyword(activity)
   }
   
   private fun Int.dpToPx(): Float {

@@ -218,6 +218,8 @@
         android:layout_width="match_parent"
         android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false"
       />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
@@ -230,24 +232,40 @@
     android:layout_gravity="bottom"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
     android:background="@drawable/bottom_bar_background"
-    android:elevation="8dp"
+    android:elevation="12dp"
+    android:translationZ="8dp"
   >
-    <!-- Frequent Activities with inline plus button -->
+    <!-- Frequent Activities -->
     <HorizontalScrollView
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      android:layout_weight="1"
       android:scrollbars="none"
     >
       <com.google.android.material.chip.ChipGroup
         android:id="@+id/frequentActivitiesChipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         app:singleLine="true"
         app:chipSpacing="12dp"
       />
     </HorizontalScrollView>
+    
+    <!-- Add Entry FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/addEntryFab"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      app:fabSize="mini"
+      app:srcCompat="@android:drawable/ic_input_add"
+      app:tint="?attr/colorOnPrimary"
+      app:backgroundTint="?attr/colorPrimary"
+    />
   </LinearLayout>
   
   <!-- Bottom Sheet for Adding Entry -->
