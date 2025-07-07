@@ -65,5 +65,26 @@
       android:name=".WeeklyResultsReceiver"
       android:exported="false"
     />
+    
+    <!-- Widget Provider -->
+    <receiver
+      android:name=".ChronofileWidgetProvider"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/chronofile_widget_info" />
+    </receiver>
+    
+    <!-- Widget Activity Receiver -->
+    <receiver
+      android:name=".WidgetActivityReceiver"
+      android:exported="false">
+      <intent-filter>
+        <action android:name="com.chaidarun.chronofile.ACTIVITY_CLICKED" />
+      </intent-filter>
+    </receiver>
   </application>
 </manifest>
