@@ -18,7 +18,7 @@
       android:id="@+id/editorToolbar"
       android:layout_height="?attr/actionBarSize"
       android:layout_width="match_parent"
-      app:title="Settings"
+      app:title="Groups"
       app:navigationIcon="?attr/homeAsUpIndicator"
     />
   </com.google.android.material.appbar.AppBarLayout>
@@ -84,20 +84,22 @@
           >
             <com.google.android.material.button.MaterialButton
               android:id="@+id/addGroupButton"
-              android:layout_height="wrap_content"
+              android:layout_height="40dp"
               android:layout_width="wrap_content"
               android:layout_marginEnd="8dp"
               android:text="Add Group"
               app:icon="@android:drawable/ic_input_add"
+              app:iconSize="18dp"
               style="@style/Widget.Material3.Button.OutlinedButton"
             />
             
             <com.google.android.material.button.MaterialButton
               android:id="@+id/loadDefaultGroupsButton"
-              android:layout_height="wrap_content"
+              android:layout_height="40dp"
               android:layout_width="wrap_content"
               android:text="Load Defaults"
               app:icon="@android:drawable/ic_menu_view"
+              app:iconSize="18dp"
               style="@style/Widget.Material3.Button.TonalButton"
             />
           </LinearLayout>

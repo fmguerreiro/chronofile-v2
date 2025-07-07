@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="12dp"
   >
     <!-- Group Header -->
     <LinearLayout
@@ -63,22 +63,30 @@
       />
     </LinearLayout>
     
-    <!-- Activities Chips -->
-    <com.google.android.material.chip.ChipGroup
-      android:id="@+id/activitiesChipGroup"
+    <!-- Activities Chips - Horizontal Scrollable -->
+    <HorizontalScrollView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
-      app:chipSpacingHorizontal="8dp"
-      app:chipSpacingVertical="4dp"
-    />
+      android:scrollbars="none"
+      android:overScrollMode="never"
+    >
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/activitiesChipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="0dp"
+        app:singleLine="true"
+      />
+    </HorizontalScrollView>
     
     <!-- Add Activity Button -->
     <com.google.android.material.button.MaterialButton
       android:id="@+id/addActivityButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="4dp"
       android:text="Add Activity"
       app:icon="@android:drawable/ic_input_add"
       app:iconSize="16dp"

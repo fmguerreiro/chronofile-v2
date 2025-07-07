@@ -15,6 +15,7 @@
   style="?attr/materialCardViewElevatedStyle"
 >
   <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/entryContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
@@ -51,7 +52,7 @@
       android:layout_marginEnd="12dp"
       android:orientation="vertical"
       app:layout_constraintStart_toEndOf="@id/iconContainer"
-      app:layout_constraintEnd_toStartOf="@id/durationChip"
+      app:layout_constraintEnd_toStartOf="@id/durationSection"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
     >
@@ -80,19 +81,34 @@
       />
     </LinearLayout>
     
-    <!-- Duration Chip -->
-    <com.google.android.material.chip.Chip
-      android:id="@+id/durationChip"
+    <!-- Duration Bar and Text -->
+    <LinearLayout
+      android:id="@+id/durationSection"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textAppearance="?attr/textAppearanceLabelLarge"
-      app:chipBackgroundColor="?attr/colorSecondaryContainer"
-      app:chipStrokeWidth="0dp"
-      app:chipMinHeight="32dp"
+      android:orientation="vertical"
+      android:gravity="end"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
-      tools:text="2h 30m"
-    />
+    >
+      <TextView
+        android:id="@+id/durationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceLabelMedium"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:layout_marginBottom="4dp"
+        tools:text="2h 30m"
+      />
+      
+      <View
+        android:id="@+id/durationBar"
+        android:layout_width="60dp"
+        android:layout_height="4dp"
+        android:background="?attr/colorPrimary"
+        android:alpha="0.8"
+      />
+    </LinearLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
