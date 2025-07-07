@@ -34,6 +34,7 @@ object EmojiDatabase {
         EmojiEntry("🏃", listOf("exercise", "running", "fitness", "cardio", "workout", "sport", "training")),
         EmojiEntry("🏋️", listOf("gym", "weightlifting", "strength", "muscle", "fitness")),
         EmojiEntry("🚴", listOf("cycling", "bike", "cardio", "outdoor", "commute")),
+        EmojiEntry("🏊", listOf("swim", "swimming", "swimm", "pool", "water", "laps", "freestyle", "backstroke")),
         EmojiEntry("🧘", listOf("meditation", "mindfulness", "relaxation", "zen", "wellness")),
         EmojiEntry("🩺", listOf("health", "doctor", "medical", "checkup", "appointment")),
         EmojiEntry("💊", listOf("medicine", "medication", "pills", "treatment", "health")),
