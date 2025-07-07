@@ -22,6 +22,19 @@ class ChronofileWidgetProvider : AppWidgetProvider() {
         }
     }
 
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+        if (AppWidgetManager.ACTION_APPWIDGET_UPDATE == intent.action) {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val appWidgetIds = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS)
+            if (appWidgetIds != null) {
+                for (appWidgetId in appWidgetIds) {
+                    updateAppWidget(context, appWidgetManager, appWidgetId)
+                }
+            }
+        }
+    }
+
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is created
     }
@@ -72,10 +85,13 @@ class ChronofileWidgetProvider : AppWidgetProvider() {
                 if (i < commonActivities.size) {
                     val activity = commonActivities[i]
                     val displayText = if (useCompactLayout) {
+                        // Compact: emoji only
                         getActivityIcon(activity)
                     } else {
-                        // Truncate long activity names to prevent overflow
-                        if (activity.length > 8) activity.take(6) + ".." else activity
+                        // Full width: emoji + text
+                        val emoji = getActivityIcon(activity)
+                        val text = if (activity.length > 6) activity.take(4) + ".." else activity
+                        "$emoji ${text.capitalize()}"
                     }
                     views.setTextViewText(buttonIds[i], displayText)
                     views.setOnClickPendingIntent(buttonIds[i], 
@@ -176,26 +192,34 @@ class ChronofileWidgetProvider : AppWidgetProvider() {
                 val options = appWidgetManager.getAppWidgetOptions(appWidgetId)
                 val minWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0)
                 val maxWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, minWidth)
+                val minHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0)
+                val maxHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, minHeight)
                 
-                // Use the larger of min/max width for more reliable detection
+                // Use the larger of min/max for more reliable detection
                 val effectiveWidth = maxOf(minWidth, maxWidth)
+                val effectiveHeight = maxOf(minHeight, maxHeight)
                 
-                // Validate that we got reasonable width values
-                if (effectiveWidth <= 0) {
-                    throw IllegalStateException("Invalid widget width: $effectiveWidth")
+                // Validate that we got reasonable values
+                if (effectiveWidth <= 0 || effectiveHeight <= 0) {
+                    throw IllegalStateException("Invalid widget dimensions: ${effectiveWidth}x${effectiveHeight}")
                 }
                 
                 // Convert dp to pixels for more accurate calculation
                 val density = context.resources.displayMetrics.density
                 val widthPx = (effectiveWidth * density).toInt()
+                val heightPx = (effectiveHeight * density).toInt()
                 
-                // Multiple breakpoints for better responsiveness
-                when {
-                    effectiveWidth < 120 -> WidgetLayout.COMPACT  // Very tiny widgets
-                    effectiveWidth < 200 -> WidgetLayout.COMPACT  // Small widgets
-                    widthPx < 500 && density < 2.0 -> WidgetLayout.COMPACT  // Low density small screens
+                // Check both width and height for compact mode
+                val layout = when {
+                    effectiveHeight < 70 -> WidgetLayout.COMPACT  // Short widgets
+                    effectiveWidth < 300 -> WidgetLayout.COMPACT  // Most widgets should be compact
                     else -> WidgetLayout.NORMAL
                 }
+                
+                // Debug logging
+                android.util.Log.d("ChronofileWidget", "Widget size: ${effectiveWidth}x${effectiveHeight}dp, layout: $layout")
+                
+                layout
             } catch (e: Exception) {
                 // Multi-level fallback system
                 try {

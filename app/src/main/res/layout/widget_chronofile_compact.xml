@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:orientation="horizontal"
-    android:padding="4dp"
+    android:padding="2dp"
     android:gravity="center_vertical">
 
     <!-- App Icon -->
     <ImageView
         android:id="@+id/widget_app_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="2dp"
         android:src="@mipmap/ic_launcher"
         android:contentDescription="Open Chronofile"
         android:background="?android:attr/selectableItemBackgroundBorderless"
@@ -36,10 +36,10 @@
             android:layout_weight="1"
             android:layout_marginEnd="1dp"
             android:text="💼"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:padding="2dp"
+            android:padding="1dp"
             tools:ignore="HardcodedText" />
 
         <Button
@@ -50,10 +50,10 @@
             android:layout_weight="1"
             android:layout_marginHorizontal="1dp"
             android:text="☕"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:padding="2dp"
+            android:padding="1dp"
             tools:ignore="HardcodedText" />
 
         <Button
@@ -64,10 +64,10 @@
             android:layout_weight="1"
             android:layout_marginHorizontal="1dp"
             android:text="🍽️"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:padding="2dp"
+            android:padding="1dp"
             tools:ignore="HardcodedText" />
 
         <Button
@@ -78,10 +78,10 @@
             android:layout_weight="1"
             android:layout_marginStart="1dp"
             android:text="👥"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:padding="2dp"
+            android:padding="1dp"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>
