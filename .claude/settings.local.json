@@ -18,7 +18,9 @@
       "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew assembleDebug)",
       "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew clean)",
       "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew assembleDebug --stacktrace)",
-      "Bash(adb:*)"
+      "Bash(adb:*)",
+      "Bash(sdkmanager:*)",
+      "Bash(avdmanager create avd:*)"
     ],
     "deny": []
   }

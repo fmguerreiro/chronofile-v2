@@ -13,6 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `make log` - Show filtered Android logs for debugging (requires connected device/emulator)
 - `adb install app/build/outputs/apk/debug/app-debug.apk` - Install debug build
 - `adb install app/build/outputs/apk/release/app-release.apk` - Install release build
+- `export JAVA_HOME=$(/usr/libexec/java_home -v 17) && ./gradlew installDebug` - Build and deploy debug APK to connected device/emulator
 
 ### Testing
 No automated tests exist in this codebase. Testing is done manually on device/emulator.
