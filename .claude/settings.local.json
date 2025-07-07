@@ -20,7 +20,8 @@
       "Bash(JAVA_HOME=/opt/homebrew/opt/java ./gradlew assembleDebug --stacktrace)",
       "Bash(adb:*)",
       "Bash(sdkmanager:*)",
-      "Bash(avdmanager create avd:*)"
+      "Bash(avdmanager create avd:*)",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
