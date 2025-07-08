@@ -8,25 +8,12 @@
   android:fitsSystemWindows="true"
   tools:context="com.chaidarun.chronofile.EditorActivity"
 >
-  <com.google.android.material.appbar.AppBarLayout
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    app:liftOnScroll="true"
-  >
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/editorToolbar"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_width="match_parent"
-      app:title="Groups"
-      app:navigationIcon="?attr/homeAsUpIndicator"
-    />
-  </com.google.android.material.appbar.AppBarLayout>
   
   <androidx.core.widget.NestedScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
   >
     <LinearLayout
       android:layout_height="wrap_content"
@@ -161,13 +148,6 @@
     android:visibility="gone"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
   >
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/jsonEditorToolbar"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_width="match_parent"
-      app:title="JSON Configuration"
-      app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
-    />
     
     <TextView
       android:id="@+id/editorInstructions"
@@ -218,4 +198,17 @@
       />
     </LinearLayout>
   </LinearLayout>
+  
+  <!-- Bottom Navigation Bar -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    app:menu="@menu/bottom_navigation_menu"
+    app:backgroundTint="?attr/colorSurface"
+    app:itemIconTint="?attr/colorOnSurface"
+    app:itemTextColor="?attr/colorOnSurface"
+    app:elevation="8dp"
+  />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

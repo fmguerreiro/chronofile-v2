@@ -1,6 +1,7 @@
 package com.chaidarun.chronofile
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaidarun.chronofile.databinding.ActivityWeeklyGoalsBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,13 +29,12 @@ class WeeklyGoalsActivity : BaseActivity() {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setSupportActionBar(binding.toolbar)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
     
     setupRecyclerViews()
     setupFab()
     setupWeekRangeText()
     setupDefaultGoalsButton()
+    setupBottomNavigation()
     
     disposables = CompositeDisposable()
     disposables?.add(
@@ -41,43 +42,6 @@ class WeeklyGoalsActivity : BaseActivity() {
     )
   }
   
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_weekly_goals, menu)
-    
-    // Set notification toggle state
-    val notificationsItem = menu.findItem(R.id.action_notifications)
-    val isEnabled = Store.state.config?.weeklyNotificationsEnabled ?: true
-    notificationsItem.isChecked = isEnabled
-    
-    return true
-  }
-  
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.action_add_defaults -> {
-        showDefaultGoalsDialog()
-        return true
-      }
-      R.id.action_notifications -> {
-        toggleNotifications(item)
-        return true
-      }
-      R.id.action_test_notification -> {
-        testNotification()
-        return true
-      }
-      R.id.action_clear_all -> {
-        confirmClearAllGoals()
-        return true
-      }
-    }
-    return super.onOptionsItemSelected(item)
-  }
-  
-  override fun onSupportNavigateUp(): Boolean {
-    onBackPressed()
-    return true
-  }
   
   private fun setupRecyclerViews() {
     currentGoalsAdapter = WeeklyGoalsAdapter(
@@ -123,6 +87,42 @@ class WeeklyGoalsActivity : BaseActivity() {
     
     val weekRangeText = "${formatter.format(weekStart)} - ${formatter.format(weekEnd)}, ${yearFormatter.format(weekEnd)}"
     binding.weekRangeText.text = weekRangeText
+  }
+  
+  private fun setupBottomNavigation() {
+    binding.bottomNavigation.setOnItemSelectedListener { item ->
+      when (item.itemId) {
+        R.id.nav_timeline -> {
+          val intent = Intent(this, MainActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_stats -> {
+          val intent = Intent(this, GraphActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_goals -> {
+          // Already on goals, do nothing
+          true
+        }
+        R.id.nav_settings -> {
+          val intent = Intent(this, EditorActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        else -> false
+      }
+    }
+    
+    // Set goals as selected in bottom navigation
+    binding.bottomNavigation.selectedItemId = R.id.nav_goals
   }
   
   private fun updateUI(state: State) {

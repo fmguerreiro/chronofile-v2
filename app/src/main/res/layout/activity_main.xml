@@ -9,27 +9,32 @@
   android:fitsSystemWindows="true"
   tools:context="com.chaidarun.chronofile.MainActivity"
 >
-  <com.google.android.material.appbar.AppBarLayout
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    app:liftOnScroll="true"
-  >
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/toolbar"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_width="match_parent"
-      app:title="Timeline"
-      app:titleCentered="true"
-    />
-  </com.google.android.material.appbar.AppBarLayout>
   
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="72dp"
+    android:clipToPadding="false"
   >
+    
+    <!-- Activity Recommendations Bar -->
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="16dp"
+      android:layout_marginVertical="8dp"
+      android:scrollbars="none"
+    >
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/frequentActivitiesChipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        app:singleLine="true"
+        app:chipSpacing="12dp"
+      />
+    </HorizontalScrollView>
     
     <!-- Activity Suggestion Card -->
     <com.google.android.material.card.MaterialCardView
@@ -218,55 +223,36 @@
         android:layout_width="match_parent"
         android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
-        android:paddingBottom="80dp"
-        android:clipToPadding="false"
       />
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
   </LinearLayout>
   
-  <!-- Bottom Actions Bar -->
-  <LinearLayout
+  <!-- Add Entry FAB -->
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/addEntryFab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="88dp"
+    app:srcCompat="@android:drawable/ic_input_add"
+    app:tint="?attr/colorOnPrimary"
+    app:backgroundTint="?attr/colorPrimary"
+  />
+  
+  <!-- Bottom Navigation Bar -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="12dp"
-    android:background="@drawable/bottom_bar_background"
-    android:elevation="0dp"
-  >
-    <!-- Frequent Activities -->
-    <HorizontalScrollView
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:scrollbars="none"
-    >
-      <com.google.android.material.chip.ChipGroup
-        android:id="@+id/frequentActivitiesChipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        app:singleLine="true"
-        app:chipSpacing="12dp"
-      />
-    </HorizontalScrollView>
-    
-    <!-- Add Entry FAB -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-      android:id="@+id/addEntryFab"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="12dp"
-      app:fabSize="mini"
-      app:srcCompat="@android:drawable/ic_input_add"
-      app:tint="?attr/colorOnPrimary"
-      app:backgroundTint="?attr/colorPrimary"
-      app:elevation="0dp"
-    />
-  </LinearLayout>
+    app:menu="@menu/bottom_navigation_menu"
+    app:backgroundTint="?attr/colorSurface"
+    app:itemIconTint="?attr/colorOnSurface"
+    app:itemTextColor="?attr/colorOnSurface"
+    app:elevation="8dp"
+  />
   
   <!-- Bottom Sheet for Adding Entry -->
   <LinearLayout

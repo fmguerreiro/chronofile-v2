@@ -6,41 +6,27 @@
   android:layout_width="match_parent"
   android:background="?attr/colorSurface"
 >
-  <com.google.android.material.appbar.AppBarLayout
+  <com.google.android.material.tabs.TabLayout
+    android:id="@+id/graphTabs"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:background="@android:color/transparent"
-    app:elevation="0dp"
-  >
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/graphToolbar"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_width="match_parent"
-      app:title="Statistics"
-      app:titleTextAppearance="?attr/textAppearanceHeadlineSmall"
-      app:navigationIcon="@drawable/ic_arrow_back"
-    />
-    <com.google.android.material.tabs.TabLayout
-      android:id="@+id/graphTabs"
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      app:tabGravity="fill"
-      app:tabMode="fixed"
-      app:tabIndicatorColor="?attr/colorPrimary"
-      app:tabIndicatorHeight="3dp"
-      app:tabIndicatorFullWidth="false"
-      app:tabIndicatorAnimationMode="elastic"
-      app:tabSelectedTextColor="?attr/colorPrimary"
-      app:tabTextColor="?attr/colorOnSurfaceVariant"
-      android:background="?attr/colorSurface"
-    />
-  </com.google.android.material.appbar.AppBarLayout>
+    app:tabGravity="fill"
+    app:tabMode="fixed"
+    app:tabIndicatorColor="?attr/colorPrimary"
+    app:tabIndicatorHeight="3dp"
+    app:tabIndicatorFullWidth="false"
+    app:tabIndicatorAnimationMode="elastic"
+    app:tabSelectedTextColor="?attr/colorPrimary"
+    app:tabTextColor="?attr/colorOnSurfaceVariant"
+    android:background="?attr/colorSurface"
+  />
   
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
   >
     <androidx.viewpager.widget.ViewPager
       android:id="@+id/graphViewPager"
@@ -115,4 +101,17 @@
       </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
   </LinearLayout>
+  
+  <!-- Bottom Navigation Bar -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    app:menu="@menu/bottom_navigation_menu"
+    app:backgroundTint="?attr/colorSurface"
+    app:itemIconTint="?attr/colorOnSurface"
+    app:itemTextColor="?attr/colorOnSurface"
+    app:elevation="8dp"
+  />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

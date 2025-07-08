@@ -2,6 +2,7 @@
 
 package com.chaidarun.chronofile
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chaidarun.chronofile.databinding.ActivityEditorBinding
 import com.chaidarun.chronofile.databinding.ItemActivityGroupBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -26,12 +28,11 @@ class EditorActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setSupportActionBar(binding.editorToolbar)
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
     
     setupGroupsList()
     setupButtons()
     setupJsonEditor()
+    setupBottomNavigation()
   }
   
   private fun setupGroupsList() {
@@ -74,9 +75,6 @@ class EditorActivity : BaseActivity() {
       saveJsonConfig()
     }
     
-    binding.jsonEditorToolbar.setNavigationOnClickListener {
-      hideJsonEditor()
-    }
   }
   
   private fun setupJsonEditor() {
@@ -331,6 +329,49 @@ class EditorActivity : BaseActivity() {
     Log.i(TAG, "Saved JSON config")
     hideJsonEditor()
     loadGroups() // Refresh the groups list
+  }
+  
+  private fun setupBottomNavigation() {
+    binding.bottomNavigation.setOnItemSelectedListener { item ->
+      when (item.itemId) {
+        R.id.nav_timeline -> {
+          val intent = Intent(this, MainActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_stats -> {
+          val intent = Intent(this, GraphActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_goals -> {
+          val intent = Intent(this, WeeklyGoalsActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_insights -> {
+          val intent = Intent(this, RecommendationActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_settings -> {
+          // Already on settings, do nothing
+          true
+        }
+        else -> false
+      }
+    }
+    
+    // Set settings as selected in bottom navigation
+    binding.bottomNavigation.selectedItemId = R.id.nav_settings
   }
 
   override fun onSupportNavigateUp(): Boolean {

@@ -26,6 +26,7 @@ import java.util.Date
 import com.chaidarun.chronofile.databinding.FormNfcBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity() {
   val binding by viewBinding(ActivityMainBinding::inflate)
@@ -40,7 +41,6 @@ class MainActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setSupportActionBar(binding.toolbar)
 
     hydrateStoreFromFiles()
 
@@ -83,6 +83,41 @@ class MainActivity : BaseActivity() {
       hideSuggestionCard()
     }
     
+    // Set up bottom navigation
+    binding.bottomNavigation.setOnItemSelectedListener { item ->
+      when (item.itemId) {
+        R.id.nav_timeline -> {
+          // Already on timeline, do nothing
+          true
+        }
+        R.id.nav_stats -> {
+          val intent = Intent(this, GraphActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          false // Don't select this item since we're navigating away
+        }
+        R.id.nav_goals -> {
+          val intent = Intent(this, WeeklyGoalsActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          false // Don't select this item since we're navigating away
+        }
+        R.id.nav_insights -> {
+          val intent = Intent(this, RecommendationActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          false // Don't select this item since we're navigating away
+        }
+        R.id.nav_settings -> {
+          val intent = Intent(this, EditorActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          false // Don't select this item since we're navigating away
+        }
+        else -> false
+      }
+    }
+    
     binding.addEntry.setOnClickListener {
       History.addEntry(
         binding.addEntryActivity.text.toString(),
@@ -118,25 +153,6 @@ class MainActivity : BaseActivity() {
     }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.action_about ->
-        startActivity(
-          Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/fmguerreiro/chronofile-v2"))
-        )
-      R.id.action_change_save_dir -> requestStorageAccess()
-      R.id.action_settings -> startActivity(Intent(this, EditorActivity::class.java))
-      R.id.action_stats -> startActivity(Intent(this, GraphActivity::class.java))
-      R.id.action_weekly_goals -> startActivity(Intent(this, WeeklyGoalsActivity::class.java))
-      else -> return super.onOptionsItemSelected(item)
-    }
-    return true
-  }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
     super.onActivityResult(requestCode, resultCode, resultData)
@@ -186,6 +202,9 @@ class MainActivity : BaseActivity() {
     if (intent.action in NFC_INTENT_ACTIONS) {
       processNfcIntent(intent)
     }
+    
+    // Set timeline as selected in bottom navigation
+    binding.bottomNavigation.selectedItemId = R.id.nav_timeline
     
     // Update frequent activities
     updateFrequentActivities()

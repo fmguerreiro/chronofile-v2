@@ -8,26 +8,12 @@
   android:fitsSystemWindows="true"
   tools:context="com.chaidarun.chronofile.WeeklyGoalsActivity"
 >
-  <com.google.android.material.appbar.AppBarLayout
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    app:liftOnScroll="true"
-  >
-    <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/toolbar"
-      android:layout_height="?attr/actionBarSize"
-      android:layout_width="match_parent"
-      app:title="Weekly Goals"
-      app:titleCentered="true"
-      app:navigationIcon="?attr/homeAsUpIndicator"
-    />
-  </com.google.android.material.appbar.AppBarLayout>
   
   <androidx.core.widget.NestedScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
   >
     <LinearLayout
       android:layout_height="wrap_content"
@@ -156,5 +142,18 @@
     android:layout_margin="16dp"
     android:text="Add Goal"
     app:icon="@android:drawable/ic_input_add"
+  />
+  
+  <!-- Bottom Navigation Bar -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    app:menu="@menu/bottom_navigation_menu"
+    app:backgroundTint="?attr/colorSurface"
+    app:itemIconTint="?attr/colorOnSurface"
+    app:itemTextColor="?attr/colorOnSurface"
+    app:elevation="8dp"
   />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

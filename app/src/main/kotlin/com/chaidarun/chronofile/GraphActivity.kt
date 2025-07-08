@@ -2,6 +2,7 @@
 
 package com.chaidarun.chronofile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.chaidarun.chronofile.databinding.ActivityGraphBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.CompositeDisposable
 
 class GraphActivity : BaseActivity() {
@@ -25,12 +27,48 @@ class GraphActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setSupportActionBar(binding.graphToolbar)
     
-    // Set up back navigation
-    binding.graphToolbar.setNavigationOnClickListener {
-      onBackPressed()
+    // Set up bottom navigation
+    binding.bottomNavigation.setOnItemSelectedListener { item ->
+      when (item.itemId) {
+        R.id.nav_timeline -> {
+          val intent = Intent(this, MainActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_stats -> {
+          // Already on stats, do nothing
+          true
+        }
+        R.id.nav_goals -> {
+          val intent = Intent(this, WeeklyGoalsActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_insights -> {
+          val intent = Intent(this, RecommendationActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        R.id.nav_settings -> {
+          val intent = Intent(this, EditorActivity::class.java)
+          startActivity(intent)
+          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          finish()
+          true
+        }
+        else -> false
+      }
     }
+    
+    // Set stats as selected in bottom navigation
+    binding.bottomNavigation.selectedItemId = R.id.nav_stats
     
     binding.graphViewPager.run {
       adapter = GraphPagerAdapter(supportFragmentManager)
