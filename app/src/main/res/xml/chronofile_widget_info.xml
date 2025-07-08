@@ -4,7 +4,7 @@
     android:initialKeyguardLayout="@layout/widget_chronofile"
     android:initialLayout="@layout/widget_chronofile"
     android:minWidth="110dp"
-    android:minHeight="30dp"
+    android:minHeight="20dp"
     android:previewImage="@mipmap/ic_launcher"
     android:previewLayout="@layout/widget_chronofile_compact"
     android:resizeMode="horizontal|vertical"

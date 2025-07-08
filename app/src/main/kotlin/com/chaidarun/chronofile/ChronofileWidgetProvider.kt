@@ -211,9 +211,9 @@ class ChronofileWidgetProvider : AppWidgetProvider() {
                 
                 // Check both width and height for compact mode
                 val layout = when {
-                    effectiveHeight < 70 -> WidgetLayout.COMPACT  // Short widgets
-                    effectiveWidth < 300 -> WidgetLayout.COMPACT  // Most widgets should be compact
-                    else -> WidgetLayout.NORMAL
+                    effectiveHeight < 35 -> WidgetLayout.COMPACT  // Very short widgets (search bar style)
+                    effectiveWidth < 200 -> WidgetLayout.COMPACT  // Narrow widgets
+                    else -> WidgetLayout.NORMAL  // Medium+ widgets show emoji+text
                 }
                 
                 // Debug logging

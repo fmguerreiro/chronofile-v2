@@ -14,7 +14,7 @@ import java.util.Locale
 /** Gets current Unix timestamp in seconds */
 fun epochSeconds() = System.currentTimeMillis() / 1000
 
-fun formatDate(date: Date) = SimpleDateFormat("EE, d MMM yyyy", Locale.US).format(date)
+fun formatDate(date: Date) = SimpleDateFormat("d MMM", Locale.US).format(date)
 
 fun formatDate(seconds: Long) = formatDate(Date(seconds * 1000))
 

@@ -18,6 +18,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing
 No automated tests exist in this codebase. Testing is done manually on device/emulator.
 
+### Claude Commands
+- `/commit` - Create logical git commit for current session changes
+
 ## Architecture Overview
 
 ### Redux-Inspired State Management
