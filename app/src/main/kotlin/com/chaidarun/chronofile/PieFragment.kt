@@ -34,7 +34,7 @@ class PieFragment : GraphFragment() {
       holeRadius = 50f
       legend.isEnabled = false
       rotationAngle = 225f
-      setCenterTextColor(LABEL_COLOR)
+      setCenterTextColor(getLabelColor())
       setCenterTextSize(LABEL_FONT_SIZE)
       setCenterTextTypeface(resources.getFont(R.font.exo2_regular))
       setDrawEntryLabels(false)
@@ -99,7 +99,7 @@ class PieFragment : GraphFragment() {
         valueLineColor = Color.TRANSPARENT
         valueLinePart1Length = 0.45f
         valueLinePart2Length = 0f
-        valueTextColor = LABEL_COLOR
+        valueTextColor = getLabelColor()
         valueTextSize = LABEL_FONT_SIZE
         valueTypeface = resources.getFont(R.font.exo2_regular)
         valueFormatter =

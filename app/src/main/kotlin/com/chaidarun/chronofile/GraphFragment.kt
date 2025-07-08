@@ -118,6 +118,12 @@ abstract class GraphFragment : BaseFragment() {
     return Pair(bucketsWithOther, sliceList)
   }
 
+  protected fun getLabelColor(): Int {
+    val typedValue = android.util.TypedValue()
+    requireContext().theme.resolveAttribute(com.google.android.material.R.attr.colorOnSurface, typedValue, true)
+    return typedValue.data
+  }
+
   companion object {
     /** D3.js schemeTableau10 and schemeDark2 */
     val COLORS by lazy {
@@ -147,8 +153,6 @@ abstract class GraphFragment : BaseFragment() {
     /** Slices smaller than this will get bucketed into "Other" */
     private const val MIN_SLICE_PERCENT = 0.015
 
-    /** TODO: Make this `protected` once Kotlin supports that */
-    const val LABEL_COLOR = Color.WHITE
     /** TODO: Make this `protected` once Kotlin supports that */
     const val LABEL_FONT_SIZE = 12f
     /** TODO: Make this `protected` once Kotlin supports that */

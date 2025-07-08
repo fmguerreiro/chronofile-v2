@@ -235,8 +235,7 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="12dp"
     android:background="@drawable/bottom_bar_background"
-    android:elevation="12dp"
-    android:translationZ="8dp"
+    android:elevation="0dp"
   >
     <!-- Frequent Activities -->
     <HorizontalScrollView
@@ -265,6 +264,7 @@
       app:srcCompat="@android:drawable/ic_input_add"
       app:tint="?attr/colorOnPrimary"
       app:backgroundTint="?attr/colorPrimary"
+      app:elevation="0dp"
     />
   </LinearLayout>
   

@@ -42,7 +42,7 @@ class AreaFragment : GraphFragment() {
       description.isEnabled = false
       with(legend) {
         isWordWrapEnabled = true
-        textColor = LABEL_COLOR
+        textColor = getLabelColor()
         textSize = LABEL_FONT_SIZE
         typeface = resources.getFont(R.font.exo2_regular)
         xEntrySpace = 15f
@@ -149,7 +149,11 @@ class AreaFragment : GraphFragment() {
       with(axisLeft) {
         axisMaximum = if (stacked) DAY_SECONDS.toFloat() else maxEntrySeconds.toFloat()
         removeAllLimitLines()
-        if (!stacked) addLimitLine(limitLine)
+        if (!stacked) addLimitLine(LimitLine(28800f).apply {
+          lineColor = getLabelColor()
+          lineWidth = 2f
+          enableDashedLine(5f, 5f, 0f)
+        })
       }
       data = LineData(dataSets)
       isScaleYEnabled = !stacked
@@ -160,12 +164,4 @@ class AreaFragment : GraphFragment() {
     Log.i(TAG, "Rendered area chart in $elapsed ms")
   }
 
-  companion object {
-    val limitLine =
-      LimitLine(28800f).apply {
-        lineColor = Color.WHITE
-        lineWidth = 2f
-        enableDashedLine(5f, 5f, 0f)
-      }
-  }
 }

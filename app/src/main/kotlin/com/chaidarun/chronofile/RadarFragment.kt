@@ -35,7 +35,7 @@ class RadarFragment : GraphFragment() {
       description.isEnabled = false
       legend.run {
         isWordWrapEnabled = true
-        textColor = LABEL_COLOR
+        textColor = getLabelColor()
         textSize = LABEL_FONT_SIZE
         typeface = resources.getFont(R.font.exo2_regular)
         xEntrySpace = 15f
@@ -48,7 +48,7 @@ class RadarFragment : GraphFragment() {
             override fun getAxisLabel(value: Float, axis: AxisBase?) =
               DateFormatSymbols(Locale.US).shortWeekdays[((value.toInt() + 1) % 7) + 1]
           }
-        textColor = LABEL_COLOR
+        textColor = getLabelColor()
         textSize = LABEL_FONT_SIZE
         typeface = resources.getFont(R.font.exo2_regular)
       }
