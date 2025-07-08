@@ -48,6 +48,13 @@ sealed class Action {
   data class UpdateWeeklyGoal(val goal: WeeklyGoal) : Action()
 
   data class SetWeeklyNotificationsEnabled(val enabled: Boolean) : Action()
+  
+  // New Recommendation Actions
+  data class UpdateLifeBalance(val metrics: LifeBalanceMetrics) : Action()
+  data class CelebrateAchievement(val achievement: Achievement) : Action()
+  data class DismissRecommendation(val recommendationId: String) : Action()
+  data class AcceptRecommendation(val recommendation: SmartRecommendation) : Action()
+  data class UpdateHabitMetrics(val metrics: Map<String, HabitMetrics>) : Action()
 }
 
 /** This class must be deeply immutable and preferably printable */
@@ -55,7 +62,12 @@ data class State(
   val config: Config? = null,
   val history: History? = null,
   val graphConfig: GraphConfig = GraphConfig(),
-  val searchQuery: String? = null
+  val searchQuery: String? = null,
+  val recommendations: List<SmartRecommendation> = emptyList(),
+  val lifeBalance: LifeBalanceMetrics? = null,
+  val habitMetrics: Map<String, HabitMetrics> = emptyMap(),
+  val achievements: List<Achievement> = emptyList(),
+  val dismissedRecommendations: Set<String> = emptySet()
 )
 
 private val reducer: (State, Action) -> State = { state, action ->
@@ -147,6 +159,17 @@ private val reducer: (State, Action) -> State = { state, action ->
           newConfig.save()
           copy(config = newConfig)
         }
+        is Action.UpdateLifeBalance -> copy(lifeBalance = action.metrics)
+        is Action.CelebrateAchievement -> copy(achievements = achievements + action.achievement)
+        is Action.DismissRecommendation -> copy(
+          dismissedRecommendations = dismissedRecommendations + action.recommendationId,
+          recommendations = recommendations.filter { it.id != action.recommendationId }
+        )
+        is Action.AcceptRecommendation -> {
+          // Handle recommendation acceptance
+          copy(dismissedRecommendations = dismissedRecommendations + action.recommendation.id)
+        }
+        is Action.UpdateHabitMetrics -> copy(habitMetrics = action.metrics)
       }
 
     Log.i(TAG, "Reduced $action in ${System.currentTimeMillis() - start} ms")
