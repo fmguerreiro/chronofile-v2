@@ -83,4 +83,13 @@
   <!-- Other Category -->
   <color name="other_category_bg">#F5F5F5</color>
   <color name="other_category_text">#424242</color>
+
+  <!-- Recommendation Card Colors -->
+  <color name="celebration_background">#FFF9C4</color>
+  <color name="nudge_background">#E8F5E8</color>
+  <color name="default_card_background">@color/colorSurface</color>
+
+  <!-- Achievement Colors -->
+  <color name="locked_achievement_background">#F5F5F5</color>
+  <color name="locked_achievement_text">#757575</color>
 </resources>

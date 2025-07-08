@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <!-- X axis -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M3,18h18v2H3V18z"/>
+  <!-- Y axis -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M3,16V4h2v12H3z"/>
+  <!-- Chart line -->
+  <path
+      android:strokeColor="@android:color/white"
+      android:strokeWidth="2"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"
+      android:fillColor="@android:color/transparent"
+      android:pathData="M7,12l3,-3l3,1.5l4,-4.5"/>
+  <!-- Data points as small squares -->
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M6,11h2v2h-2z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M9,8h2v2h-2z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M12,9.5h2v2h-2z"/>
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M16,5h2v2h-2z"/>
+</vector>
