@@ -57,6 +57,11 @@
       android:name=".WeeklyGoalsActivity"
       android:parentActivityName=".MainActivity"
     />
+    <activity
+      android:exported="false"
+      android:name=".RecommendationActivity"
+      android:parentActivityName=".MainActivity"
+    />
     <service
       android:exported="false"
       android:name=".FetchAddressIntentService"
