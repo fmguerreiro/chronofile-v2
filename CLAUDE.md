@@ -10,10 +10,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `./gradlew assembleRelease` - Build release APK directly
 
 ### Development
+- `make deploy` - Fast build, install, and launch (recommended for development)
+- `make build` - Fast build debug APK only
 - `make log` - Show filtered Android logs for debugging (requires connected device/emulator)
 - `adb install app/build/outputs/apk/debug/app-debug.apk` - Install debug build
 - `adb install app/build/outputs/apk/release/app-release.apk` - Install release build
 - `export JAVA_HOME=$(/usr/libexec/java_home -v 17) && ./gradlew installDebug` - Build and deploy debug APK to connected device/emulator
+
+### Emulator Management
+- `emulator -list-avds` - List available Android Virtual Devices
+- `emulator -avd ChronofileEmu &` - Start the ChronofileEmu emulator
+- `adb devices` - Check connected devices/emulators
+- `adb wait-for-device` - Wait for emulator to be ready
 
 ### Testing
 No automated tests exist in this codebase. Testing is done manually on device/emulator.

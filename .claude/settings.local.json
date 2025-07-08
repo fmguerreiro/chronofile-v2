@@ -21,7 +21,8 @@
       "Bash(adb:*)",
       "Bash(sdkmanager:*)",
       "Bash(avdmanager create avd:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(emulator:*)"
     ],
     "deny": []
   }

@@ -259,7 +259,7 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
       val note = entry.note
 
       with(itemView) {
-        binding.entryActivity.text = activity
+        binding.entryActivity.text = activity.replaceFirstChar { it.uppercase() }
         
         // Show/hide note based on content
         if (note.isNullOrEmpty()) {

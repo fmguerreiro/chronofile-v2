@@ -358,7 +358,7 @@ class MainActivity : BaseActivity() {
     intelligentActivities.forEach { activity ->
       val chip = Chip(this).apply {
         val icon = getActivityIcon(activity)
-        text = "$icon $activity"
+        text = "$icon ${activity.replaceFirstChar { it.uppercase() }}"
         isClickable = true
         isFocusable = true
         isCheckable = false
@@ -469,7 +469,7 @@ class MainActivity : BaseActivity() {
   }
   
   private fun showSuggestionCard(activity: String, confidence: Double) {
-    binding.suggestedActivityText.text = activity
+    binding.suggestedActivityText.text = activity.replaceFirstChar { it.uppercase() }
     binding.suggestionConfidenceText.text = "${(confidence * 100).toInt()}% confidence"
     binding.activitySuggestionCard.visibility = View.VISIBLE
   }
