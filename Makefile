@@ -22,3 +22,28 @@ deploy:
 build:
 	# Fast build with daemon
 	export JAVA_HOME=$$(/usr/libexec/java_home -v 17) && ./gradlew assembleDebug --daemon
+
+.PHONY: emulator
+emulator:
+	# Launch the ChronofileEmu emulator
+	emulator -avd ChronofileEmu &
+
+.PHONY: wait-for-emulator
+wait-for-emulator:
+	# Wait for emulator to be ready
+	adb wait-for-device
+	echo "Waiting for emulator to boot..."
+	adb shell 'while [[ -z $$(getprop sys.boot_completed) ]]; do sleep 1; done'
+	echo "Emulator ready!"
+
+.PHONY: emulator-deploy
+emulator-deploy:
+	# Launch emulator and deploy when ready
+	make emulator
+	make wait-for-emulator
+	make deploy
+
+.PHONY: kill-emulator
+kill-emulator:
+	# Kill running emulator
+	pkill -f "emulator.*ChronofileEmu" || true
