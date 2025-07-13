@@ -54,7 +54,7 @@
     />
     <activity
       android:exported="false"
-      android:name=".WeeklyGoalsActivity"
+      android:name=".GoalsActivity"
       android:parentActivityName=".MainActivity"
     />
     <activity
@@ -68,6 +68,10 @@
     />
     <receiver
       android:name=".WeeklyResultsReceiver"
+      android:exported="false"
+    />
+    <receiver
+      android:name=".DailyGoalCheckReceiver"
       android:exported="false"
     />
     

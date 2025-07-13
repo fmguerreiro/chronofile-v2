@@ -1,114 +1,88 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<com.google.android.material.card.MaterialCardView
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_marginHorizontal="16dp"
-  android:layout_marginVertical="4dp"
-  android:checkable="true"
-  android:clickable="true"
-  android:focusable="true"
-  app:cardCornerRadius="16dp"
-  app:cardElevation="1dp"
-  style="?attr/materialCardViewElevatedStyle"
+  android:orientation="horizontal"
+  android:paddingHorizontal="20dp"
+  android:paddingVertical="16dp"
+  android:minHeight="72dp"
+  android:gravity="center_vertical"
 >
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/entryContainer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
+  <!-- Icon Container - Simplified -->
+  <FrameLayout
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_marginEnd="16dp"
   >
-    <!-- Activity Icon -->
-    <com.google.android.material.card.MaterialCardView
-      android:id="@+id/iconContainer"
-      android:layout_width="40dp"
-      android:layout_height="40dp"
-      app:cardCornerRadius="12dp"
-      app:cardElevation="0dp"
-      app:cardBackgroundColor="?attr/colorPrimaryContainer"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-    >
-      <TextView
-        android:id="@+id/activityIcon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="📝"
-        android:textColor="?attr/colorOnPrimaryContainer"
-      />
-    </com.google.android.material.card.MaterialCardView>
-    
-    <!-- Content -->
-    <LinearLayout
-      android:id="@+id/contentLayout"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="12dp"
-      android:layout_marginEnd="12dp"
-      android:orientation="vertical"
-      app:layout_constraintStart_toEndOf="@id/iconContainer"
-      app:layout_constraintEnd_toStartOf="@id/durationSection"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-    >
-      <TextView
-        android:id="@+id/entryActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceBodyLarge"
-        android:textColor="?attr/colorOnSurface"
-        android:textStyle="bold"
-        tools:text="Work"
-      />
-      
-      <TextView
-        android:id="@+id/entryNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:visibility="gone"
-        tools:visibility="visible"
-        tools:text="Working on the new feature implementation"
-      />
-    </LinearLayout>
-    
-    <!-- Duration Bar and Text -->
-    <LinearLayout
-      android:id="@+id/durationSection"
+    <!-- Minimal Line Icon -->
+    <ImageView
+      android:id="@+id/activityIcon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_gravity="center"
+      android:src="@drawable/ic_briefcase_line"
+      android:scaleType="center"
+      app:tint="#666666"
+    />
+  </FrameLayout>
+  
+  <!-- Content Section - Structured Block -->
+  <LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:layout_marginEnd="16dp"
+  >
+    <!-- Activity Name -->
+    <TextView
+      android:id="@+id/entryActivity"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:gravity="end"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-    >
-      <TextView
-        android:id="@+id/durationText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceLabelMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:layout_marginBottom="4dp"
-        tools:text="2h 30m"
-      />
-      
-      <View
-        android:id="@+id/durationBar"
-        android:layout_width="60dp"
-        android:layout_height="4dp"
-        android:background="?attr/colorPrimary"
-        android:alpha="0.8"
-      />
-    </LinearLayout>
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+      android:textAppearance="?attr/textAppearanceBodyLarge"
+      android:textColor="?attr/colorOnSurface"
+      android:textStyle="normal"
+      android:layout_marginBottom="2dp"
+      tools:text="Work Session"
+    />
+    
+    <!-- Time Range -->
+    <TextView
+      android:id="@+id/entryTimeRange"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAppearance="?attr/textAppearanceBodySmall"
+      android:textColor="?attr/colorOnSurfaceVariant"
+      tools:text="9:00 AM - 12:00 PM"
+    />
+    
+    <!-- Note (if exists) -->
+    <TextView
+      android:id="@+id/entryNote"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:textAppearance="?attr/textAppearanceBodySmall"
+      android:textColor="?attr/colorOnSurfaceVariant"
+      android:maxLines="1"
+      android:ellipsize="end"
+      android:visibility="gone"
+      tools:visibility="visible"
+      tools:text="Feature development"
+    />
+  </LinearLayout>
+  
+  <!-- Duration Display -->
+  <TextView
+    android:id="@+id/entryDuration"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?attr/textAppearanceBodySmall"
+    android:textColor="?attr/colorOnSurfaceVariant"
+    android:gravity="end"
+    tools:text="3h"
+  />
+</LinearLayout>

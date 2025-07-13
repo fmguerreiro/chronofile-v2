@@ -18,7 +18,7 @@ fun formatDate(date: Date) = SimpleDateFormat("d MMM", Locale.US).format(date)
 
 fun formatDate(seconds: Long) = formatDate(Date(seconds * 1000))
 
-fun formatTime(date: Date) = SimpleDateFormat("H:mm", Locale.US).format(date)
+fun formatTime(date: Date) = SimpleDateFormat("h:mm a", Locale.US).format(date)
 
 fun formatForSearch(seconds: Long) =
   SimpleDateFormat("yyyyMMdd", Locale.US).format(Date(seconds * 1000))

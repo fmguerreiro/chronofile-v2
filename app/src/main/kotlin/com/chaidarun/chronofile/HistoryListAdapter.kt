@@ -1,5 +1,3 @@
-// © Art Chaidarun
-
 package com.chaidarun.chronofile
 
 import android.content.Intent
@@ -22,6 +20,7 @@ import com.chaidarun.chronofile.databinding.FormEntryBinding
 import com.chaidarun.chronofile.databinding.ItemDateBinding
 import com.chaidarun.chronofile.databinding.ItemEntryBinding
 import com.chaidarun.chronofile.databinding.ItemTimeBinding
+import androidx.core.content.ContextCompat
 import java.util.Date
 import kotlin.system.measureTimeMillis
 
@@ -49,6 +48,7 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
   private var itemList = listOf<ListItem>()
   private var itemListLength = 0
   private var selectedEntry: Entry? = null
+  private var selectedDateTimestamp: Long? = null
   private val receiver by lazy {
     object : ResultReceiver(Handler()) {
       override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
@@ -130,76 +130,7 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
           return@subscribe
         }
 
-        val elapsedMs = measureTimeMillis {
-          // Select entries to show, and also compute activity end times for convenience later on
-          val entriesToShow =
-            mutableListOf<Pair<Entry, Long>>().apply {
-              var numMatchingEntries = 0
-              var matchingEntriesSeconds = 0L
-              var lastSeenStartTime = history.currentActivityStartTime
-              for (entry in history.entries.reversed()) {
-                if (
-                  query == null ||
-                    query.lowercase() in "${entry.activity}|${entry.note ?: ""}".lowercase() ||
-                    query.toIntOrNull() != null &&
-                      formatForSearch(entry.startTime).startsWith(query)
-                ) {
-                  matchingEntriesSeconds += lastSeenStartTime - entry.startTime
-                  if (++numMatchingEntries <= MAX_ENTRIES_TO_SHOW) {
-                    add(Pair(entry, lastSeenStartTime))
-                  }
-                }
-                lastSeenStartTime = entry.startTime
-              }
-              reverse()
-              if (query != null) {
-                App.toast(
-                  "$numMatchingEntries results, ${formatDuration(matchingEntriesSeconds, showDays = true, showMinutes = false)}"
-                )
-              }
-            }
-
-          // Construct list items
-          val items = mutableListOf<ListItem>(SpacerItem(32))
-          var lastDateShown: String? = null
-          var lastTimeShown: Long? = null
-          for ((entry, endTime) in entriesToShow) {
-            // Show date marker
-            val startDate = formatDate(entry.startTime)
-            if (startDate != lastDateShown) {
-              items.add(DateItem(Date(entry.startTime * 1000)))
-              lastDateShown = startDate
-            }
-
-            // Show start time marker
-            if (entry.startTime != lastTimeShown) {
-              items.add(TimeItem(Date(entry.startTime * 1000)))
-              lastTimeShown = entry.startTime
-            }
-
-            // Show entry either once or twice depending on whether it crosses midnight
-            val endDate = formatDate(endTime)
-            if (startDate != endDate) {
-              val midnight = getPreviousMidnight(endTime)
-              items.add(EntryItem(entry, entry.startTime, midnight))
-              items.add(DateItem(Date(endTime * 1000)))
-              lastDateShown = endDate
-              items.add(EntryItem(entry, midnight, endTime))
-            } else {
-              items.add(EntryItem(entry, entry.startTime, endTime))
-            }
-
-            // Show end time marker
-            items.add(TimeItem(Date(endTime * 1000)))
-            lastTimeShown = endTime
-          }
-          items.add(SpacerItem(32))
-          itemList = items
-          itemListLength = items.size
-          notifyDataSetChanged()
-          appActivity.binding.historyList.scrollToPosition(items.size - 1)
-        }
-        Log.i(TAG, "Rendered history view in $elapsedMs ms")
+        updateHistoryView(history, query)
       }
 
   override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
@@ -259,7 +190,10 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
       val note = entry.note
 
       with(itemView) {
-        binding.entryActivity.text = activity.replaceFirstChar { it.uppercase() }
+        binding.entryActivity.text = formatActivityAsRoutineBlock(activity, itemStart)
+        
+        // Set time range
+        binding.entryTimeRange.text = "${formatTime(Date(itemStart * 1000))} - ${formatTime(Date(itemEnd * 1000))}"
         
         // Show/hide note based on content
         if (note.isNullOrEmpty()) {
@@ -269,16 +203,15 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
           binding.entryNote.text = note
         }
         
-        // Set duration text
-        binding.durationText.text = formatDuration(itemEnd - itemStart)
-        
         // Set activity icon based on activity name
-        binding.activityIcon.text = getActivityIcon(activity)
+        binding.activityIcon.setImageResource(getActivityIcon(activity))
         
-        // Apply visual weight based on duration
-        val durationSeconds = itemEnd - itemStart
-        val durationHours = durationSeconds / 3600.0
-        applyVisualWeight(durationHours, durationSeconds)
+        // Calculate and display duration
+        val durationHours = (itemEnd - itemStart) / 3600.0
+        binding.entryDuration.text = when {
+            durationHours >= 1.0 -> "${String.format("%.1f", durationHours)}h"
+            else -> "${((itemEnd - itemStart) / 60).toInt()}m"
+        }
         
         setOnClickListener { History.addEntry(activity, note) }
         setOnLongClickListener {
@@ -289,46 +222,46 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
       }
     }
     
-    private fun applyVisualWeight(durationHours: Double, durationSeconds: Long) {
-      // Calculate weight factors (0.0 to 1.0)
-      val heightWeight = minOf(1.0, durationHours / 8.0) // Cap at 8 hours for max height
-      val opacityWeight = minOf(1.0, durationHours / 4.0) // Cap at 4 hours for max opacity
-      val saturationWeight = minOf(1.0, durationHours / 6.0) // Cap at 6 hours for max saturation
-      
-      // Apply opacity to the entire card (0.7 to 1.0)
-      val alpha = 0.7f + (0.3f * opacityWeight.toFloat())
-      itemView.alpha = alpha
-      
-      // Apply saturation to the duration bar width (30dp to 80dp)
-      val minBarWidth = (30 * itemView.context.resources.displayMetrics.density).toInt()
-      val maxBarWidth = (80 * itemView.context.resources.displayMetrics.density).toInt()
-      val barWidth = minBarWidth + ((maxBarWidth - minBarWidth) * saturationWeight).toInt()
-      
-      binding.durationBar.layoutParams = binding.durationBar.layoutParams.apply {
-        width = barWidth
-      }
-      
-      // Color intensity based on duration
-      val colorAlpha = (0.5f + (0.5f * saturationWeight.toFloat())).coerceIn(0.5f, 1.0f)
-      binding.durationBar.alpha = colorAlpha
-      
-      // Add subtle padding variations for longer activities (16dp to 24dp)
-      val basePadding = (16 * itemView.context.resources.displayMetrics.density).toInt()
-      val extraPadding = (8 * heightWeight * itemView.context.resources.displayMetrics.density).toInt()
-      val totalPadding = basePadding + extraPadding
-      
-      binding.entryContainer.setPadding(totalPadding, totalPadding, totalPadding, totalPadding)
-      
-      // Scale the card elevation slightly for longer activities
-      val baseElevation = 1f
-      val maxElevation = 4f
-      val cardElevation = baseElevation + ((maxElevation - baseElevation) * heightWeight.toFloat())
-      (itemView as? com.google.android.material.card.MaterialCardView)?.cardElevation = cardElevation
+    private fun getActivityIcon(activity: String): Int {
+      return IconDatabase.findByKeyword(activity)
     }
     
-    private fun getActivityIcon(activity: String): String {
-      return EmojiDatabase.findByKeyword(activity)
+    private fun formatActivityAsRoutineBlock(activity: String, startTime: Long): String {
+      val hour = java.time.LocalDateTime.ofInstant(
+        java.time.Instant.ofEpochSecond(startTime), 
+        java.time.ZoneId.systemDefault()
+      ).hour
+      
+      return when {
+        // Morning routine activities
+        hour in 5..8 && activity.lowercase() in listOf("shower", "hygiene", "breakfast", "morning", "coffee") -> 
+          "Morning Routine"
+        
+        // Work session activities
+        hour in 9..17 && activity.lowercase() in listOf("work", "meeting", "coding", "programming", "office", "email") -> 
+          "Work Session"
+        
+        // Lunch break activities
+        hour in 11..14 && activity.lowercase() in listOf("lunch", "meal", "food", "eat", "break") -> 
+          "Lunch Break"
+        
+        // Exercise/fitness activities
+        activity.lowercase() in listOf("exercise", "gym", "workout", "run", "walk", "bike", "cycle", "swim") -> 
+          "Exercise Session"
+        
+        // Evening routine activities
+        hour in 18..22 && activity.lowercase() in listOf("dinner", "relax", "rest", "tv", "read", "evening") -> 
+          "Evening Routine"
+        
+        // Sleep activities
+        (hour >= 22 || hour <= 5) && activity.lowercase() in listOf("sleep", "rest", "nap", "bed") -> 
+          "Sleep"
+        
+        // Default to formatted activity name
+        else -> activity.replaceFirstChar { it.uppercase() }
+      }
     }
+    
   }
 
   class SpacerViewHolder(view: View) : ViewHolder(view) {
@@ -344,5 +277,104 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
     override fun bindItem(listItem: ListItem) {
       binding.time.text = formatTime((listItem as TimeItem).time)
     }
+  }
+  
+  // Filter timeline to show only entries from the selected date
+  fun updateSelectedDate(selectedDateTimestamp: Long) {
+    this.selectedDateTimestamp = selectedDateTimestamp
+    // Manually trigger update since selectedDateTimestamp is not in Store
+    val currentState = Store.state
+    if (currentState.history != null) {
+      updateHistoryView(currentState.history, currentState.searchQuery)
+    }
+  }
+  
+  private fun updateHistoryView(history: History, query: String?) {
+    val elapsedMs = measureTimeMillis {
+      // Select entries to show, and also compute activity end times for convenience later on
+      val entriesToShow =
+        mutableListOf<Pair<Entry, Long>>().apply {
+          var numMatchingEntries = 0
+          var matchingEntriesSeconds = 0L
+          var lastSeenStartTime = history.currentActivityStartTime
+          for (entry in history.entries.reversed()) {
+            val matchesQuery = query == null ||
+                query.lowercase() in "${entry.activity}|${entry.note ?: ""}".lowercase() ||
+                query.toIntOrNull() != null &&
+                  formatForSearch(entry.startTime).startsWith(query)
+                  
+            val matchesDate = selectedDateTimestamp == null || 
+                isSameDay(entry.startTime * 1000, selectedDateTimestamp!!)
+                
+            if (matchesQuery && matchesDate) {
+              matchingEntriesSeconds += lastSeenStartTime - entry.startTime
+              if (++numMatchingEntries <= MAX_ENTRIES_TO_SHOW) {
+                add(Pair(entry, lastSeenStartTime))
+              }
+            }
+            lastSeenStartTime = entry.startTime
+          }
+          reverse()
+          if (query != null) {
+            App.toast(
+              "$numMatchingEntries results, ${formatDuration(matchingEntriesSeconds, showDays = true, showMinutes = false)}"
+            )
+          }
+        }
+
+      // Construct list items
+      val items = mutableListOf<ListItem>(SpacerItem(32))
+      var lastDateShown: String? = null
+      var lastTimeShown: Long? = null
+      for ((entry, endTime) in entriesToShow) {
+        // Show date marker
+        val startDate = formatDate(entry.startTime)
+        if (startDate != lastDateShown) {
+          items.add(DateItem(Date(entry.startTime * 1000)))
+          lastDateShown = startDate
+        }
+
+        // Show start time marker
+        if (entry.startTime != lastTimeShown) {
+          items.add(TimeItem(Date(entry.startTime * 1000)))
+          lastTimeShown = entry.startTime
+        }
+
+        // Show entry either once or twice depending on whether it crosses midnight
+        val endDate = formatDate(endTime)
+        if (startDate != endDate) {
+          val midnight = getPreviousMidnight(endTime)
+          items.add(EntryItem(entry, entry.startTime, midnight))
+          items.add(DateItem(Date(endTime * 1000)))
+          lastDateShown = endDate
+          items.add(EntryItem(entry, midnight, endTime))
+        } else {
+          items.add(EntryItem(entry, entry.startTime, endTime))
+        }
+
+        // Show end time marker
+        items.add(TimeItem(Date(endTime * 1000)))
+        lastTimeShown = endTime
+      }
+      items.add(SpacerItem(32))
+      itemList = items
+      itemListLength = items.size
+      notifyDataSetChanged()
+      appActivity.binding.historyList.scrollToPosition(items.size - 1)
+    }
+
+    Log.i(TAG, "Rendered history view in $elapsedMs ms")
+  }
+  
+  private fun isSameDay(timestamp1: Long, timestamp2: Long): Boolean {
+    val cal1 = java.util.Calendar.getInstance().apply { timeInMillis = timestamp1 }
+    val cal2 = java.util.Calendar.getInstance().apply { timeInMillis = timestamp2 }
+    val result = cal1.get(java.util.Calendar.YEAR) == cal2.get(java.util.Calendar.YEAR) &&
+           cal1.get(java.util.Calendar.DAY_OF_YEAR) == cal2.get(java.util.Calendar.DAY_OF_YEAR)
+    
+    // Debug logging
+    android.util.Log.d("DateFilter", "Comparing entry ${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(java.util.Date(timestamp1))} with selected ${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(java.util.Date(timestamp2))} = $result")
+    
+    return result
   }
 }

@@ -12,16 +12,16 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import java.util.*
 
-object WeeklyNotificationManager {
+object GoalNotificationManager {
   
-  private const val CHANNEL_ID = "weekly_goals_results"
+  private const val CHANNEL_ID = "goal_results"
   private const val NOTIFICATION_ID = 1001
   private const val ALARM_REQUEST_CODE = 2001
   
   fun createNotificationChannel(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      val name = "Weekly Goals Results"
-      val description = "Notifications for weekly goal progress and results"
+      val name = "Goal Results"
+      val description = "Notifications for goal progress and results"
       val importance = NotificationManager.IMPORTANCE_DEFAULT
       val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
         this.description = description
@@ -32,9 +32,9 @@ object WeeklyNotificationManager {
     }
   }
   
-  fun scheduleWeeklyNotification(context: Context) {
+  fun scheduleDailyGoalCheck(context: Context) {
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    val intent = Intent(context, WeeklyResultsReceiver::class.java)
+    val intent = Intent(context, DailyGoalCheckReceiver::class.java)
     val pendingIntent = PendingIntent.getBroadcast(
       context,
       ALARM_REQUEST_CODE,
@@ -42,32 +42,27 @@ object WeeklyNotificationManager {
       PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
     )
     
-    // Schedule for next Monday at 9 AM
+    // Schedule for tomorrow at 9 AM
     val calendar = Calendar.getInstance().apply {
-      set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+      add(Calendar.DAY_OF_YEAR, 1) // Tomorrow
       set(Calendar.HOUR_OF_DAY, 9)
       set(Calendar.MINUTE, 0)
       set(Calendar.SECOND, 0)
       set(Calendar.MILLISECOND, 0)
-      
-      // If it's already past this Monday 9 AM, schedule for next Monday
-      if (timeInMillis <= System.currentTimeMillis()) {
-        add(Calendar.WEEK_OF_YEAR, 1)
-      }
     }
     
-    // Use setRepeating for weekly notifications
+    // Use setRepeating for daily notifications
     alarmManager.setRepeating(
       AlarmManager.RTC_WAKEUP,
       calendar.timeInMillis,
-      AlarmManager.INTERVAL_DAY * 7, // Weekly
+      AlarmManager.INTERVAL_DAY, // Daily
       pendingIntent
     )
   }
   
-  fun cancelWeeklyNotification(context: Context) {
+  fun cancelDailyGoalCheck(context: Context) {
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    val intent = Intent(context, WeeklyResultsReceiver::class.java)
+    val intent = Intent(context, DailyGoalCheckReceiver::class.java)
     val pendingIntent = PendingIntent.getBroadcast(
       context,
       ALARM_REQUEST_CODE,
@@ -78,17 +73,42 @@ object WeeklyNotificationManager {
     alarmManager.cancel(pendingIntent)
   }
   
-  fun showWeeklyResultsNotification(context: Context) {
-    val results = calculateLastWeekResults()
+  fun checkAndShowGoalNotifications(context: Context) {
+    val config = Store.state.config ?: return
+    val history = Store.state.history ?: return
+    val goals = config.weeklyGoals ?: return
     
-    if (results.isEmpty()) {
-      return // No goals to report
+    if (goals.isEmpty()) return
+    
+    val calendar = Calendar.getInstance()
+    val today = calendar.get(Calendar.DAY_OF_WEEK)
+    val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+    val isLastDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH) == calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+    
+    val goalResults = mutableListOf<GoalResult>()
+    
+    for (goal in goals) {
+      if (!goal.isActive) continue
+      
+      val frequency = goal.frequency ?: GoalFrequency.WEEKLY
+      val shouldNotify = when (frequency) {
+        GoalFrequency.DAILY -> true // Check daily goals every day
+        GoalFrequency.WEEKLY -> today == Calendar.MONDAY // Check weekly goals on Monday
+        GoalFrequency.MONTHLY -> isLastDayOfMonth // Check monthly goals on last day of month
+      }
+      
+      if (shouldNotify) {
+        val result = calculateGoalResult(goal, history, frequency)
+        goalResults.add(result)
+      }
     }
     
-    val (title, content) = formatNotificationContent(results)
+    if (goalResults.isEmpty()) return
     
-    // Create intent to open WeeklyGoalsActivity
-    val intent = Intent(context, WeeklyGoalsActivity::class.java)
+    val (title, content) = formatNotificationContent(goalResults)
+    
+    // Create intent to open GoalsActivity
+    val intent = Intent(context, GoalsActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(
       context,
       0,
@@ -108,6 +128,80 @@ object WeeklyNotificationManager {
     
     with(NotificationManagerCompat.from(context)) {
       notify(NOTIFICATION_ID, notification)
+    }
+  }
+  
+  private fun calculateGoalResult(goal: WeeklyGoal, history: History, frequency: GoalFrequency): GoalResult {
+    val (startTime, endTime) = getTimeRangeForFrequency(frequency)
+    
+    val actualHours = history.entries
+      .filter { entry ->
+        entry.startTime >= startTime && 
+        entry.startTime < endTime &&
+        entry.activity == goal.activity
+      }
+      .sumOf { entry ->
+        val nextEntry = history.entries.find { it.startTime > entry.startTime }
+        val calculatedEndTime = nextEntry?.startTime ?: endTime
+        val durationSeconds = (calculatedEndTime - entry.startTime).coerceAtLeast(0)
+        durationSeconds / 3600.0 // Convert to hours
+      }
+    
+    val completionPercentage = ((actualHours / goal.targetHours) * 100).toInt().coerceAtMost(100)
+    
+    return GoalResult(
+      activity = goal.activity,
+      targetHours = goal.targetHours,
+      actualHours = actualHours,
+      completionPercentage = completionPercentage,
+      frequency = frequency
+    )
+  }
+  
+  private fun getTimeRangeForFrequency(frequency: GoalFrequency): Pair<Long, Long> {
+    val calendar = Calendar.getInstance()
+    val now = System.currentTimeMillis() / 1000
+    
+    return when (frequency) {
+      GoalFrequency.DAILY -> {
+        // Yesterday
+        calendar.add(Calendar.DAY_OF_YEAR, -1)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val startTime = calendar.timeInMillis / 1000
+        val endTime = startTime + (24 * 60 * 60) // 24 hours
+        Pair(startTime, endTime)
+      }
+      GoalFrequency.WEEKLY -> {
+        // Last week (Monday to Sunday)
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val startTime = calendar.timeInMillis / 1000
+        val endTime = startTime + (7 * 24 * 60 * 60) // 7 days
+        Pair(startTime, endTime)
+      }
+      GoalFrequency.MONTHLY -> {
+        // Last month
+        calendar.add(Calendar.MONTH, -1)
+        calendar.set(Calendar.DAY_OF_MONTH, 1)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val startTime = calendar.timeInMillis / 1000
+        
+        val endCalendar = Calendar.getInstance()
+        endCalendar.time = calendar.time
+        endCalendar.add(Calendar.MONTH, 1)
+        val endTime = endCalendar.timeInMillis / 1000
+        Pair(startTime, endTime)
+      }
     }
   }
   
@@ -144,16 +238,24 @@ object WeeklyNotificationManager {
           durationSeconds / 3600.0 // Convert to hours
         }
       
+      // Convert target hours to weekly equivalent for consistent reporting
+      val frequency = goal.frequency ?: GoalFrequency.WEEKLY
+      val weeklyTargetHours = when (frequency) {
+        GoalFrequency.DAILY -> goal.targetHours * 7.0 // Daily * 7 days
+        GoalFrequency.WEEKLY -> goal.targetHours // Already weekly
+        GoalFrequency.MONTHLY -> goal.targetHours / 4.29 // Monthly / ~4.29 weeks per month
+      }
+      
       WeeklyGoalResult(
         activity = goal.activity,
-        targetHours = goal.targetHours,
+        targetHours = weeklyTargetHours,
         actualHours = actualHours,
-        completionPercentage = ((actualHours / goal.targetHours) * 100).toInt().coerceAtMost(100)
+        completionPercentage = ((actualHours / weeklyTargetHours) * 100).toInt().coerceAtMost(100)
       )
     }
   }
   
-  private fun formatNotificationContent(results: List<WeeklyGoalResult>): Pair<String, String> {
+  private fun formatNotificationContent(results: List<GoalResult>): Pair<String, String> {
     val completed = results.count { it.completionPercentage >= 100 }
     val total = results.size
     val averageCompletion = results.map { it.completionPercentage }.average().toInt()
@@ -178,6 +280,14 @@ object WeeklyNotificationManager {
   }
 }
 
+data class GoalResult(
+  val activity: String,
+  val targetHours: Double,
+  val actualHours: Double,
+  val completionPercentage: Int,
+  val frequency: GoalFrequency
+)
+
 data class WeeklyGoalResult(
   val activity: String,
   val targetHours: Double,
@@ -185,8 +295,15 @@ data class WeeklyGoalResult(
   val completionPercentage: Int
 )
 
+class DailyGoalCheckReceiver : BroadcastReceiver() {
+  override fun onReceive(context: Context, intent: Intent) {
+    GoalNotificationManager.checkAndShowGoalNotifications(context)
+  }
+}
+
 class WeeklyResultsReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent) {
-    WeeklyNotificationManager.showWeeklyResultsNotification(context)
+    // Legacy compatibility - redirect to new daily check
+    GoalNotificationManager.checkAndShowGoalNotifications(context)
   }
 }

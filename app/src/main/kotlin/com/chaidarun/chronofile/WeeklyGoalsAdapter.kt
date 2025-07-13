@@ -9,7 +9,8 @@ import com.chaidarun.chronofile.databinding.ItemWeeklyGoalBinding
 class WeeklyGoalsAdapter(
   private val showProgress: Boolean,
   private val onEditClick: (WeeklyGoal) -> Unit,
-  private val onDeleteClick: (WeeklyGoal) -> Unit
+  private val onDeleteClick: (WeeklyGoal) -> Unit,
+  private val onFrequencyClick: (WeeklyGoal) -> Unit
 ) : RecyclerView.Adapter<WeeklyGoalsAdapter.GoalViewHolder>() {
   
   private var goals: List<WeeklyGoal> = emptyList()
@@ -41,7 +42,11 @@ class WeeklyGoalsAdapter(
     
     fun bind(goal: WeeklyGoal) {
       binding.goalActivity.text = goal.activity
-      binding.goalTarget.text = "${goal.targetHours}h"
+      binding.goalFrequency.text = (goal.frequency ?: GoalFrequency.WEEKLY).displayName()
+      
+      // Set goal icon based on activity type
+      val iconRes = getIconForActivity(goal.activity)
+      binding.goalIcon.setImageResource(iconRes)
       
       binding.editGoalButton.setOnClickListener {
         onEditClick(goal)
@@ -51,11 +56,21 @@ class WeeklyGoalsAdapter(
         onDeleteClick(goal)
       }
       
+      (binding.goalFrequency.parent as View).setOnClickListener {
+        onFrequencyClick(goal)
+      }
+      
+      // Click on the entire goal item to edit
+      binding.root.setOnClickListener {
+        onEditClick(goal)
+      }
+      
       if (showProgress && goal.isCurrentWeek()) {
-        binding.progressSection.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
         calculateAndShowProgress(goal)
       } else {
-        binding.progressSection.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
+        binding.progressPercentage.text = "${goal.targetHours.toInt()}"
       }
     }
     
@@ -81,19 +96,24 @@ class WeeklyGoalsAdapter(
       
       val progressPercentage = ((actualHours / goal.targetHours) * 100).toInt().coerceAtMost(100)
       
-      binding.progressText.text = "${String.format("%.1f", actualHours)}h / ${goal.targetHours}h"
-      binding.progressPercentage.text = "$progressPercentage%"
+      binding.progressPercentage.text = "$progressPercentage"
       binding.progressBar.progress = progressPercentage
-      
-      // Color coding based on progress
-      val colorRes = when {
-        progressPercentage >= 100 -> android.R.color.holo_green_dark
-        progressPercentage >= 75 -> android.R.color.holo_orange_dark
-        else -> android.R.color.holo_red_dark
+    }
+    
+    private fun getIconForActivity(activity: String): Int {
+      return when (activity.lowercase()) {
+        "meditate", "meditation", "mindfulness" -> R.drawable.ic_meditation
+        "exercise", "workout", "gym", "fitness" -> R.drawable.ic_dumbbell
+        "read", "reading", "book" -> R.drawable.ic_note
+        "walk", "nature", "hiking" -> R.drawable.ic_sprout
+        "work", "job", "office" -> R.drawable.ic_briefcase
+        "learn", "study", "education" -> R.drawable.ic_school
+        "sleep", "rest" -> R.drawable.ic_sleep
+        "cook", "cooking", "meal" -> R.drawable.ic_food
+        "music", "instrument" -> R.drawable.ic_music
+        "clean", "cleaning" -> R.drawable.ic_cleaning
+        else -> R.drawable.ic_target
       }
-      
-      val color = binding.root.context.getColor(colorRes)
-      binding.progressPercentage.setTextColor(color)
     }
   }
 }

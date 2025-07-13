@@ -1,0 +1,1 @@
+- dont build and deploy yourself, ill do it manually

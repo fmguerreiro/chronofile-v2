@@ -13,7 +13,7 @@ class App : Application() {
     super.onCreate()
     
     // Initialize notification channel
-    WeeklyNotificationManager.createNotificationChannel(this)
+    GoalNotificationManager.createNotificationChannel(this)
   }
 
   companion object {

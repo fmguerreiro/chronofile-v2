@@ -33,7 +33,7 @@ data class Achievement(
     val id: String,
     val title: String,
     val description: String,
-    val emoji: String,
+    @androidx.annotation.DrawableRes val iconRes: Int,
     val isNewlyEarned: Boolean,
     val celebrationMessage: String,
     val category: LifeCategory? = null,

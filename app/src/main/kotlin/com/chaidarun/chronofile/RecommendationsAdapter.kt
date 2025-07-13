@@ -111,7 +111,7 @@ class AchievementViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     
     fun bind(achievement: Achievement) {
-        binding.achievementEmoji.text = achievement.emoji
+        binding.achievementIcon.setImageResource(achievement.iconRes)
         binding.achievementTitle.text = achievement.title
         binding.achievementDescription.text = achievement.description
         

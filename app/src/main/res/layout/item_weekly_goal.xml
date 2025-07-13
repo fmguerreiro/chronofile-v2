@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<com.google.android.material.card.MaterialCardView
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_marginBottom="8dp"
-  app:cardCornerRadius="8dp"
-  app:cardElevation="1dp"
-  app:strokeWidth="1dp"
-  app:strokeColor="?attr/colorOutlineVariant"
+  android:orientation="horizontal"
+  android:gravity="center_vertical"
+  android:padding="16dp"
+  android:layout_marginBottom="12dp"
 >
+  <!-- Icon -->
+  <androidx.cardview.widget.CardView
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+    app:cardElevation="0dp"
+  >
+    <ImageView
+      android:id="@+id/goalIcon"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_gravity="center"
+      android:src="@drawable/ic_meditation"
+      android:tint="@color/icon_primary"
+      tools:ignore="UseAppTint"
+    />
+  </androidx.cardview.widget.CardView>
+  
+  <!-- Content -->
   <LinearLayout
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:orientation="vertical"
-    android:padding="16dp"
   >
     <LinearLayout
       android:layout_width="match_parent"
@@ -28,86 +48,86 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textAppearance="?attr/textAppearanceBodyLarge"
-        android:textStyle="bold"
-        tools:text="Exercise"
-      />
-      
-      <TextView
-        android:id="@+id/goalTarget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceBodyMedium"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        tools:text="5.0h"
-      />
-      
-      <ImageButton
-        android:id="@+id/editGoalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_menu_edit"
-        android:contentDescription="Edit goal"
-        android:padding="8dp"
-      />
-      
-      <ImageButton
-        android:id="@+id/deleteGoalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_menu_delete"
-        android:contentDescription="Delete goal"
-        android:padding="8dp"
+        style="@style/TextAppearance.Chronofile.GoalName"
+        tools:text="Meditate for 15"
       />
     </LinearLayout>
     
     <LinearLayout
-      android:id="@+id/progressSection"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:layout_marginTop="12dp"
-      android:visibility="gone"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:layout_marginTop="4dp"
     >
-      <LinearLayout
-        android:layout_width="match_parent"
+      <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="4dp"
       >
         <TextView
-          android:id="@+id/progressText"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:textAppearance="?attr/textAppearanceBodySmall"
-          android:textColor="?attr/colorOnSurfaceVariant"
-          tools:text="2.5h / 5.0h"
-        />
-        
-        <TextView
-          android:id="@+id/progressPercentage"
+          android:id="@+id/goalFrequency"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:textAppearance="?attr/textAppearanceBodySmall"
-          android:textColor="?attr/colorOnSurfaceVariant"
-          tools:text="50%"
+          style="@style/TextAppearance.Chronofile.CadenceLabel"
+          tools:text="Daily"
         />
-      </LinearLayout>
+      </FrameLayout>
       
       <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:indicatorColor="?attr/colorPrimary"
-        app:trackColor="?attr/colorSurfaceVariant"
-        tools:progress="50"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_weight="1"
+        android:layout_marginEnd="12dp"
+        app:indicatorColor="@color/progress_primary"
+        app:trackColor="@color/progress_fill"
+        app:trackCornerRadius="4dp"
+        tools:progress="75"
       />
     </LinearLayout>
   </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+  
+  <!-- Progress Percentage -->
+  <TextView
+    android:id="@+id/progressPercentage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/TextAppearance.Chronofile.ProgressPercentage"
+    tools:text="75"
+  />
+  
+  <!-- Action Buttons -->
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="16dp"
+    android:visibility="gone"
+  >
+    <ImageButton
+      android:id="@+id/editGoalButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="4dp"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:src="@android:drawable/ic_menu_edit"
+      android:contentDescription="Edit goal"
+      android:padding="8dp"
+    />
+    
+    <ImageButton
+      android:id="@+id/deleteGoalButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:src="@android:drawable/ic_menu_delete"
+      android:contentDescription="Delete goal"
+      android:padding="8dp"
+    />
+  </LinearLayout>
+</LinearLayout>

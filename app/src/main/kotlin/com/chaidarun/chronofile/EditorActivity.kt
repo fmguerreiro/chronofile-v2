@@ -1,5 +1,3 @@
-// © Art Chaidarun
-
 package com.chaidarun.chronofile
 
 import android.content.Intent
@@ -349,7 +347,7 @@ class EditorActivity : BaseActivity() {
           true
         }
         R.id.nav_goals -> {
-          val intent = Intent(this, WeeklyGoalsActivity::class.java)
+          val intent = Intent(this, GoalsActivity::class.java)
           startActivity(intent)
           overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
           finish()

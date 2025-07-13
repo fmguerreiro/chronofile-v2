@@ -5,13 +5,14 @@ object DefaultGoals {
   data class DefaultGoalTemplate(
     val activity: String,
     val targetHours: Double,
-    val description: String
+    val description: String,
+    val frequency: GoalFrequency = GoalFrequency.WEEKLY
   )
   
   val healthAndWellness = listOf(
     DefaultGoalTemplate("Exercise", 3.0, "Physical fitness and health"),
     DefaultGoalTemplate("Sleep", 56.0, "7-8 hours per night for good health"),
-    DefaultGoalTemplate("Meditation", 1.5, "Daily mindfulness practice"),
+    DefaultGoalTemplate("Meditation", 1.5, "Daily mindfulness practice", GoalFrequency.DAILY),
     DefaultGoalTemplate("Walking", 5.0, "Regular movement and outdoor time")
   )
   
@@ -78,7 +79,8 @@ object DefaultGoals {
       id = java.util.UUID.randomUUID().toString(),
       activity = template.activity,
       targetHours = template.targetHours,
-      weekStartTimestamp = calendar.timeInMillis
+      weekStartTimestamp = calendar.timeInMillis,
+      frequency = template.frequency
     )
   }
 }

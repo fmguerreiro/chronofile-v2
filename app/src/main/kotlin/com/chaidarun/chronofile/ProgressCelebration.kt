@@ -52,7 +52,7 @@ private fun History.getStreakAchievements(): List<Achievement> {
                 id = "streak_3_$activity",
                 title = "Three Day Warrior",
                 description = "Completed 3 days of ${activity.lowercase()}!",
-                emoji = "🔥",
+                iconRes = R.drawable.ic_fire,
                 isNewlyEarned = checkIfNewlyEarned("streak_3_$activity"),
                 celebrationMessage = "You're building momentum with $activity!",
                 category = mapActivityToLifeCategory(activity)
@@ -62,7 +62,7 @@ private fun History.getStreakAchievements(): List<Achievement> {
                 id = "streak_7_$activity",
                 title = "Week Champion",
                 description = "Amazing! 7 days strong with ${activity.lowercase()}",
-                emoji = "🏆",
+                iconRes = R.drawable.ic_trophy,
                 isNewlyEarned = checkIfNewlyEarned("streak_7_$activity"),
                 celebrationMessage = "A full week of $activity - you're unstoppable!",
                 category = mapActivityToLifeCategory(activity)
@@ -72,7 +72,7 @@ private fun History.getStreakAchievements(): List<Achievement> {
                 id = "streak_30_$activity",
                 title = "Monthly Master",
                 description = "Incredible 30-day streak with ${activity.lowercase()}!",
-                emoji = "💎",
+                iconRes = R.drawable.ic_diamond,
                 isNewlyEarned = checkIfNewlyEarned("streak_30_$activity"),
                 celebrationMessage = "30 days of $activity - you've formed a real habit!",
                 category = mapActivityToLifeCategory(activity)
@@ -94,7 +94,7 @@ private fun History.getBalanceAchievements(): List<Achievement> {
             id = "balanced_life",
             title = "Life Balance Master",
             description = "Great balance across ${balance.categories.size} life categories!",
-            emoji = "⚖️",
+            iconRes = R.drawable.ic_balance,
             isNewlyEarned = checkIfNewlyEarned("balanced_life"),
             celebrationMessage = "You're living a wonderfully balanced life!"
         ))
@@ -106,7 +106,7 @@ private fun History.getBalanceAchievements(): List<Achievement> {
             id = "diverse_life",
             title = "Renaissance Person",
             description = "Active in ${balance.categories.size} different life areas!",
-            emoji = "🌟",
+            iconRes = R.drawable.ic_star,
             isNewlyEarned = checkIfNewlyEarned("diverse_life"),
             celebrationMessage = "Your life is beautifully diverse and rich!"
         ))
@@ -136,7 +136,7 @@ private fun History.getConsistencyImprovements(): List<Achievement> {
             id = "consistency_improvement",
             title = "Consistency Champion",
             description = "More variety this week than last - $thisWeekActivities different activities!",
-            emoji = "📈",
+            iconRes = R.drawable.ic_trending_up,
             isNewlyEarned = checkIfNewlyEarned("consistency_improvement"),
             celebrationMessage = "Your consistency is improving week by week!"
         ))
@@ -154,7 +154,7 @@ private fun History.getFirstTimeAchievements(): List<Achievement> {
             id = "first_entry",
             title = "Journey Begins",
             description = "Congratulations on your first tracked activity!",
-            emoji = "🎯",
+            iconRes = R.drawable.ic_target,
             isNewlyEarned = true,
             celebrationMessage = "Welcome to your personal growth journey!"
         ))
@@ -168,7 +168,7 @@ private fun History.getFirstTimeAchievements(): List<Achievement> {
             id = "first_week",
             title = "Week One Warrior",
             description = "Successfully tracked activities for a full week!",
-            emoji = "🌱",
+            iconRes = R.drawable.ic_sprout,
             isNewlyEarned = checkIfNewlyEarned("first_week"),
             celebrationMessage = "You're building great tracking habits!"
         ))
@@ -191,7 +191,7 @@ private fun History.getAllStreakAchievements(): List<Achievement> {
             id = "streak_3_$activity",
             title = "Three Day Warrior",
             description = if (has3DayStreak) "Completed 3 days of ${activity.lowercase()}!" else "Complete 3 days of ${activity.lowercase()}",
-            emoji = "🔥",
+            iconRes = R.drawable.ic_fire,
             isNewlyEarned = has3DayStreak && checkIfNewlyEarned("streak_3_$activity"),
             celebrationMessage = "You're building momentum with $activity!",
             category = mapActivityToLifeCategory(activity),
@@ -206,7 +206,7 @@ private fun History.getAllStreakAchievements(): List<Achievement> {
             id = "streak_7_$activity",
             title = "Week Champion",
             description = if (has7DayStreak) "Amazing! 7 days strong with ${activity.lowercase()}" else "Complete 7 days of ${activity.lowercase()}",
-            emoji = "🏆",
+            iconRes = R.drawable.ic_trophy,
             isNewlyEarned = has7DayStreak && checkIfNewlyEarned("streak_7_$activity"),
             celebrationMessage = "A full week of $activity - you're unstoppable!",
             category = mapActivityToLifeCategory(activity),
@@ -221,7 +221,7 @@ private fun History.getAllStreakAchievements(): List<Achievement> {
             id = "streak_30_$activity",
             title = "Monthly Master",
             description = if (has30DayStreak) "Incredible 30-day streak with ${activity.lowercase()}!" else "Complete 30 days of ${activity.lowercase()}",
-            emoji = "💎",
+            iconRes = R.drawable.ic_diamond,
             isNewlyEarned = has30DayStreak && checkIfNewlyEarned("streak_30_$activity"),
             celebrationMessage = "30 days of $activity - you've formed a real habit!",
             category = mapActivityToLifeCategory(activity),
@@ -246,7 +246,7 @@ private fun History.getAllBalanceAchievements(): List<Achievement> {
         id = "balanced_life",
         title = "Life Balance Master",
         description = if (hasLifeBalance) "Great balance across ${balance.categories.size} life categories!" else "Achieve balance across 4+ life categories",
-        emoji = "⚖️",
+        iconRes = R.drawable.ic_balance,
         isNewlyEarned = hasLifeBalance && checkIfNewlyEarned("balanced_life"),
         celebrationMessage = "You're living a wonderfully balanced life!",
         isLocked = !hasLifeBalance,
@@ -260,7 +260,7 @@ private fun History.getAllBalanceAchievements(): List<Achievement> {
         id = "diverse_life",
         title = "Renaissance Person",
         description = if (hasDiversity) "Active in ${balance.categories.size} different life areas!" else "Be active in 6+ different life areas",
-        emoji = "🌟",
+        iconRes = R.drawable.ic_star,
         isNewlyEarned = hasDiversity && checkIfNewlyEarned("diverse_life"),
         celebrationMessage = "Your life is beautifully diverse and rich!",
         isLocked = !hasDiversity,
@@ -292,7 +292,7 @@ private fun History.getAllConsistencyAchievements(): List<Achievement> {
         id = "consistency_improvement",
         title = "Consistency Champion",
         description = if (hasConsistencyImprovement) "More variety this week than last - $thisWeekActivities different activities!" else "Do more varied activities than last week",
-        emoji = "📈",
+        iconRes = R.drawable.ic_trending_up,
         isNewlyEarned = hasConsistencyImprovement && checkIfNewlyEarned("consistency_improvement"),
         celebrationMessage = "Your consistency is improving week by week!",
         isLocked = !hasConsistencyImprovement,
@@ -313,7 +313,7 @@ private fun History.getAllFirstTimeAchievements(): List<Achievement> {
         id = "first_entry",
         title = "Journey Begins",
         description = if (hasFirstEntry) "Congratulations on your first tracked activity!" else "Track your first activity",
-        emoji = "🎯",
+        iconRes = R.drawable.ic_target,
         isNewlyEarned = entries.size == 1,
         celebrationMessage = "Welcome to your personal growth journey!",
         isLocked = !hasFirstEntry,
@@ -329,7 +329,7 @@ private fun History.getAllFirstTimeAchievements(): List<Achievement> {
         id = "first_week",
         title = "Week One Warrior",
         description = if (hasFirstWeek) "Successfully tracked activities for a full week!" else "Track activities for a full week",
-        emoji = "🌱",
+        iconRes = R.drawable.ic_sprout,
         isNewlyEarned = hasFirstWeek && entries.size <= 10 && checkIfNewlyEarned("first_week"),
         celebrationMessage = "You're building great tracking habits!",
         isLocked = !hasFirstWeek,

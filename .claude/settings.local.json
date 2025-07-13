@@ -23,7 +23,10 @@
       "Bash(avdmanager create avd:*)",
       "Bash(git add:*)",
       "Bash(emulator:*)",
-      "Bash(./gradlew:*)"
+      "Bash(./gradlew:*)",
+      "Bash(./gradlew:*)",
+      "Bash(rg:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

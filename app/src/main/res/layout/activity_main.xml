@@ -36,6 +36,57 @@
       />
     </HorizontalScrollView>
     
+    <!-- Date Navigation Header -->
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:padding="16dp"
+      android:background="?attr/colorSurface"
+    >
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/previousDayButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:text="‹"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        style="@style/Widget.Material3.Button.IconButton"
+        app:cornerRadius="24dp"
+      />
+      
+      <TextView
+        android:id="@+id/currentDateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Today"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textStyle="bold"
+        android:gravity="center"
+      />
+      
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextDayButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:text="›"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        style="@style/Widget.Material3.Button.IconButton"
+        app:cornerRadius="24dp"
+      />
+    </LinearLayout>
+    
     <!-- Activity Suggestion Card -->
     <com.google.android.material.card.MaterialCardView
       android:id="@+id/activitySuggestionCard"
@@ -224,6 +275,174 @@
         android:nestedScrollingEnabled="false"
         android:scrollbars="vertical"
       />
+      
+      <!-- Pattern Insights Section -->
+      <LinearLayout
+        android:id="@+id/patternInsightsSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Pattern Insights"
+          android:textAppearance="?attr/textAppearanceHeadlineSmall"
+          android:textStyle="bold"
+          android:layout_marginBottom="12dp"
+        />
+        
+        <TextView
+          android:id="@+id/patternInsightsText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="You've been most productive between 9 AM and 12 PM. Your day is balanced with a good mix of work and relaxation."
+          android:textAppearance="?attr/textAppearanceBodyMedium"
+          android:lineSpacingExtra="4dp"
+        />
+      </LinearLayout>
+      
+      <!-- Day Summary Section -->
+      <LinearLayout
+        android:id="@+id/daySummarySection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Day Summary"
+          android:textAppearance="?attr/textAppearanceHeadlineSmall"
+          android:textStyle="bold"
+          android:layout_marginBottom="16dp"
+        />
+        
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:padding="16dp"
+        >
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:layout_marginEnd="8dp"
+          />
+          
+          <TextView
+            android:id="@+id/balanceScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7/10"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorOnSurfaceVariant"
+          />
+        </LinearLayout>
+      </LinearLayout>
+      
+      <!-- Mood & Energy Section -->
+      <LinearLayout
+        android:id="@+id/moodEnergySection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Mood &amp; Energy"
+          android:textAppearance="?attr/textAppearanceHeadlineSmall"
+          android:textStyle="bold"
+          android:layout_marginBottom="16dp"
+        />
+        
+        <!-- Energy Row -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:layout_marginBottom="16dp"
+        >
+          <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_lightning_line"
+            app:tint="#666666"
+            android:layout_marginEnd="16dp"
+          />
+          
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+          >
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Energy"
+              android:textAppearance="?attr/textAppearanceBodyLarge"
+            />
+            
+            <TextView
+              android:id="@+id/energyLevel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="High"
+              android:textAppearance="?attr/textAppearanceBodyMedium"
+              android:textColor="?attr/colorOnSurfaceVariant"
+            />
+          </LinearLayout>
+        </LinearLayout>
+        
+        <!-- Mood Row -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+        >
+          <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_smile_line"
+            app:tint="#666666"
+            android:layout_marginEnd="16dp"
+          />
+          
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+          >
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Mood"
+              android:textAppearance="?attr/textAppearanceBodyLarge"
+            />
+            
+            <TextView
+              android:id="@+id/moodLevel"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Calm"
+              android:textAppearance="?attr/textAppearanceBodyMedium"
+              android:textColor="?attr/colorOnSurfaceVariant"
+            />
+          </LinearLayout>
+        </LinearLayout>
+      </LinearLayout>
     </LinearLayout>
   </androidx.core.widget.NestedScrollView>
   </LinearLayout>

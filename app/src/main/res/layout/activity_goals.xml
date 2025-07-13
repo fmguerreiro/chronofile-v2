@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_height="match_parent"
+  android:layout_width="match_parent"
+  android:fitsSystemWindows="true"
+  tools:context="com.chaidarun.chronofile.GoalsActivity"
+>
+  
+  <androidx.core.widget.NestedScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
+  >
+    <LinearLayout
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:padding="16dp"
+    >
+      <!-- Current Goals Section -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp"
+      >
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+          android:layout_marginBottom="16dp"
+        >
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Current Goals"
+            style="@style/TextAppearance.Chronofile.SectionHeader"
+          />
+          
+          <ImageButton
+            android:id="@+id/goalsSettingsButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_manage"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/text_primary"
+            android:contentDescription="Goals settings"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+          />
+        </LinearLayout>
+        
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/currentGoalsList"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:nestedScrollingEnabled="false"
+        />
+        
+        <TextView
+          android:id="@+id/emptyCurrentGoalsText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="No goals set for this week"
+          android:textAppearance="?attr/textAppearanceBodyMedium"
+          android:textColor="?attr/colorOnSurfaceVariant"
+          android:gravity="center"
+          android:padding="24dp"
+          android:visibility="gone"
+        />
+      </LinearLayout>
+      
+      <!-- Progress Trends Section -->
+      <LinearLayout
+        android:id="@+id/progressTrendsSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Progress Trends"
+          style="@style/TextAppearance.Chronofile.SectionHeader"
+          android:layout_marginBottom="16dp"
+        />
+        
+        <com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="16dp"
+          app:cardElevation="2dp"
+          android:layout_marginBottom="8dp"
+        >
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+          >
+            <TextView
+              android:id="@+id/progressActivityTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Meditation Progress"
+              style="@style/TextAppearance.Chronofile.GoalName"
+              android:layout_marginBottom="8dp"
+            />
+            
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:gravity="center_vertical"
+              android:layout_marginBottom="16dp"
+            >
+              <TextView
+                android:id="@+id/progressPercentageMain"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="75%"
+                style="@style/TextAppearance.Chronofile.LargeProgress"
+              />
+              
+              <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end"
+              >
+                <TextView
+                  android:id="@+id/progressTrendIndicator"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Last 30 Days +10%"
+                  style="@style/TextAppearance.Chronofile.TrendIndicator"
+                  android:drawableStart="@drawable/ic_trending_up"
+                  android:drawablePadding="4dp"
+                />
+              </LinearLayout>
+            </LinearLayout>
+            
+            <!-- Progress Chart -->
+            <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="120dp"
+              android:src="@drawable/meditation_progress_chart"
+              android:scaleType="fitXY"
+              android:contentDescription="Meditation progress chart"
+            />
+            
+            <!-- Week Labels -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginTop="8dp"
+            >
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Week 1"
+                style="@style/TextAppearance.Chronofile.SecondaryText"
+                android:gravity="center"
+              />
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Week 2"
+                style="@style/TextAppearance.Chronofile.SecondaryText"
+                android:gravity="center"
+              />
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Week 3"
+                style="@style/TextAppearance.Chronofile.SecondaryText"
+                android:gravity="center"
+              />
+              <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Week 4"
+                style="@style/TextAppearance.Chronofile.SecondaryText"
+                android:gravity="center"
+              />
+            </LinearLayout>
+          </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+      </LinearLayout>
+      
+      <!-- Celebrations Section -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="32dp"
+      >
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Celebrations"
+          style="@style/TextAppearance.Chronofile.SectionHeader"
+          android:layout_marginBottom="16dp"
+        />
+        
+        <com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent"
+          android:layout_height="200dp"
+          app:cardCornerRadius="16dp"
+          app:cardElevation="2dp"
+        >
+          <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/forest_landscape"
+            android:scaleType="centerCrop"
+            android:contentDescription="Forest landscape celebration"
+          />
+        </com.google.android.material.card.MaterialCardView>
+      </LinearLayout>
+      
+      <!-- All Goals Section (Hidden in this view) -->
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/allGoalsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        android:visibility="gone"
+      />
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+  
+  <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    android:id="@+id/addGoalFab"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="16dp"
+    android:text="Add Goal"
+    app:icon="@android:drawable/ic_input_add"
+  />
+  
+  <!-- Bottom Navigation Bar -->
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    app:menu="@menu/bottom_navigation_menu"
+    app:backgroundTint="?attr/colorSurface"
+    app:itemIconTint="?attr/colorOnSurface"
+    app:itemTextColor="?attr/colorOnSurface"
+    app:elevation="8dp"
+  />
+  
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

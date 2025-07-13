@@ -1,5 +1,3 @@
-// © Art Chaidarun
-
 package com.chaidarun.chronofile
 
 import android.os.Bundle

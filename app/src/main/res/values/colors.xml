@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <!-- Material 3 Color Scheme -->
+  <!-- New Green Success Theme -->
   <!-- Primary colors -->
-  <color name="colorPrimary">#006493</color>
+  <color name="colorPrimary">#4CAF50</color>
   <color name="colorOnPrimary">#FFFFFF</color>
-  <color name="colorPrimaryContainer">#CAE6FF</color>
-  <color name="colorOnPrimaryContainer">#001E30</color>
+  <color name="colorPrimaryContainer">#E8F5E8</color>
+  <color name="colorOnPrimaryContainer">#1B5E20</color>
   
   <!-- Secondary colors -->
-  <color name="colorSecondary">#50606E</color>
+  <color name="colorSecondary">#81C784</color>
   <color name="colorOnSecondary">#FFFFFF</color>
-  <color name="colorSecondaryContainer">#D3E5F5</color>
-  <color name="colorOnSecondaryContainer">#0C1D29</color>
+  <color name="colorSecondaryContainer">#C8E6C9</color>
+  <color name="colorOnSecondaryContainer">#2E7D32</color>
   
   <!-- Tertiary colors -->
-  <color name="colorTertiary">#65587B</color>
+  <color name="colorTertiary">#66BB6A</color>
   <color name="colorOnTertiary">#FFFFFF</color>
-  <color name="colorTertiaryContainer">#EBDDFF</color>
-  <color name="colorOnTertiaryContainer">#201634</color>
+  <color name="colorTertiaryContainer">#E8F5E8</color>
+  <color name="colorOnTertiaryContainer">#1B5E20</color>
   
   <!-- Error colors -->
   <color name="colorError">#BA1A1A</color>
@@ -26,28 +26,28 @@
   <color name="colorOnErrorContainer">#410002</color>
   
   <!-- Background colors -->
-  <color name="colorBackground">#FAFCFF</color>
-  <color name="colorOnBackground">#191C1E</color>
+  <color name="colorBackground">#FFFFFF</color>
+  <color name="colorOnBackground">#212121</color>
   
   <!-- Surface colors -->
-  <color name="colorSurface">#FAFCFF</color>
-  <color name="colorOnSurface">#191C1E</color>
-  <color name="colorSurfaceVariant">#DDE3EA</color>
-  <color name="colorOnSurfaceVariant">#41484D</color>
+  <color name="colorSurface">#FFFFFF</color>
+  <color name="colorOnSurface">#212121</color>
+  <color name="colorSurfaceVariant">#F5F5F5</color>
+  <color name="colorOnSurfaceVariant">#757575</color>
   
   <!-- Outline colors -->
-  <color name="colorOutline">#71787E</color>
-  <color name="colorOutlineVariant">#C1C7CE</color>
+  <color name="colorOutline">#E0E0E0</color>
+  <color name="colorOutlineVariant">#E0E0E0</color>
   
   <!-- Legacy support -->
-  <color name="colorPrimaryDark">#004B70</color>
+  <color name="colorPrimaryDark">#388E3C</color>
   <color name="colorAccent">@color/colorSecondary</color>
-  <color name="colorFadedText">#71787E</color>
+  <color name="colorFadedText">#888888</color>
   
   <!-- Surface levels for elevation -->
-  <color name="colorSurfaceContainer">#ECEFF3</color>
-  <color name="colorSurfaceContainerHigh">#E6E8EC</color>
-  <color name="colorSurfaceContainerHighest">#E0E2E6</color>
+  <color name="colorSurfaceContainer">#FFFFFF</color>
+  <color name="colorSurfaceContainerHigh">#FFFFFF</color>
+  <color name="colorSurfaceContainerHighest">#FFFFFF</color>
   
   <!-- Widget colors -->
   <color name="widget_background">#F8FAFC</color>
@@ -92,4 +92,28 @@
   <!-- Achievement Colors -->
   <color name="locked_achievement_background">#F5F5F5</color>
   <color name="locked_achievement_text">#757575</color>
+  
+  <!-- Typography Colors -->
+  <color name="text_primary">#212121</color>
+  <color name="text_secondary">#757575</color>
+  <color name="text_hint">#888888</color>
+  
+  <!-- Progress & Success Colors -->
+  <color name="progress_primary">#4CAF50</color>
+  <color name="progress_secondary">#81C784</color>
+  <color name="progress_success">#66BB6A</color>
+  <color name="progress_fill">#E8F5E8</color>
+  
+  <!-- Icon Colors -->
+  <color name="icon_primary">#757575</color>
+  <color name="icon_secondary">#888888</color>
+  
+  <!-- Chart Colors -->
+  <color name="chart_line">#4CAF50</color>
+  <color name="chart_fill">#E8F5E8</color>
+  <color name="chart_background">#F8F9FA</color>
+  <color name="chart_axis">#E0E0E0</color>
+  
+  <!-- Legacy Progress Colors -->
+  <color name="meditation_progress_color">#4CAF50</color>
 </resources>
