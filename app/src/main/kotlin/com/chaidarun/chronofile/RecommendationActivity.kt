@@ -63,6 +63,7 @@ class RecommendationActivity : BaseActivity() {
             when (item.itemId) {
                 R.id.nav_timeline -> {
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                     startActivity(intent)
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                     finish()

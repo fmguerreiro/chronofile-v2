@@ -14,6 +14,9 @@ class App : Application() {
     
     // Initialize notification channel
     GoalNotificationManager.createNotificationChannel(this)
+    
+    // Initialize ML-powered icon database
+    IconDatabase.initialize(this)
   }
 
   companion object {
