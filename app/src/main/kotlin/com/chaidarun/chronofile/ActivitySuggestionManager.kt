@@ -75,10 +75,10 @@ class ActivitySuggestionManager(
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
         paint.isFakeBoldText = true // Creates medium weight effect
 
-        // Visual state indicator for current activity
+        // Visual state indicator for current activity (green border as specified)
         if (activity == currentActivity) {
           chipStrokeWidth = 3.dpToPx()
-          chipStrokeColor = ContextCompat.getColorStateList(context, R.color.colorPrimary)
+          chipStrokeColor = ContextCompat.getColorStateList(context, android.R.color.holo_green_dark)
           alpha = 1.0f
           elevation = 4.dpToPx()
           // Add subtle animation effect

@@ -96,72 +96,94 @@ data class History(val entries: List<Entry>, val currentActivityStartTime: Long)
   fun getIntelligentActivitySuggestions(): List<String> {
     val now = epochSeconds()
     val currentHour = ((now % DAY_SECONDS) / 3600).toInt()
-    val currentMinute = ((now % 3600) / 60).toInt()
-    val currentTimeInMinutes = currentHour * 60 + currentMinute
+    val suggestions = mutableListOf<String>()
     
-    // Look at the last 30 days for pattern analysis
+    // Check if we have at least 7 days of data, otherwise use fallback
+    val sevenDaysAgo = now - (7 * DAY_SECONDS)
+    val hasEnoughData = entries.any { it.startTime >= sevenDaysAgo }
+    
+    if (!hasEnoughData) {
+      // Fallback: Show 5 most recent unique activities
+      return entries.reversed()
+        .map { it.activity }
+        .distinct()
+        .take(5)
+        .ifEmpty { listOf("Work", "Break", "Lunch", "Meeting", "Study") }
+    }
+    
+    val fourteenDaysAgo = now - (14 * DAY_SECONDS)
+    val twoDaysAgo = now - (2 * DAY_SECONDS)
     val thirtyDaysAgo = now - (30 * DAY_SECONDS)
-    val recentEntries = entries.filter { it.startTime >= thirtyDaysAgo }
     
-    if (recentEntries.isEmpty()) {
-      return listOf("Work", "Break", "Lunch", "Meeting")
+    // 1. Time-based prediction (highest priority)
+    val timeActivities = getActivitiesForHour(currentHour, fourteenDaysAgo)
+    suggestions.addAll(timeActivities.take(2))
+    
+    // 2. Frequency-based
+    val frequentActivities = getMostFrequent(fourteenDaysAgo)
+    suggestions.addAll(frequentActivities.take(3))
+    
+    // 3. Sequential patterns (if last activity exists)
+    val lastActivity = entries.lastOrNull()?.activity
+    if (lastActivity != null) {
+      val followingActivities = getActivitiesAfter(lastActivity, thirtyDaysAgo)
+      suggestions.addAll(followingActivities.take(1))
     }
     
-    // Group activities by time windows and calculate scores
-    val timeWindowSize = 60 // 1-hour windows for broader context
-    val currentTimeWindow = currentTimeInMinutes / timeWindowSize
+    // 4. Recency boost for activities in last 2 days
+    val recentActivities = entries.filter { it.startTime >= twoDaysAgo }
+      .map { it.activity }
+      .distinct()
     
-    // Calculate activity scores based on multiple factors
-    val activityScores = mutableMapOf<String, Double>()
-    
-    recentEntries.forEach { entry ->
-      val entryTime = entry.startTime
-      val entryHour = ((entryTime % DAY_SECONDS) / 3600).toInt()
-      val entryMinute = ((entryTime % 3600) / 60).toInt()
-      val entryTimeInMinutes = entryHour * 60 + entryMinute
-      val entryTimeWindow = entryTimeInMinutes / timeWindowSize
-      
-      val activity = entry.activity
-      val currentScore = activityScores.getOrDefault(activity, 0.0)
-      
-      // Base frequency score
-      var score = 1.0
-      
-      // Time context bonus (higher score for activities at similar times)
-      val timeDifference = kotlin.math.abs(entryTimeWindow - currentTimeWindow)
-      val timeBonus = when {
-        timeDifference == 0 -> 3.0 // Same hour window
-        timeDifference == 1 -> 2.0 // Adjacent hour
-        timeDifference <= 2 -> 1.5 // Within 2 hours
-        timeDifference <= 4 -> 1.2 // Within 4 hours
-        else -> 1.0 // No time bonus
+    val recentlyBoostedSuggestions = suggestions.toMutableList()
+    recentActivities.forEach { recentActivity ->
+      val index = recentlyBoostedSuggestions.indexOf(recentActivity)
+      if (index != -1) {
+        // Move recent activity to front
+        recentlyBoostedSuggestions.removeAt(index)
+        recentlyBoostedSuggestions.add(0, recentActivity)
       }
-      score *= timeBonus
-      
-      // Recency bonus (more recent entries get higher weight)
-      val daysSinceEntry = (now - entryTime) / DAY_SECONDS.toDouble()
-      val recencyBonus = when {
-        daysSinceEntry <= 1 -> 1.5 // Last day
-        daysSinceEntry <= 3 -> 1.3 // Last 3 days
-        daysSinceEntry <= 7 -> 1.2 // Last week
-        daysSinceEntry <= 14 -> 1.1 // Last 2 weeks
-        else -> 1.0 // No recency bonus
-      }
-      score *= recencyBonus
-      
-      // Day of week pattern bonus
-      val currentDayOfWeek = ((now / DAY_SECONDS) % 7).toInt()
-      val entryDayOfWeek = ((entryTime / DAY_SECONDS) % 7).toInt()
-      val dayOfWeekBonus = if (currentDayOfWeek == entryDayOfWeek) 1.3 else 1.0
-      score *= dayOfWeekBonus
-      
-      activityScores[activity] = currentScore + score
     }
     
-    // Sort by combined score and return top 4
-    return activityScores.entries
+    // Deduplicate and limit to 5
+    return recentlyBoostedSuggestions.distinct().take(5)
+  }
+  
+  private fun getActivitiesForHour(targetHour: Int, since: Long): List<String> {
+    val hourRange = -1..1 // ±1 hour
+    return entries.filter { entry ->
+      entry.startTime >= since &&
+      ((entry.startTime % DAY_SECONDS) / 3600).toInt() in (targetHour + hourRange.first)..(targetHour + hourRange.last)
+    }
+    .groupBy { it.activity }
+    .mapValues { it.value.size }
+    .entries
+    .sortedByDescending { it.value }
+    .map { it.key }
+  }
+  
+  private fun getMostFrequent(since: Long): List<String> {
+    return entries.filter { it.startTime >= since }
+      .groupBy { it.activity }
+      .mapValues { it.value.size }
+      .entries
       .sortedByDescending { it.value }
-      .take(5)
+      .map { it.key }
+  }
+  
+  private fun getActivitiesAfter(lastActivity: String, since: Long): List<String> {
+    val recentEntries = entries.filter { it.startTime >= since }
+    val followingActivities = mutableMapOf<String, Int>()
+    
+    for (i in 0 until recentEntries.size - 1) {
+      if (recentEntries[i].activity == lastActivity) {
+        val nextActivity = recentEntries[i + 1].activity
+        followingActivities[nextActivity] = followingActivities.getOrDefault(nextActivity, 0) + 1
+      }
+    }
+    
+    return followingActivities.entries
+      .sortedByDescending { it.value }
       .map { it.key }
   }
 
