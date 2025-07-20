@@ -241,39 +241,7 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
     }
     
     private fun formatActivityAsRoutineBlock(activity: String, startTime: Long): String {
-      val hour = java.time.LocalDateTime.ofInstant(
-        java.time.Instant.ofEpochSecond(startTime), 
-        java.time.ZoneId.systemDefault()
-      ).hour
-      
-      return when {
-        // Morning routine activities
-        hour in 5..8 && activity.lowercase() in listOf("shower", "hygiene", "breakfast", "morning", "coffee") -> 
-          "Morning Routine"
-        
-        // Work session activities
-        hour in 9..17 && activity.lowercase() in listOf("work", "meeting", "coding", "programming", "office", "email") -> 
-          "Work Session"
-        
-        // Lunch break activities
-        hour in 11..14 && activity.lowercase() in listOf("lunch", "meal", "food", "eat", "break") -> 
-          "Lunch Break"
-        
-        // Exercise/fitness activities
-        activity.lowercase() in listOf("exercise", "gym", "workout", "run", "walk", "bike", "cycle", "swim") -> 
-          "Exercise Session"
-        
-        // Evening routine activities
-        hour in 18..22 && activity.lowercase() in listOf("dinner", "relax", "rest", "tv", "read", "evening") -> 
-          "Evening Routine"
-        
-        // Sleep activities
-        (hour >= 22 || hour <= 5) && activity.lowercase() in listOf("sleep", "rest", "nap", "bed") -> 
-          "Sleep"
-        
-        // Default to formatted activity name
-        else -> activity.replaceFirstChar { it.uppercase() }
-      }
+      return activity.replaceFirstChar { it.uppercase() }
     }
     
   }

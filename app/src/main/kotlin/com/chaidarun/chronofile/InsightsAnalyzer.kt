@@ -467,7 +467,7 @@ class InsightsAnalyzer {
     if (missingRoutines.isNotEmpty()) {
       val topMissing = missingRoutines.maxByOrNull { historicalFrequency[it] ?: 0 }
       if (topMissing != null) {
-        val streakDays = calculateStreakLength(historicalEntries, topMissing)
+        val streakDays = calculateStreakLength(historicalEntries, topMissing, config)
         return if (streakDays > 0) {
           "No ${topMissing.capitalize()} logged, ${streakDays}-day streak broken"
         } else {
@@ -479,7 +479,7 @@ class InsightsAnalyzer {
     return ""
   }
 
-  private fun calculateStreakLength(entries: List<Entry>, activity: String): Int {
+  private fun calculateStreakLength(entries: List<Entry>, activity: String, config: Config?): Int {
     val dailyOccurrences = entries
       .filter { normalizeActivityName(it.activity, config) == activity }
       .map { 
@@ -767,57 +767,150 @@ class InsightsAnalyzer {
     }
   }
 
-  fun calculateBalanceScore(history: History, selectedDate: Calendar): Int {
+  data class DayMetrics(
+    val timeAllocation: Map<String, Double>, // category -> hours
+    val totalActiveTime: Double, // hours of logged activities
+    val totalAwakeTime: Double, // estimated awake hours (16hr default)
+    val unaccountedTime: Double, // gaps between activities
+    val activityCount: Int,
+    val categoryCount: Int,
+    val dailyGoalsCompleted: Int,
+    val dailyGoalsTotal: Int,
+    val goalCompletionRate: Int // percentage
+  )
+
+  fun calculateDayMetrics(history: History, selectedDate: Calendar, config: Config?): DayMetrics {
     val selectedDayEntries = history.entries.filter { 
       isSelectedDay(it.startTime * 1000, selectedDate)
-    }
+    }.sortedBy { it.startTime }
 
-    if (selectedDayEntries.isEmpty()) return 5
-
-    // Score based on variety of activities, work-life balance, and productivity
-    val uniqueActivities = selectedDayEntries.map { it.activity.lowercase() }.toSet().size
-    val varietyScore = minOf(uniqueActivities * 2, 4) // Max 4 points for variety
-
-    // Work-life balance score
-    val workKeywords = setOf("work", "meeting", "email", "coding")
-    val personalKeywords = setOf("break", "lunch", "relax", "exercise", "family")
-
-    val workTime = selectedDayEntries.mapIndexed { index, entry ->
-      if (workKeywords.any { it in entry.activity.lowercase() }) {
-        val nextEntry = selectedDayEntries.getOrNull(index + 1)
-        (nextEntry?.startTime ?: history.currentActivityStartTime) - entry.startTime
-      } else 0L
-    }.sum()
-
-    val personalTime = selectedDayEntries.mapIndexed { index, entry ->
-      if (personalKeywords.any { it in entry.activity.lowercase() }) {
-        val nextEntry = selectedDayEntries.getOrNull(index + 1)
-        (nextEntry?.startTime ?: history.currentActivityStartTime) - entry.startTime
-      } else 0L
-    }.sum()
-
-    val totalTime = workTime + personalTime
-    val balanceScore = if (totalTime > 0) {
-      val workRatio = workTime.toDouble() / totalTime
-      when {
-        workRatio in 0.4..0.7 -> 4 // Good balance
-        workRatio in 0.3..0.8 -> 3 // Okay balance
-        else -> 2 // Poor balance
+    // Calculate goal completion for daily goals
+    val activeGoals = config?.weeklyGoals?.filter { it.isActive && it.frequency == GoalFrequency.DAILY } ?: emptyList()
+    val dailyGoalsTotal = activeGoals.size
+    val dailyGoalsCompleted = if (selectedDayEntries.isNotEmpty()) {
+      activeGoals.count { goal ->
+        selectedDayEntries.any { entry ->
+          val normalizedActivity = normalizeActivityName(entry.activity, config)
+          val normalizedGoal = normalizeActivityName(goal.activity, config)
+          normalizedActivity == normalizedGoal
+        }
       }
-    } else 2
+    } else 0
+    
+    val goalCompletionRate = if (dailyGoalsTotal > 0) {
+      (dailyGoalsCompleted * 100) / dailyGoalsTotal
+    } else 100
 
-    // Activity duration consistency (not too short, not too long)
-    val durations = selectedDayEntries.mapIndexed { index, entry ->
+    if (selectedDayEntries.isEmpty()) {
+      return DayMetrics(
+        timeAllocation = emptyMap(),
+        totalActiveTime = 0.0,
+        totalAwakeTime = 16.0,
+        unaccountedTime = 16.0,
+        activityCount = 0,
+        categoryCount = 0,
+        dailyGoalsCompleted = dailyGoalsCompleted,
+        dailyGoalsTotal = dailyGoalsTotal,
+        goalCompletionRate = goalCompletionRate
+      )
+    }
+
+    // Calculate time allocation by category using user-defined groups
+    val categoryTime = mutableMapOf<String, Double>()
+    
+    selectedDayEntries.forEachIndexed { index, entry ->
+      val category = config?.getActivityGroup(entry.activity) ?: entry.activity
       val nextEntry = selectedDayEntries.getOrNull(index + 1)
-      (nextEntry?.startTime ?: history.currentActivityStartTime) - entry.startTime
-    }
-    val avgDuration = if (durations.isNotEmpty()) durations.average() else 0.0
-    val consistencyScore = when {
-      avgDuration > 1800 && avgDuration < 7200 -> 2 // 30min - 2hrs is good
-      else -> 1
+      val endTime = nextEntry?.startTime ?: history.currentActivityStartTime
+      val duration = (endTime - entry.startTime) / 3600.0 // Convert to hours
+      
+      if (duration > 0 && duration < 24) { // Sanity check
+        categoryTime[category] = categoryTime.getOrDefault(category, 0.0) + duration
+      }
     }
 
-    return minOf(varietyScore + balanceScore + consistencyScore, 10)
+    // Calculate total active time
+    val firstEntry = selectedDayEntries.first()
+    val lastEntryEnd = if (selectedDayEntries.size > 1) {
+      val lastEntry = selectedDayEntries.last()
+      val nextEntry = history.entries.find { it.startTime > lastEntry.startTime }
+      nextEntry?.startTime ?: history.currentActivityStartTime
+    } else {
+      history.currentActivityStartTime
+    }
+    
+    val totalActiveTime = (lastEntryEnd - firstEntry.startTime) / 3600.0
+    val totalLoggedTime = categoryTime.values.sum()
+    val unaccountedTime = maxOf(0.0, totalActiveTime - totalLoggedTime)
+    
+    // Assume 16 hours awake time (6AM-10PM default)
+    val awakeTime = 16.0
+    
+    return DayMetrics(
+      timeAllocation = categoryTime,
+      totalActiveTime = totalLoggedTime,
+      totalAwakeTime = awakeTime,
+      unaccountedTime = unaccountedTime,
+      activityCount = selectedDayEntries.size,
+      categoryCount = categoryTime.size,
+      dailyGoalsCompleted = dailyGoalsCompleted,
+      dailyGoalsTotal = dailyGoalsTotal,
+      goalCompletionRate = goalCompletionRate
+    )
+  }
+
+  fun formatDayMetricsText(metrics: DayMetrics): String {
+    if (metrics.activityCount == 0) {
+      val goalText = if (metrics.dailyGoalsTotal > 0) {
+        "Goals: 0/${metrics.dailyGoalsTotal}"
+      } else ""
+      return if (goalText.isNotEmpty()) {
+        "No activities logged today\n$goalText"
+      } else {
+        "No activities logged today"
+      }
+    }
+
+    val parts = mutableListOf<String>()
+    
+    // Time allocation (top 3 categories)
+    val topCategories = metrics.timeAllocation.entries
+      .sortedByDescending { it.value }
+      .take(3)
+      .map { "${it.key}: ${String.format("%.1f", it.value)}hr" }
+    
+    if (topCategories.isNotEmpty()) {
+      parts.add(topCategories.joinToString(" | "))
+    }
+    
+    // Create second line with key metrics
+    val secondLineParts = mutableListOf<String>()
+    
+    // Daily goals if any exist
+    if (metrics.dailyGoalsTotal > 0) {
+      secondLineParts.add("Goals: ${metrics.dailyGoalsCompleted}/${metrics.dailyGoalsTotal}")
+    }
+    
+    // Activity coverage
+    val coverage = if (metrics.totalAwakeTime > 0) {
+      ((metrics.totalActiveTime / metrics.totalAwakeTime) * 100).toInt()
+    } else 0
+    
+    secondLineParts.add("Coverage: ${coverage}%")
+    
+    // Add active time details
+    secondLineParts.add("${String.format("%.1f", metrics.totalActiveTime)}hr active")
+    
+    if (secondLineParts.isNotEmpty()) {
+      parts.add(secondLineParts.joinToString(" | "))
+    }
+    
+    // Gaps if significant (third line)
+    if (metrics.unaccountedTime > 0.5) {
+      parts.add("Gaps: ${String.format("%.1f", metrics.unaccountedTime)}hr unaccounted")
+    }
+    
+    return parts.joinToString("\n")
   }
 
   fun analyzeMoodAndEnergy(history: History, selectedDate: Calendar): Pair<String, String> {

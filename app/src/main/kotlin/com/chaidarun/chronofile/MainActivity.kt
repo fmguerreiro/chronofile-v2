@@ -223,9 +223,11 @@ class MainActivity : BaseActivity() {
     binding.patternInsightsText.text = insightText
     updateActivityFrequencyChart(history, selectedDate)
 
-    // Update Day Summary
+    // Update Day Summary with calculated metrics
     binding.daySummarySection.visibility = View.VISIBLE
-    binding.balanceScore.text = "${insightsAnalyzer.calculateBalanceScore(history, selectedDate)}/10"
+    val dayMetrics = insightsAnalyzer.calculateDayMetrics(history, selectedDate, config)
+    val metricsText = insightsAnalyzer.formatDayMetricsText(dayMetrics)
+    binding.balanceScore.text = metricsText
 
     // Update Yesterday vs Today Comparison
     binding.comparisonSection.visibility = View.VISIBLE

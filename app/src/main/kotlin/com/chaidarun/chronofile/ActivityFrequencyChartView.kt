@@ -121,14 +121,15 @@ class ActivityFrequencyChartView @JvmOverloads constructor(
         // Draw time labels for key hours (every 4 hours = 8 slots)
         if (index % 8 == 0) {
             val timeLabel = slot.startTime.substring(0, 2) // Just hour part
+            val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+            labelPaint.color = Color.GRAY
+            labelPaint.textSize = 20f
+            labelPaint.textAlign = Paint.Align.CENTER
             canvas.drawText(
                 timeLabel,
                 x + barWidth / 2,
                 height - 4f,
-                textPaint.apply { 
-                    color = ContextCompat.getColor(context, android.R.color.tertiary_text_dark)
-                    textSize = 20f
-                }
+                labelPaint
             )
         }
     }
