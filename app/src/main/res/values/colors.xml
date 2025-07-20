@@ -33,7 +33,7 @@
   <color name="colorSurface">#FFFFFF</color>
   <color name="colorOnSurface">#212121</color>
   <color name="colorSurfaceVariant">#F5F5F5</color>
-  <color name="colorOnSurfaceVariant">#757575</color>
+  <color name="colorOnSurfaceVariant">#668A5C</color>
   
   <!-- Outline colors -->
   <color name="colorOutline">#E0E0E0</color>

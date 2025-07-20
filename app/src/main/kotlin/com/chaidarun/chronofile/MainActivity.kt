@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -128,17 +129,20 @@ class MainActivity : BaseActivity() {
         R.id.nav_stats -> {
           startActivity(Intent(this, GraphActivity::class.java))
           overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-          false
+          finish()
+          true
         }
         R.id.nav_goals -> {
           startActivity(Intent(this, GoalsActivity::class.java))
           overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-          false
+          finish()
+          true
         }
         R.id.nav_insights -> {
           startActivity(Intent(this, RecommendationActivity::class.java))
           overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-          false
+          finish()
+          true
         }
         else -> false
       }
@@ -203,23 +207,58 @@ class MainActivity : BaseActivity() {
     if (history == null || history.entries.isEmpty()) {
       binding.patternInsightsSection.visibility = View.GONE
       binding.daySummarySection.visibility = View.GONE
-      binding.moodEnergySection.visibility = View.GONE
+      binding.comparisonSection.visibility = View.GONE
       return
     }
 
-    // Update Pattern Insights
+    // Update Pattern Insights - show 2-4 insights maximum as single lines
     binding.patternInsightsSection.visibility = View.VISIBLE
-    binding.patternInsightsText.text = insightsAnalyzer.generateProductivityInsights(history, selectedDate)
+    val config = Store.state.config
+    val patternInsights = insightsAnalyzer.generatePatternInsights(history, selectedDate, config)
+    val insightText = if (patternInsights.isNotEmpty()) {
+      patternInsights.joinToString("\n") // Single line spacing for each insight
+    } else {
+      insightsAnalyzer.generateProductivityInsights(history, selectedDate)
+    }
+    binding.patternInsightsText.text = insightText
+    updateActivityFrequencyChart(history, selectedDate)
 
     // Update Day Summary
     binding.daySummarySection.visibility = View.VISIBLE
     binding.balanceScore.text = "${insightsAnalyzer.calculateBalanceScore(history, selectedDate)}/10"
 
-    // Update Mood & Energy
-    binding.moodEnergySection.visibility = View.VISIBLE
-    val (energy, mood) = insightsAnalyzer.analyzeMoodAndEnergy(history, selectedDate)
-    binding.energyLevel.text = energy
-    binding.moodLevel.text = mood
+    // Update Yesterday vs Today Comparison
+    binding.comparisonSection.visibility = View.VISIBLE
+    val (activityCount, activeHours, dayStart) = insightsAnalyzer.compareYesterdayVsToday(history, selectedDate)
+    binding.activityCountComparison.text = activityCount
+    binding.activeHoursComparison.text = activeHours
+    binding.dayStartComparison.text = dayStart
+  }
+  
+  private fun updateActivityFrequencyChart(history: History, selectedDate: Calendar) {
+    val chartView = binding.activityFrequencyChart as? ActivityFrequencyChartView
+    if (chartView != null) {
+      val frequencyData = ActivityFrequencyData.fromHistory(history, selectedDate)
+      chartView.setData(frequencyData)
+      
+      chartView.setOnSlotClickListener { slot ->
+        showSlotDetails(slot)
+      }
+    }
+  }
+  
+  private fun showSlotDetails(slot: TimeSlotData) {
+    if (slot.isEmpty) {
+      App.toast("No activity during ${slot.startTime}")
+      return
+    }
+    
+    val activity = slot.dominantActivity!!
+    val frequency = (slot.frequency * 7).toInt()
+    val avgMinutes = slot.totalMinutes / 7
+    
+    val message = "$activity: $frequency/7 days, avg ${avgMinutes}min"
+    App.toast(message)
   }
 
   // NFC and dialog methods remain the same but simplified

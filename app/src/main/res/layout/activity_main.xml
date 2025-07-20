@@ -42,13 +42,13 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       android:gravity="center_vertical"
-      android:padding="16dp"
+      android:padding="8dp"
       android:background="?attr/colorSurface"
     >
       <com.google.android.material.button.MaterialButton
         android:id="@+id/previousDayButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:text="‹"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         style="@style/Widget.Material3.Button.IconButton"
-        app:cornerRadius="24dp"
+        app:cornerRadius="20dp"
       />
       
       <TextView
@@ -66,15 +66,15 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Today"
-        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         android:textStyle="bold"
         android:gravity="center"
       />
       
       <com.google.android.material.button.MaterialButton
         android:id="@+id/nextDayButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:text="›"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -83,7 +83,7 @@
         android:minWidth="0dp"
         android:minHeight="0dp"
         style="@style/Widget.Material3.Button.IconButton"
-        app:cornerRadius="24dp"
+        app:cornerRadius="20dp"
       />
     </LinearLayout>
     
@@ -290,6 +290,7 @@
           android:text="Pattern Insights"
           android:textAppearance="?attr/textAppearanceHeadlineSmall"
           android:textStyle="bold"
+          android:fontFamily="@font/epilogue"
           android:layout_marginBottom="12dp"
         />
         
@@ -300,7 +301,71 @@
           android:text="You've been most productive between 9 AM and 12 PM. Your day is balanced with a good mix of work and relaxation."
           android:textAppearance="?attr/textAppearanceBodyMedium"
           android:lineSpacingExtra="4dp"
+          android:layout_marginBottom="16dp"
         />
+        
+        <!-- Activity Frequency Chart -->
+        <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="Activity Frequency"
+          android:textAppearance="?attr/textAppearanceBodyMedium"
+          android:textStyle="bold"
+          android:layout_marginBottom="8dp"
+        />
+        
+        <com.chaidarun.chronofile.ActivityFrequencyChartView
+          android:id="@+id/activityFrequencyChart"
+          android:layout_width="match_parent"
+          android:layout_height="80dp"
+          android:paddingHorizontal="8dp"
+          android:background="@drawable/chart_background"
+        />
+        
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginTop="4dp"
+          android:paddingHorizontal="8dp"
+        >
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6AM"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center"
+          />
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="12PM"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center"
+          />
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6PM"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center"
+          />
+          <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="12AM"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:gravity="center"
+          />
+        </LinearLayout>
       </LinearLayout>
       
       <!-- Day Summary Section -->
@@ -317,6 +382,7 @@
           android:text="Day Summary"
           android:textAppearance="?attr/textAppearanceHeadlineSmall"
           android:textStyle="bold"
+          android:fontFamily="@font/epilogue"
           android:layout_marginBottom="16dp"
         />
         
@@ -330,7 +396,7 @@
           <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balance"
+            android:text="Work/Life Balance"
             android:textAppearance="?attr/textAppearanceBodyLarge"
             android:layout_marginEnd="8dp"
           />
@@ -346,9 +412,9 @@
         </LinearLayout>
       </LinearLayout>
       
-      <!-- Mood & Energy Section -->
+      <!-- Yesterday vs Today Section -->
       <LinearLayout
-        android:id="@+id/moodEnergySection"
+        android:id="@+id/comparisonSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -358,24 +424,25 @@
         <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="Mood &amp; Energy"
+          android:text="Yesterday vs Today"
           android:textAppearance="?attr/textAppearanceHeadlineSmall"
           android:textStyle="bold"
+          android:fontFamily="@font/epilogue"
           android:layout_marginBottom="16dp"
         />
         
-        <!-- Energy Row -->
+        <!-- Activity Count Comparison -->
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
           android:gravity="center_vertical"
-          android:layout_marginBottom="16dp"
+          android:layout_marginBottom="12dp"
         >
           <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_lightning_line"
+            android:src="@drawable/ic_list_check"
             app:tint="#666666"
             android:layout_marginEnd="16dp"
           />
@@ -389,32 +456,33 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Energy"
+              android:text="Activity Count"
               android:textAppearance="?attr/textAppearanceBodyLarge"
             />
             
             <TextView
-              android:id="@+id/energyLevel"
+              android:id="@+id/activityCountComparison"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="High"
+              android:text="12 today, 8 yesterday (+4)"
               android:textAppearance="?attr/textAppearanceBodyMedium"
               android:textColor="?attr/colorOnSurfaceVariant"
             />
           </LinearLayout>
         </LinearLayout>
         
-        <!-- Mood Row -->
+        <!-- Total Time Comparison -->
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
           android:gravity="center_vertical"
+          android:layout_marginBottom="12dp"
         >
           <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_smile_line"
+            android:src="@drawable/ic_time_line"
             app:tint="#666666"
             android:layout_marginEnd="16dp"
           />
@@ -428,15 +496,54 @@
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Mood"
+              android:text="Active Hours"
               android:textAppearance="?attr/textAppearanceBodyLarge"
             />
             
             <TextView
-              android:id="@+id/moodLevel"
+              android:id="@+id/activeHoursComparison"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Calm"
+              android:text="14.2hr today, 12.8hr yesterday (+1.4hr)"
+              android:textAppearance="?attr/textAppearanceBodyMedium"
+              android:textColor="?attr/colorOnSurfaceVariant"
+            />
+          </LinearLayout>
+        </LinearLayout>
+        
+        <!-- Start Time Comparison -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_vertical"
+        >
+          <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_sun_line"
+            app:tint="#666666"
+            android:layout_marginEnd="16dp"
+          />
+          
+          <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+          >
+            <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Day Start"
+              android:textAppearance="?attr/textAppearanceBodyLarge"
+            />
+            
+            <TextView
+              android:id="@+id/dayStartComparison"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="7:30 AM today, 8:15 AM yesterday (45min earlier)"
               android:textAppearance="?attr/textAppearanceBodyMedium"
               android:textColor="?attr/colorOnSurfaceVariant"
             />

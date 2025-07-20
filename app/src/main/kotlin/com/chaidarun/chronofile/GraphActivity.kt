@@ -56,13 +56,6 @@ class GraphActivity : BaseActivity() {
           finish()
           true
         }
-        R.id.nav_settings -> {
-          val intent = Intent(this, EditorActivity::class.java)
-          startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-          finish()
-          true
-        }
         else -> false
       }
     }
@@ -86,7 +79,7 @@ class GraphActivity : BaseActivity() {
           val tabChildsCount = childCount
           (0 until tabChildsCount)
             .map { getChildAt(it) }
-            .forEach { (it as? TextView)?.typeface = resources.getFont(R.font.exo2_regular) }
+            .forEach { (it as? TextView)?.typeface = resources.getFont(R.font.epilogue_400) }
         }
       }
     }

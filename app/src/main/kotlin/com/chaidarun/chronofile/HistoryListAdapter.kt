@@ -166,6 +166,20 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.bindItem(itemList[position])
+    
+    // Hide top/bottom lines for first/last entry items
+    if (holder is EntryViewHolder) {
+      val entryPositions = itemList.mapIndexedNotNull { index, item -> 
+        if (item.viewType == ViewType.ENTRY) index else null 
+      }
+      val entryIndex = entryPositions.indexOf(position)
+      
+      val isFirstEntry = entryIndex == 0
+      val isLastEntry = entryIndex == entryPositions.size - 1
+      
+      holder.binding.topLineCover.visibility = if (isFirstEntry) View.VISIBLE else View.GONE
+      holder.binding.bottomLineCover.visibility = if (isLastEntry) View.VISIBLE else View.GONE
+    }
   }
 
   companion object {
@@ -327,33 +341,29 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
       var lastDateShown: String? = null
       var lastTimeShown: Long? = null
       for ((entry, endTime) in entriesToShow) {
-        // Show date marker
+        // Show date marker - REMOVED
         val startDate = formatDate(entry.startTime)
         if (startDate != lastDateShown) {
-          items.add(DateItem(Date(entry.startTime * 1000)))
+          // items.add(DateItem(Date(entry.startTime * 1000)))
           lastDateShown = startDate
         }
 
-        // Show start time marker
-        if (entry.startTime != lastTimeShown) {
-          items.add(TimeItem(Date(entry.startTime * 1000)))
-          lastTimeShown = entry.startTime
-        }
+        // Start time is now shown within the entry item
+        lastTimeShown = entry.startTime
 
         // Show entry either once or twice depending on whether it crosses midnight
         val endDate = formatDate(endTime)
         if (startDate != endDate) {
           val midnight = getPreviousMidnight(endTime)
           items.add(EntryItem(entry, entry.startTime, midnight))
-          items.add(DateItem(Date(endTime * 1000)))
+          // items.add(DateItem(Date(endTime * 1000)))
           lastDateShown = endDate
           items.add(EntryItem(entry, midnight, endTime))
         } else {
           items.add(EntryItem(entry, entry.startTime, endTime))
         }
 
-        // Show end time marker
-        items.add(TimeItem(Date(endTime * 1000)))
+        // End time is now shown within the entry item
         lastTimeShown = endTime
       }
       items.add(SpacerItem(32))

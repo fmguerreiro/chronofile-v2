@@ -7,27 +7,64 @@
   android:layout_height="wrap_content"
   android:orientation="horizontal"
   android:paddingHorizontal="20dp"
-  android:paddingVertical="16dp"
   android:minHeight="72dp"
   android:gravity="center_vertical"
 >
-  <!-- Icon Container - Simplified -->
-  <FrameLayout
+  <!-- Icon Container with Timeline Line -->
+  <RelativeLayout
     android:layout_width="32dp"
-    android:layout_height="32dp"
+    android:layout_height="match_parent"
     android:layout_marginEnd="16dp"
   >
+    <!-- Continuous vertical line -->
+    <View
+      android:layout_width="2dp"
+      android:layout_height="match_parent"
+      android:layout_centerHorizontal="true"
+      android:background="?attr/colorOutline"
+    />
+    
+    <!-- Top line cover for first item -->
+    <View
+      android:id="@+id/topLineCover"
+      android:layout_width="2dp"
+      android:layout_height="36dp"
+      android:layout_centerHorizontal="true"
+      android:layout_alignParentTop="true"
+      android:background="?attr/colorSurface"
+      android:visibility="gone"
+    />
+    
+    <!-- Bottom line cover for last item -->
+    <View
+      android:id="@+id/bottomLineCover"
+      android:layout_width="2dp"
+      android:layout_height="36dp"
+      android:layout_centerHorizontal="true"
+      android:layout_alignParentBottom="true"
+      android:background="?attr/colorSurface"
+      android:visibility="gone"
+    />
+    
+    <!-- Icon background circle -->
+    <View
+      android:layout_width="32dp"
+      android:layout_height="32dp"
+      android:layout_centerInParent="true"
+      android:background="@drawable/timeline_dot"
+    />
+    
     <!-- Minimal Line Icon -->
     <ImageView
       android:id="@+id/activityIcon"
       android:layout_width="24dp"
       android:layout_height="24dp"
-      android:layout_gravity="center"
+      android:layout_centerInParent="true"
       android:src="@drawable/ic_briefcase_line"
       android:scaleType="center"
       app:tint="#666666"
     />
-  </FrameLayout>
+  </RelativeLayout>
   
   <!-- Content Section - Structured Block -->
   <LinearLayout

@@ -360,16 +360,11 @@ class EditorActivity : BaseActivity() {
           finish()
           true
         }
-        R.id.nav_settings -> {
-          // Already on settings, do nothing
-          true
-        }
         else -> false
       }
     }
     
-    // Set settings as selected in bottom navigation
-    binding.bottomNavigation.selectedItemId = R.id.nav_settings
+    // Settings page - no bottom navigation item to select
   }
 
   override fun onSupportNavigateUp(): Boolean {

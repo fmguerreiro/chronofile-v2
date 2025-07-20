@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Vertical line behind the icon -->
+    <item android:gravity="center_horizontal">
+        <shape android:shape="rectangle">
+            <size android:width="2dp" />
+            <solid android:color="?attr/colorOutline" />
+        </shape>
+    </item>
+    
+    <!-- Circle background for the icon -->
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <size android:width="32dp" android:height="32dp" />
+            <solid android:color="?attr/colorSurface" />
+            <stroke android:width="2dp" android:color="?attr/colorOutline" />
+        </shape>
+    </item>
+</layer-list>

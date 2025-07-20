@@ -54,12 +54,12 @@ watch:
 	echo "Watching for changes... Press Ctrl+C to stop"
 	echo "Initial deploy..."
 	make deploy
-	@LAST_CHECKSUM=$$(find app/src -type f -name "*.kt" -o -name "*.xml" -o -name "*.java" | xargs ls -la | shasum); \
+	@LAST_CHECKSUM=$$(find app/src -type f \( -name "*.kt" -o -name "*.xml" -o -name "*.java" \) -exec stat -f "%m %N" {} \; | sort | shasum -a 256 | cut -d' ' -f1); \
 	CHECK_COUNTER=0; \
 	while true; do \
-		sleep 2; \
+		sleep 1; \
 		CHECK_COUNTER=$$((CHECK_COUNTER + 1)); \
-		if [ $$CHECK_COUNTER -ge 30 ]; then \
+		if [ $$CHECK_COUNTER -ge 60 ]; then \
 			CHECK_COUNTER=0; \
 			if ! adb shell getprop sys.boot_completed 2>/dev/null | grep -q "1"; then \
 				echo "[$$(date '+%H:%M:%S')] Emulator not responding, restarting..."; \
@@ -67,19 +67,19 @@ watch:
 				make deploy; \
 			fi; \
 		fi; \
-		CURRENT_CHECKSUM=$$(find app/src -type f -name "*.kt" -o -name "*.xml" -o -name "*.java" | xargs ls -la | shasum); \
+		CURRENT_CHECKSUM=$$(find app/src -type f \( -name "*.kt" -o -name "*.xml" -o -name "*.java" \) -exec stat -f "%m %N" {} \; | sort | shasum -a 256 | cut -d' ' -f1); \
 		if [ "$$LAST_CHECKSUM" != "$$CURRENT_CHECKSUM" ]; then \
 			LAST_CHECKSUM="$$CURRENT_CHECKSUM"; \
 			echo -e "\n[$$(date '+%H:%M:%S')] Changes detected, building..."; \
 			if export JAVA_HOME=$$(/usr/libexec/java_home -v 17) && ./gradlew assembleDebug --daemon; then \
 				echo "[$$(date '+%H:%M:%S')] Build successful, deploying..."; \
-				if ! export JAVA_HOME=$$(/usr/libexec/java_home -v 17) && ./gradlew installDebug --daemon; then \
+				if export JAVA_HOME=$$(/usr/libexec/java_home -v 17) && ./gradlew installDebug --daemon; then \
+					adb shell am start -n com.chaidarun.chronofile/.MainActivity && \
+					echo "[$$(date '+%H:%M:%S')] Deploy complete!"; \
+				else \
 					echo "[$$(date '+%H:%M:%S')] Deploy failed, checking emulator..."; \
 					make check-emulator; \
-					export JAVA_HOME=$$(/usr/libexec/java_home -v 17) && ./gradlew installDebug --daemon; \
 				fi; \
-				adb shell am start -n com.chaidarun.chronofile/.MainActivity && \
-				echo "[$$(date '+%H:%M:%S')] Deploy complete!"; \
 			else \
 				echo "[$$(date '+%H:%M:%S')] Build failed, skipping deploy"; \
 			fi; \

@@ -86,13 +86,6 @@ class RecommendationActivity : BaseActivity() {
                     // Already on insights, do nothing
                     true
                 }
-                R.id.nav_settings -> {
-                    val intent = Intent(this, EditorActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
-                    finish()
-                    true
-                }
                 else -> false
             }
         }

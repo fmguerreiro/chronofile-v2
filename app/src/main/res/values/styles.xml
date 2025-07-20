@@ -32,8 +32,7 @@
     <item name="colorOutline">@color/colorOutline</item>
     <item name="colorOutlineVariant">@color/colorOutlineVariant</item>
     
-    <item name="android:fontFamily">@font/exo2</item>
-    <item name="fontFamily">@font/exo2</item>
+    <item name="android:fontFamily">@font/epilogue</item>
     
     <!-- Shape -->
     <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Chronofile.SmallComponent</item>
@@ -48,6 +47,11 @@
     <item name="textAppearanceLabelLarge">@style/TextAppearance.Chronofile.LabelLarge</item>
     
     <item name="android:windowOptOutEdgeToEdgeEnforcement" tools:targetApi="35">true</item>
+    
+    <!-- Disable default activity transitions to ensure our custom ones work -->
+    <item name="android:windowActivityTransitions">false</item>
+    <item name="android:windowContentTransitions">false</item>
+    <item name="android:windowAnimationStyle">@null</item>
   </style>
   
   <!-- Shape Appearances -->
@@ -67,30 +71,19 @@
   </style>
   
   <!-- Text Appearances -->
-  <style name="TextAppearance.Chronofile.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
-    <item name="fontFamily">@font/exo2</item>
-  </style>
+  <style name="TextAppearance.Chronofile.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge" />
   
-  <style name="TextAppearance.Chronofile.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
-    <item name="fontFamily">@font/exo2</item>
-  </style>
+  <style name="TextAppearance.Chronofile.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium" />
   
-  <style name="TextAppearance.Chronofile.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
-    <item name="fontFamily">@font/exo2</item>
-  </style>
+  <style name="TextAppearance.Chronofile.BodyLarge" parent="TextAppearance.Material3.BodyLarge" />
   
-  <style name="TextAppearance.Chronofile.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
-    <item name="fontFamily">@font/exo2</item>
-  </style>
+  <style name="TextAppearance.Chronofile.BodyMedium" parent="TextAppearance.Material3.BodyMedium" />
   
-  <style name="TextAppearance.Chronofile.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
-    <item name="fontFamily">@font/exo2</item>
-  </style>
+  <style name="TextAppearance.Chronofile.LabelLarge" parent="TextAppearance.Material3.LabelLarge" />
   
   <!-- New Typography System -->
   <!-- Section Headers: 24px, weight 700 -->
   <style name="TextAppearance.Chronofile.SectionHeader" parent="TextAppearance.Material3.HeadlineSmall">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">24sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/text_primary</item>
@@ -98,7 +91,6 @@
   
   <!-- Goal Names: 18px, weight 600 -->
   <style name="TextAppearance.Chronofile.GoalName" parent="TextAppearance.Material3.BodyLarge">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">18sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/text_primary</item>
@@ -106,7 +98,6 @@
   
   <!-- Progress Percentages: 16px, weight 700 -->
   <style name="TextAppearance.Chronofile.ProgressPercentage" parent="TextAppearance.Material3.BodyMedium">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">16sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/progress_success</item>
@@ -114,7 +105,6 @@
   
   <!-- Percentage Trend Indicator: 18px, weight 600 -->
   <style name="TextAppearance.Chronofile.TrendIndicator" parent="TextAppearance.Material3.BodyLarge">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">18sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/progress_success</item>
@@ -122,7 +112,6 @@
   
   <!-- Cadence Labels: 14px, weight 400, increased letter-spacing -->
   <style name="TextAppearance.Chronofile.CadenceLabel" parent="TextAppearance.Material3.BodyMedium">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">14sp</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textColor">@color/text_hint</item>
@@ -131,7 +120,6 @@
   
   <!-- Trend Subtitle: 14px, weight 400 -->
   <style name="TextAppearance.Chronofile.TrendSubtitle" parent="TextAppearance.Material3.BodyMedium">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">14sp</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textColor">@color/text_hint</item>
@@ -139,7 +127,6 @@
   
   <!-- Large Progress Display: 32px, weight 700 -->
   <style name="TextAppearance.Chronofile.LargeProgress" parent="TextAppearance.Material3.HeadlineMedium">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">32sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/text_primary</item>
@@ -147,7 +134,6 @@
   
   <!-- Secondary Text: 14px, weight 400 -->
   <style name="TextAppearance.Chronofile.SecondaryText" parent="TextAppearance.Material3.BodyMedium">
-    <item name="fontFamily">@font/exo2</item>
     <item name="android:textSize">14sp</item>
     <item name="android:textStyle">normal</item>
     <item name="android:textColor">@color/text_secondary</item>
