@@ -1,0 +1,30 @@
+# TinyBERT Activity Classification Requirements
+# Python ML training dependencies
+
+# Core ML libraries
+torch>=1.11.0
+transformers>=4.21.0
+tensorflow>=2.10.0
+scikit-learn>=1.1.0
+
+# Data processing
+pandas>=1.4.0
+numpy>=1.21.0
+datasets>=2.5.0
+
+# Model optimization
+onnx>=1.12.0
+onnxruntime>=1.12.0
+tf2onnx>=1.10.0
+
+# Visualization and analysis
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Configuration and utilities
+pyyaml>=6.0
+tqdm>=4.64.0
+wandb>=0.13.0  # Optional: for experiment tracking
+
+# Optional quantization tools
+onnxruntime-tools>=1.12.0  # For ONNX quantization

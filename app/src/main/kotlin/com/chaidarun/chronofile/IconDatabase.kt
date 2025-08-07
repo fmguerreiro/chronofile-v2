@@ -15,12 +15,27 @@ object IconDatabase {
     // ML-based activity classifier for intelligent icon prediction
     private val activityClassifier by lazy { ActivityClassifier() }
     
+    // Enhanced TinyBERT-based classifier with fallback
+    private var enhancedClassifier: EnhancedActivityClassifier? = null
+    private var isEnhancedClassifierReady = false
+    
     // Self-improving learning system (initialized when context is available)
     private var learningSystem: IconLearningSystem? = null
     
-    // Initialize learning system with context
+    // Initialize learning system and enhanced classifier with context
     fun initialize(context: android.content.Context) {
         learningSystem = IconLearningSystem(context)
+        
+        // Initialize enhanced TinyBERT demo classifier
+        enhancedClassifier = EnhancedActivityClassifier(context)
+        enhancedClassifier?.initializeAsync { success ->
+            isEnhancedClassifierReady = success
+            if (success) {
+                android.util.Log.i("IconDatabase", "Enhanced TinyBERT demo classifier initialized successfully")
+            } else {
+                android.util.Log.w("IconDatabase", "TinyBERT demo classifier failed to initialize, using fallback")
+            }
+        }
     }
     
     private val iconData = listOf(
@@ -140,12 +155,24 @@ object IconDatabase {
             return it 
         }
         
-        // 2. ML-based prediction (primary system)
-        val prediction = activityClassifier.predictCategory(activity)
-        android.util.Log.d("IconMapping", "$activity -> ML prediction: ${prediction.category} (${prediction.confidence})")
-        if (prediction.confidence > 0.3f) { // Lower threshold to let ML handle more cases
-            android.util.Log.d("IconMapping", "$activity -> using ML prediction: ${prediction.iconRes}")
-            return prediction.iconRes
+        // 2. Enhanced ML-based prediction (TinyBERT + fallback)
+        if (isEnhancedClassifierReady) {
+            val prediction = enhancedClassifier?.predictCategory(activity)
+            prediction?.let { pred ->
+                android.util.Log.d("IconMapping", "$activity -> Enhanced prediction: ${pred.category} (${pred.confidence}) [${pred.source}]")
+                if (pred.confidence > 0.3f) {
+                    android.util.Log.d("IconMapping", "$activity -> using enhanced prediction: ${pred.iconRes}")
+                    return pred.iconRes
+                }
+            }
+        } else {
+            // Fallback to original classifier
+            val prediction = activityClassifier.predictCategory(activity)
+            android.util.Log.d("IconMapping", "$activity -> Fallback ML prediction: ${prediction.category} (${prediction.confidence})")
+            if (prediction.confidence > 0.3f) {
+                android.util.Log.d("IconMapping", "$activity -> using fallback prediction: ${prediction.iconRes}")
+                return prediction.iconRes
+            }
         }
         
         // 3. Direct keyword match (only for very specific terms)
@@ -461,5 +488,42 @@ object IconDatabase {
             "tempo", "horário", "compromisso", "calendário", "urgente"
         )
         return timeKeywords.any { text.contains(it) }
+    }
+    
+    /**
+     * Get classifier status for debugging (can be called from MainActivity).
+     */
+    fun getClassifierStatus(): Map<String, Any> {
+        return if (enhancedClassifier != null) {
+            enhancedClassifier!!.getStatus().plus(
+                mapOf("enhanced_classifier_ready" to isEnhancedClassifierReady)
+            )
+        } else {
+            mapOf("error" to "Enhanced classifier not initialized")
+        }
+    }
+    
+    /**
+     * Test the enhanced classifier with sample activities.
+     */
+    fun testEnhancedClassifier() {
+        val testCases = listOf(
+            "morning run around the park",
+            "team standup meeting", 
+            "lunch with colleagues",
+            "gym workout session",
+            "family dinner at home",
+            "study for exam",
+            "watch Netflix movie",
+            "doctor appointment",
+            "flight to Paris"
+        )
+        
+        android.util.Log.d("IconDatabase", "=== Testing Enhanced TinyBERT Classifier ===")
+        testCases.forEach { activity ->
+            val icon = findByActivityText(activity)
+            android.util.Log.d("IconDatabase", "Test: '$activity' -> icon resource: $icon")
+        }
+        android.util.Log.d("IconDatabase", "=== End Enhanced Classifier Test ===")
     }
 }

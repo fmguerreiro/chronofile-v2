@@ -52,6 +52,9 @@ class MainActivity : BaseActivity() {
     setupBottomNavigation()
     setupEntryForm()
     subscribeToStateChanges()
+    
+    // Test TinyBERT classifier integration
+    testTinyBertClassifier()
   }
 
   private fun setupRecyclerView() {
@@ -142,6 +145,11 @@ class MainActivity : BaseActivity() {
           startActivity(Intent(this, RecommendationActivity::class.java))
           overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
           finish()
+          true
+        }
+        R.id.nav_theme -> {
+          val currentIsDark = Store.state.config?.isDarkTheme ?: false
+          Store.dispatch(Action.SetDarkTheme(!currentIsDark))
           true
         }
         else -> false
@@ -435,6 +443,20 @@ class MainActivity : BaseActivity() {
         }
       }
     }
+  }
+
+  private fun testTinyBertClassifier() {
+    // Schedule the test to run after a delay to ensure IconDatabase is initialized
+    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+      Log.d("MainActivity", "Testing TinyBERT classifier integration...")
+      
+      // Get classifier status
+      val status = IconDatabase.getClassifierStatus()
+      Log.d("MainActivity", "Classifier status: $status")
+      
+      // Run test predictions
+      IconDatabase.testEnhancedClassifier()
+    }, 3000) // 3 second delay
   }
 
   companion object {

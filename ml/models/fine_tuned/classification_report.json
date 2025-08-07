@@ -1,0 +1,69 @@
+{
+  "entertainment": {
+    "precision": 0.9,
+    "recall": 0.25,
+    "f1-score": 0.391304347826087,
+    "support": 36.0
+  },
+  "exercise": {
+    "precision": 0.8928571428571429,
+    "recall": 0.6944444444444444,
+    "f1-score": 0.78125,
+    "support": 36.0
+  },
+  "food": {
+    "precision": 0.8222222222222222,
+    "recall": 0.8809523809523809,
+    "f1-score": 0.8505747126436781,
+    "support": 42.0
+  },
+  "health": {
+    "precision": 1.0,
+    "recall": 0.8857142857142857,
+    "f1-score": 0.9393939393939394,
+    "support": 35.0
+  },
+  "learning": {
+    "precision": 0.9090909090909091,
+    "recall": 0.5555555555555556,
+    "f1-score": 0.6896551724137931,
+    "support": 36.0
+  },
+  "sleep": {
+    "precision": 0.6481481481481481,
+    "recall": 1.0,
+    "f1-score": 0.7865168539325843,
+    "support": 35.0
+  },
+  "social": {
+    "precision": 0.8823529411764706,
+    "recall": 0.7692307692307693,
+    "f1-score": 0.821917808219178,
+    "support": 39.0
+  },
+  "travel": {
+    "precision": 1.0,
+    "recall": 0.08823529411764706,
+    "f1-score": 0.16216216216216217,
+    "support": 34.0
+  },
+  "work": {
+    "precision": 0.36936936936936937,
+    "recall": 0.9111111111111111,
+    "f1-score": 0.5256410256410257,
+    "support": 45.0
+  },
+  "accuracy": 0.6834319526627219,
+  "macro avg": {
+    "precision": 0.8248934147626958,
+    "recall": 0.6705826490140216,
+    "f1-score": 0.6609351135813831,
+    "support": 338.0
+  },
+  "weighted avg": {
+    "precision": 0.8121953689826993,
+    "recall": 0.6834319526627219,
+    "f1-score": 0.6638837651301956,
+    "support": 338.0
+  }
+}

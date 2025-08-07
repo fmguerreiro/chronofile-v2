@@ -1,0 +1,64 @@
+# TinyBERT Training Configuration
+
+model:
+  name: "huawei-noah/TinyBERT_General_4L_312D"
+  num_labels: 9
+  max_length: 128
+  dropout_rate: 0.1
+  
+training:
+  learning_rate: 0.00002
+  batch_size: 16
+  num_epochs: 3
+  warmup_steps: 100
+  weight_decay: 0.01
+  gradient_accumulation_steps: 1
+  fp16: false
+  dataloader_num_workers: 2
+  
+validation:
+  eval_steps: 100
+  save_steps: 200
+  logging_steps: 50
+  eval_strategy: "steps"
+  save_strategy: "steps"
+  metric_for_best_model: "f1_weighted"
+  greater_is_better: true
+  load_best_model_at_end: true
+  
+early_stopping:
+  patience: 3
+  min_delta: 0.001
+  
+data:
+  train_file: "../data/training_data.csv"
+  val_file: "../data/validation_data.csv"
+  test_file: "../data/test_data.csv"
+  text_column: "user_input"
+  label_column: "category"
+  confidence_column: "confidence_score"
+  
+output:
+  output_dir: "../models/fine_tuned"
+  logging_dir: "../logs"
+  
+categories:
+  - "exercise"
+  - "work"
+  - "food"
+  - "sleep"
+  - "social"
+  - "learning"
+  - "entertainment"
+  - "health"
+  - "travel"
+  
+optimization:
+  quantization: true
+  onnx_export: true
+  tflite_conversion: true
+  
+mobile:
+  target_latency_ms: 50
+  target_model_size_mb: 50
+  target_accuracy_threshold: 0.85

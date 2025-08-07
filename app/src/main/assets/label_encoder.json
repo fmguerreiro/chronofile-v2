@@ -1,0 +1,24 @@
+{
+  "classes": [
+    "entertainment",
+    "exercise",
+    "food",
+    "health",
+    "learning",
+    "sleep",
+    "social",
+    "travel",
+    "work"
+  ],
+  "category_to_id": {
+    "entertainment": 0,
+    "exercise": 1,
+    "food": 2,
+    "health": 3,
+    "learning": 4,
+    "sleep": 5,
+    "social": 6,
+    "travel": 7,
+    "work": 8
+  }
+}

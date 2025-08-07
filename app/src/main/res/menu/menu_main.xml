@@ -17,6 +17,12 @@
     app:showAsAction="never"
   />
   <item
+    android:id="@+id/action_toggle_theme"
+    android:title="Dark Theme"
+    app:showAsAction="never"
+    android:checkable="true"
+  />
+  <item
     android:id="@+id/action_settings"
     android:title="Groups"
     app:showAsAction="never"

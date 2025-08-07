@@ -20,4 +20,9 @@
     android:title="Insights"
     android:icon="@android:drawable/ic_menu_info_details"
   />
+  <item
+    android:id="@+id/nav_theme"
+    android:title="Theme"
+    android:icon="@android:drawable/ic_menu_day"
+  />
 </menu>

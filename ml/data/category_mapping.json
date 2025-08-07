@@ -1,0 +1,11 @@
+{
+  "exercise": "ic_run",
+  "work": "ic_briefcase_line",
+  "food": "ic_utensils_line",
+  "sleep": "ic_moon_line",
+  "social": "ic_people",
+  "learning": "ic_note",
+  "entertainment": "ic_tv",
+  "health": "ic_health",
+  "travel": "ic_car"
+}

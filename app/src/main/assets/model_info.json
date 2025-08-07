@@ -1,0 +1,13 @@
+{
+  "note": "This is a placeholder. In production, this would be the actual TensorFlow Lite model file.",
+  "model_size_mb": "~30-50MB",
+  "input_shape": [
+    1,
+    128
+  ],
+  "output_shape": [
+    1,
+    9
+  ],
+  "quantized": true
+}

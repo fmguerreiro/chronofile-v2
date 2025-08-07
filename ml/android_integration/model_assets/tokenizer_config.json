@@ -1,0 +1,12 @@
+{
+  "vocab_size": 30522,
+  "max_length": 128,
+  "pad_token": "[PAD]",
+  "pad_token_id": 0,
+  "unk_token": "[UNK]",
+  "unk_token_id": 100,
+  "cls_token": "[CLS]",
+  "cls_token_id": 101,
+  "sep_token": "[SEP]",
+  "sep_token_id": 102
+}

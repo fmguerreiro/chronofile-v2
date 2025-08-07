@@ -1,0 +1,1555 @@
+user_input,icon_label,category,confidence_score,source
+go trip,ic_car,travel,0.9,keyword_variation
+project call,ic_briefcase_line,work,0.8,template_generated
+presentation,ic_briefcase_line,work,1.0,direct_keyword
+go writing,ic_briefcase_line,work,0.9,keyword_variation
+afternoon course,ic_note,learning,0.7,contextual
+employment review,ic_briefcase_line,work,0.8,template_generated
+legal session,ic_briefcase_line,work,0.9,keyword_variation
+morning therapy,ic_health,health,0.7,contextual
+takeout eat,ic_utensils_line,food,0.8,template_generated
+book materials,ic_note,learning,0.8,template_generated
+evening play,ic_tv,entertainment,0.8,template_generated
+daily career,ic_briefcase_line,work,0.8,template_generated
+basketball session,ic_run,exercise,0.9,keyword_variation
+afternoon medicine,ic_health,health,0.7,contextual
+morning run,ic_run,exercise,0.8,template_generated
+urgent therapy,ic_health,health,0.8,template_generated
+go pharmacy,ic_health,health,0.9,keyword_variation
+travel adventure,ic_car,travel,0.8,template_generated
+job session,ic_briefcase_line,work,0.9,keyword_variation
+30 minute career,ic_briefcase_line,work,0.7,contextual
+seminar session,ic_note,learning,0.9,keyword_variation
+30 minute checkup,ic_health,health,0.7,contextual
+go sandwich,ic_utensils_line,food,0.9,keyword_variation
+favorite leisure,ic_tv,entertainment,0.8,template_generated
+go jpice,ic_utensils_line,food,0.81,keyword_variation_typo
+15 minute bus,ic_car,travel,0.7,contextual
+homemade dinner,ic_utensils_line,food,0.8,template_generated
+oficina,ic_briefcase_line,work,0.9,multilingual_spanish
+go talk,ic_people,social,0.9,keyword_variation
+15 minute walk,ic_run,exercise,0.8,template_generated
+go cooking,ic_utensils_line,food,0.9,keyword_variation
+much needed dream,ic_moon_line,sleep,0.8,template_generated
+rice,ic_utensils_line,food,1.0,direct_keyword
+weights session,ic_run,exercise,0.9,keyword_variation
+social gathering,ic_people,social,0.8,template_generated
+conversation sessikn,ic_people,social,0.81,keyword_variation_typo
+enjoying movie,ic_tv,entertainment,0.8,template_generated
+road,ic_car,travel,1.0,direct_keyword
+evening snack,ic_utensils_line,food,0.7,contextual
+review,ic_briefcase_line,work,1.0,direct_keyword
+quiet session,ic_moon_line,sleep,0.9,keyword_variation
+late night health,ic_health,health,0.7,contextual
+evening dinner,ic_utensils_line,food,0.7,contextual
+netflix session,ic_tv,entertainment,0.9,keyword_variation
+1 hour breakfast,ic_utensils_line,food,0.7,contextual
+checkup session,ic_health,health,0.9,keyword_variation
+bedroom,ic_moon_line,sleep,1.0,direct_keyword
+late night sleep,ic_moon_line,sleep,0.7,contextual
+15 minute checkup,ic_health,health,0.7,contextual
+late night meeting,ic_briefcase_line,work,0.7,contextual
+bike at the gym,ic_run,exercise,0.8,template_generated
+late night book,ic_note,learning,0.7,contextual
+legal,ic_briefcase_line,work,1.0,direct_keyword
+1 hour course,ic_note,learning,0.7,contextual
+leisure session,ic_tv,entertainment,0.9,keyword_variation
+appointment consultation,ic_health,health,0.8,template_generated
+group gathering,ic_people,social,0.8,template_generated
+relaxing entertainment,ic_tv,entertainment,0.8,template_generated
+quick tired,ic_moon_line,sleep,0.8,template_generated
+yoga,ic_run,exercise,1.0,direct_keyword
+weekend game,ic_tv,entertainment,0.8,template_generated
+audit session,ic_briefcase_line,work,0.9,keyword_variation
+client project,ic_briefcase_line,work,0.8,template_generated
+tennis,ic_run,exercise,1.0,direct_keyword
+party,ic_people,social,1.0,direct_keyword
+evening flight,ic_car,travel,0.7,contextual
+getting some rest,ic_moon_line,sleep,0.8,template_generated
+45 hours of bedroom,ic_moon_line,sleep,0.8,template_generated
+early morning office,ic_briefcase_line,work,0.7,contextual
+breakfast,ic_utensils_line,food,1.0,direct_keyword
+morning rest,ic_moon_line,sleep,0.7,contextual
+early morning game,ic_tv,entertainment,0.7,contextual
+go walk,ic_run,exercise,0.9,keyword_variation
+go prevention,ic_health,health,0.9,keyword_variation
+office meeting,ic_briefcase_line,work,0.8,template_generated
+leisure,ic_tv,entertainment,1.0,direct_keyword
+business lunch,ic_briefcase_line,work,0.6,realistic_pattern
+deadline,ic_briefcase_line,work,1.0,direct_keyword
+15 minute study,ic_note,learning,0.7,contextual
+30 minute entertainment,ic_tv,entertainment,0.7,contextual
+annual health,ic_health,health,0.8,template_generated
+favorite video,ic_tv,entertainment,0.8,template_generated
+evening bike,ic_run,exercise,0.8,template_generated
+daily meeting,ic_briefcase_line,work,0.8,template_generated
+training routine,ic_run,exercise,0.8,template_generated
+late night workout,ic_run,exercise,0.7,contextual
+health therapy,ic_health,health,0.8,template_generated
+workout session,ic_run,exercise,0.9,keyword_variation
+skill education,ic_note,learning,0.8,template_generated
+afternoon book,ic_note,learning,0.7,contextual
+go soccer,ic_run,exercise,0.9,keyword_variation
+business transport,ic_car,travel,0.8,template_generated
+entertainment session,ic_tv,entertainment,0.9,keyword_variation
+learn group,ic_note,learning,0.8,template_generated
+afternoon chat,ic_people,social,0.7,contextual
+go assignment,ic_note,learning,0.9,keyword_variation
+planning trip,ic_car,travel,0.8,template_generated
+15 minute task,ic_briefcase_line,work,0.7,contextual
+afternoon business,ic_briefcase_line,work,0.7,contextual
+1 hour education,ic_note,learning,0.7,contextual
+analysis,ic_briefcase_line,work,1.0,direct_keyword
+having eat,ic_utensils_line,food,0.8,template_generated
+health dentist,ic_health,health,0.8,template_generated
+go task,ic_briefcase_line,work,0.9,keyword_variation
+road drive,ic_car,travel,0.8,template_generated
+book group,ic_note,learning,0.8,template_generated
+quick journey,ic_car,travel,0.8,template_generated
+morning transport,ic_car,travel,0.8,template_generated
+afternoon run,ic_run,exercise,0.7,contextual
+long vacation,ic_car,travel,0.8,template_generated
+afternoon dinner,ic_utensils_line,food,0.7,contextual
+having dinner,ic_utensils_line,food,0.8,template_generated
+weekend bus,ic_car,travel,0.8,template_generated
+celebration,ic_people,social,1.0,direct_keyword
+rowing,ic_run,exercise,1.0,direct_keyword
+meal prep sunday,ic_utensils_line,food,0.9,realistic_pattern
+afternoon checkup,ic_health,health,0.7,contextual
+1 hour office,ic_briefcase_line,work,0.7,contextual
+fun play,ic_tv,entertainment,0.8,template_generated
+university group,ic_note,learning,0.8,template_generated
+15 minute read,ic_note,learning,0.7,contextual
+vacation adventure,ic_car,travel,0.8,template_generated
+1 hour visit,ic_people,social,0.7,contextual
+drowsy session,ic_moon_line,sleep,0.9,keyword_variation
+go juice,ic_utensils_line,food,0.9,keyword_variation
+relaxing game,ic_tv,entertainment,0.8,template_generated
+go learn,ic_note,learning,0.9,keyword_variation
+evening gym,ic_run,exercise,0.8,template_generated
+early morning project,ic_briefcase_line,work,0.7,contextual
+morning commute,ic_car,travel,0.8,template_generated
+grabbing meal,ic_utensils_line,food,0.8,template_generated
+15 minute tired,ic_moon_line,sleep,0.7,contextual
+drowsy,ic_moon_line,sleep,1.0,direct_keyword
+code review,ic_briefcase_line,work,0.9,realistic_pattern
+team session,ic_people,social,0.9,keyword_variation
+preventive therapy,ic_health,health,0.8,template_generated
+client session,ic_briefcase_line,work,0.9,keyword_variation
+relaxing tv,ic_tv,entertainment,0.8,template_generated
+getting some pillow,ic_moon_line,sleep,0.8,template_generated
+go adventure,ic_tv,entertainment,0.9,keyword_variation
+almoço,ic_utensils_line,food,0.9,multilingual_portuguese
+deep night,ic_moon_line,sleep,0.8,template_generated
+read group,ic_note,learning,0.8,template_generated
+meal,ic_utensils_line,food,1.0,direct_keyword
+afternoon gathering,ic_people,social,0.7,contextual
+evening journey,ic_car,travel,0.7,contextual
+30 hours of relax,ic_moon_line,sleep,0.8,template_generated
+morning movie,ic_tv,entertainment,0.7,contextual
+early morning course,ic_note,learning,0.7,contextual
+book notes,ic_note,learning,0.8,template_generated
+learn,ic_note,learning,1.0,direct_keyword
+afternoon education,ic_note,learning,0.7,contextual
+cooking break,ic_utensils_line,food,0.8,template_generated
+morning doctor,ic_health,health,0.7,contextual
+evening training,ic_run,exercise,0.8,template_generated
+1 hour learn,ic_note,learning,0.7,contextual
+research,ic_briefcase_line,work,1.0,direct_keyword
+drive session,ic_car,travel,0.9,keyword_variation
+early morning visit,ic_people,social,0.7,contextual
+surgery,ic_health,health,1.0,direct_keyword
+follow-up checkup,ic_health,health,0.8,template_generated
+morning exercise,ic_run,exercise,0.8,template_generated
+health checkup,ic_health,health,0.8,template_generated
+radio,ic_tv,entertainment,1.0,direct_keyword
+evening friends,ic_people,social,0.7,contextual
+streaming session,ic_tv,entertainment,0.9,keyword_variation
+peaceful rest,ic_moon_line,sleep,0.8,template_generated
+homework notes,ic_note,learning,0.8,template_generated
+project task,ic_briefcase_line,work,0.8,template_generated
+bike routine,ic_run,exercise,0.8,template_generated
+urgent doctor,ic_health,health,0.8,template_generated
+quick transport,ic_car,travel,0.8,template_generated
+1 hour journey,ic_car,travel,0.7,contextual
+late night office,ic_briefcase_line,work,0.7,contextual
+lunch session,ic_people,social,0.9,keyword_variation
+go healing,ic_health,health,0.9,keyword_variation
+go fitness.,ic_run,exercise,0.9,keyword_variation_punct
+much needed nap,ic_moon_line,sleep,0.8,template_generated
+exam research,ic_note,learning,0.8,template_generated
+go document,ic_briefcase_line,work,0.9,keyword_variation
+afternoon bed,ic_moon_line,sleep,0.8,template_generated
+coffee,ic_utensils_line,food,1.0,direct_keyword
+meal prep,ic_utensils_line,food,0.8,template_generated
+early morning gathering,ic_people,social,0.7,contextual
+youtube session,ic_tv,entertainment,0.9,keyword_variation
+relaxing video,ic_tv,entertainment,0.8,template_generated
+early morning dinner,ic_utensils_line,food,0.7,contextual
+fun entertainment,ic_tv,entertainment,0.8,template_generated
+early morning breakfast,ic_utensils_line,food,0.7,contextual
+1 hour career,ic_briefcase_line,work,0.7,contextual
+watching fun,ic_tv,entertainment,0.8,template_generated
+15 minute video,ic_tv,entertainment,0.7,contextual
+chat with friends,ic_people,social,0.8,template_generated
+practice session,ic_note,learning,0.9,keyword_variation
+1 hour medicine,ic_health,health,0.7,contextual
+medical visit,ic_health,health,0.8,template_generated
+early morning snack,ic_utensils_line,food,0.7,contextual
+birthday session,ic_people,social,0.9,keyword_variation
+training at the gym,ic_run,exercise,0.8,template_generated
+outdoor sport,ic_run,exercise,0.8,template_generated
+15 minute snack,ic_utensils_line,food,0.7,contextual
+go netflix,ic_tv,entertainment,0.9,keyword_variation
+15 minute rest,ic_moon_line,sleep,0.7,contextual
+dream session,ic_moon_line,sleep,0.9,keyword_variation
+go training,ic_run,exercise,0.9,keyword_variation
+weekend travel,ic_car,travel,0.8,template_generated
+much needed pillow,ic_moon_line,sleep,0.8,template_generated
+morning course,ic_note,learning,0.7,contextual
+daily professional,ic_briefcase_line,work,0.8,template_generated
+exercise with friends,ic_run,exercise,0.8,template_generated
+quick kitchen,ic_utensils_line,food,0.8,template_generated
+early morning tired,ic_moon_line,sleep,0.7,contextual
+exercise,ic_run,exercise,1.0,direct_keyword
+restaurant session,ic_utensils_line,food,0.9,keyword_variation
+go booking,ic_car,travel,0.9,keyword_variation
+preventive dentist,ic_health,health,0.8,template_generated
+grabbing lunch,ic_utensils_line,food,0.8,template_generated
+30 minute train,ic_car,travel,0.7,contextual
+follow-up appointment,ic_health,health,0.8,template_generated
+quick food,ic_utensils_line,food,0.8,template_generated
+go frienws,ic_people,social,0.81,keyword_variation_typo
+watch session,ic_tv,entertainment,0.9,keyword_variation
+fitness session,ic_run,exercise,0.9,keyword_variation
+evening sleep,ic_moon_line,sleep,0.7,contextual
+daily job,ic_briefcase_line,work,0.8,template_generated
+late night education,ic_note,learning,0.7,contextual
+go lecture,ic_note,learning,0.9,keyword_variation
+favorite fun,ic_tv,entertainment,0.8,template_generated
+30 minute health,ic_health,health,0.7,contextual
+having kitchen,ic_utensils_line,food,0.8,template_generated
+go class,ic_note,learning,0.9,keyword_variation
+fun date,ic_people,social,0.8,template_generated
+neighbor!,ic_people,social,1.0,direct_keyword_punct
+family chat,ic_people,social,0.8,template_generated
+go fruit,ic_utensils_line,food,0.9,keyword_variation
+weekend talk,ic_people,social,0.8,template_generated
+go comedy,ic_tv,entertainment,0.9,keyword_variation
+1 hour university,ic_note,learning,0.7,contextual
+weekend fun,ic_tv,entertainment,0.8,template_generated
+afternoon commute,ic_car,travel,0.7,contextual
+go bike,ic_run,exercise,0.9,keyword_variation
+talk session,ic_people,social,0.9,keyword_variation
+social visit,ic_people,social,0.8,template_generated
+go drink,ic_utensils_line,food,0.9,keyword_variation
+weekend drive,ic_car,travel,0.8,template_generated
+go appointment,ic_health,health,0.9,keyword_variation
+early morning relax,ic_moon_line,sleep,0.7,contextual
+go pillow,ic_moon_line,sleep,0.9,keyword_variation
+bedtime,ic_moon_line,sleep,1.0,direct_keyword
+self education,ic_note,learning,0.8,template_generated
+client,ic_briefcase_line,work,1.0,direct_keyword
+30 minute dinner,ic_utensils_line,food,0.7,contextual
+urgent medical,ic_health,health,0.8,template_generated
+routine therapy,ic_health,health,0.8,template_generated
+30 minute fitness,ic_run,exercise,0.8,template_generated
+proposal session,ic_briefcase_line,work,0.9,keyword_variation
+go fun,ic_tv,entertainment,0.9,keyword_variation
+family family,ic_people,social,0.8,template_generated
+project business,ic_briefcase_line,work,0.8,template_generated
+evening tv,ic_tv,entertainment,0.8,template_generated
+daily project,ic_briefcase_line,work,0.8,template_generated
+go relationship,ic_people,social,0.9,keyword_variation
+go basketball,ic_run,exercise,0.9,keyword_variation
+schoolhsession,ic_note,learning,0.81,keyword_variation_typo
+focused study,ic_note,learning,0.8,template_generated
+online homework,ic_note,learning,0.8,template_generated
+time to bed,ic_moon_line,sleep,0.8,template_generated
+go audit,ic_briefcase_line,work,0.9,keyword_variation
+catching up party,ic_people,social,0.8,template_generated
+30 minute game,ic_tv,entertainment,0.7,contextual
+quick pillow,ic_moon_line,sleep,0.8,template_generated
+office office,ic_briefcase_line,work,0.8,template_generated
+nourriture,ic_utensils_line,food,0.9,multilingual_french
+pharmacy,ic_health,health,1.0,direct_keyword
+late night play,ic_tv,entertainment,0.7,contextual
+vacation commute,ic_car,travel,0.8,template_generated
+15 minute course,ic_note,learning,0.7,contextual
+checkup appointment,ic_health,health,0.8,template_generated
+development sesshon,ic_briefcase_line,work,0.81,keyword_variation_typo
+30 minute gathering,ic_people,social,0.7,contextual
+go medical,ic_health,health,0.9,keyword_variation
+late night family,ic_people,social,0.7,contextual
+1 hour lunch,ic_utensils_line,food,0.7,contextual
+new fun,ic_tv,entertainment,0.8,template_generated
+sleep,ic_moon_line,sleep,1.0,direct_keyword
+knowledge session,ic_note,learning,0.9,keyword_variation
+project office,ic_briefcase_line,work,0.8,template_generated
+enjoying game,ic_tv,entertainment,0.8,template_generated
+sleep session,ic_moon_line,sleep,0.9,keyword_variation
+snack break,ic_utensils_line,food,0.8,template_generated
+grabbing kitchen,ic_utensils_line,food,0.8,template_generated
+pillow,ic_moon_line,sleep,1.0,direct_keyword
+go skill,ic_note,learning,0.9,keyword_variation
+programming?,ic_briefcase_line,work,1.0,direct_keyword_punct
+early morning entertainment,ic_tv,entertainment,0.7,contextual
+hanging out people,ic_people,social,0.8,template_generated
+social family,ic_people,social,0.8,template_generated
+job!,ic_briefcase_line,work,1.0,direct_keyword_punct
+time to nap,ic_moon_line,sleep,0.8,template_generated
+15 minute doctor,ic_health,health,0.7,contextual
+go traffic,ic_car,travel,0.9,keyword_variation
+project job,ic_briefcase_line,work,0.8,template_generated
+weekend video,ic_tv,entertainment,0.8,template_generated
+go paperwork,ic_briefcase_line,work,0.9,keyword_variation
+follow-up dentist,ic_health,health,0.8,template_generated
+alarm session,ic_moon_line,sleep,0.9,keyword_variation
+self research,ic_note,learning,0.8,template_generated
+go baseball,ic_run,exercise,0.9,keyword_variation
+task review,ic_briefcase_line,work,0.8,template_generated
+exam course,ic_note,learning,0.8,template_generated
+focused education,ic_note,learning,0.8,template_generated
+travel session,ic_car,travel,0.9,keyword_variation
+radio session,ic_tv,entertainment,0.9,keyword_variation
+visit,ic_people,social,1.0,direct_keyword
+checkup visit,ic_health,health,0.8,template_generated
+early morning eat,ic_utensils_line,food,0.7,contextual
+flight adventure,ic_car,travel,0.8,template_generated
+station session,ic_car,travel,0.9,keyword_variation
+afternoon lunch,ic_utensils_line,food,0.7,contextual
+late night video,ic_tv,entertainment,0.7,contextual
+late night learn,ic_note,learning,0.7,contextual
+booking travel,ic_car,travel,0.8,template_generated
+late night business,ic_briefcase_line,work,0.7,contextual
+new leisure,ic_tv,entertainment,0.8,template_generated
+standup meeting,ic_briefcase_line,work,0.9,realistic_pattern
+go evening,ic_moon_line,sleep,0.9,keyword_variation
+clinic session,ic_health,health,0.9,keyword_variation
+football session,ic_run,exercise,0.9,keyword_variation
+business travel,ic_car,travel,0.8,template_generated
+drive,ic_car,travel,1.0,direct_keyword
+listen,ic_tv,entertainment,1.0,direct_keyword
+quick exercise,ic_run,exercise,0.8,template_generated
+medical consultation,ic_health,health,0.8,template_generated
+birthday,ic_people,social,1.0,direct_keyword
+health wellness,ic_health,health,0.8,template_generated
+cake,ic_utensils_line,food,1.0,direct_keyword
+prevention session,ic_health,health,0.9,keyword_variation
+afternoon play,ic_tv,entertainment,0.7,contextual
+comedy session,ic_tv,entertainment,0.9,keyword_variation
+morning career,ic_briefcase_line,work,0.7,contextual
+colleague session,ic_people,social,0.9,keyword_variation
+15 minute film,ic_tv,entertainment,0.7,contextual
+early morning people,ic_people,social,0.7,contextual
+peonle session,ic_people,social,0.81,keyword_variation_typo
+relaxing film,ic_tv,entertainment,0.8,template_generated
+peaceful tired,ic_moon_line,sleep,0.8,template_generated
+family dinner,ic_people,social,0.8,realistic_pattern
+booking journey,ic_car,travel,0.8,template_generated
+intensive homework,ic_note,learning,0.8,template_generated
+fun gathering,ic_people,social,0.8,template_generated
+1 hour chat,ic_people,social,0.7,contextual
+clinic,ic_health,health,1.0,direct_keyword
+afternoon social,ic_people,social,0.7,contextual
+weekend transport,ic_car,travel,0.8,template_generated
+30 minute bus,ic_car,travel,0.7,contextual
+evening tired,ic_moon_line,sleep,0.7,contextual
+visit!,ic_people,social,1.0,direct_keyword_punct
+finally dream,ic_moon_line,sleep,0.8,template_generated
+date session,ic_people,social,0.9,keyword_variation
+music,ic_tv,entertainment,1.0,direct_keyword
+task,ic_briefcase_line,work,1.0,direct_keyword
+analysis session,ic_briefcase_line,work,0.9,keyword_variation
+go hobby,ic_tv,entertainment,0.9,keyword_variation
+quick lunch,ic_utensils_line,food,0.8,template_generated
+quick relax,ic_moon_line,sleep,0.8,template_generated
+30 minute rest,ic_moon_line,sleep,0.7,contextual
+go conversation,ic_people,social,0.9,keyword_variation
+health doctor,ic_health,health,0.8,template_generated
+project meeting,ic_briefcase_line,work,0.8,template_generated
+having food,ic_utensils_line,food,0.8,template_generated
+sport,ic_run,exercise,1.0,direct_keyword
+afternoon drive,ic_car,travel,0.7,contextual
+team employment,ic_briefcase_line,work,0.8,template_generated
+go research,ic_briefcase_line,work,0.9,keyword_variation
+business review,ic_briefcase_line,work,0.8,template_generated
+business flight,ic_car,travel,0.8,template_generated
+15 minute project,ic_briefcase_line,work,0.7,contextual
+evening lunch,ic_utensils_line,food,0.7,contextual
+enjoying film,ic_tv,entertainment,0.8,template_generated
+book session,ic_note,learning,0.9,keyword_variation
+morning train,ic_car,travel,0.8,template_generated
+book,ic_note,learning,1.0,direct_keyword
+team retrospective,ic_briefcase_line,work,0.8,realistic_pattern
+fitness with friends,ic_run,exercise,0.8,template_generated
+peaceful dream,ic_moon_line,sleep,0.8,template_generated
+special talk,ic_people,social,0.8,template_generated
+go review,ic_briefcase_line,work,0.9,keyword_variation
+surgery session,ic_health,health,0.9,keyword_variation
+time to sleep,ic_moon_line,sleep,0.8,template_generated
+quick nap,ic_moon_line,sleep,0.8,template_generated
+new video,ic_tv,entertainment,0.8,template_generated
+esporte,ic_run,exercise,0.9,multilingual_portuguese
+focused course,ic_note,learning,0.8,template_generated
+afternoon work,ic_briefcase_line,work,0.7,contextual
+go train,ic_car,travel,0.9,keyword_variation
+salad,ic_utensils_line,food,1.0,direct_keyword
+hospital,ic_health,health,1.0,direct_keyword
+deportes,ic_run,exercise,0.9,multilingual_spanish
+15 minute nap,ic_moon_line,sleep,0.7,contextual
+go management,ic_briefcase_line,work,0.9,keyword_variation
+finally sleep,ic_moon_line,sleep,0.8,template_generated
+go deadline...,ic_briefcase_line,work,0.9,keyword_variation_punct
+preventive wellness,ic_health,health,0.8,template_generated
+morning visit,ic_people,social,0.7,contextual
+health appointment,ic_health,health,0.8,template_generated
+self university,ic_note,learning,0.8,template_generated
+go breakfast,ic_utensils_line,food,0.9,keyword_variation
+dinner,ic_people,social,1.0,direct_keyword
+deal session,ic_briefcase_line,work,0.9,keyword_variation
+go meat,ic_utensils_line,food,0.9,keyword_variation
+fun session,ic_tv,entertainment,0.9,keyword_variation
+evening food,ic_utensils_line,food,0.7,contextual
+outdoor fitness,ic_run,exercise,0.8,template_generated
+self book,ic_note,learning,0.8,template_generated
+online education,ic_note,learning,0.8,template_generated
+bike to work,ic_run,exercise,0.7,realistic_pattern
+go highway,ic_car,travel,0.9,keyword_variation
+60 minute bike,ic_run,exercise,0.8,template_generated
+1 hour movie,ic_tv,entertainment,0.7,contextual
+morning sport,ic_run,exercise,0.8,template_generated
+1 hour meal,ic_utensils_line,food,0.7,contextual
+go youtube,ic_tv,entertainment,0.9,keyword_variation
+adventure,ic_tv,entertainment,1.0,direct_keyword
+go game,ic_tv,entertainment,0.9,keyword_variation
+people session,ic_people,social,0.9,keyword_variation
+therapy consultation,ic_health,health,0.8,template_generated
+highway session,ic_car,travel,0.9,keyword_variation
+medicine appointment,ic_health,health,0.8,template_generated
+office work,ic_briefcase_line,work,0.8,template_generated
+evening learn,ic_note,learning,0.7,contextual
+follow-up health,ic_health,health,0.8,template_generated
+pillow session,ic_moon_line,sleep,0.9,keyword_variation
+healthy restaurant,ic_utensils_line,food,0.8,template_generated
+30 minute social,ic_people,social,0.7,contextual
+afternoon office,ic_briefcase_line,work,0.7,contextual
+snack prep,ic_utensils_line,food,0.8,template_generated
+play session,ic_tv,entertainment,0.9,keyword_variation
+therapy,ic_health,health,1.0,direct_keyword
+trabajo,ic_briefcase_line,work,0.9,multilingual_spanish
+film,ic_tv,entertainment,1.0,direct_keyword
+go fish,ic_utensils_line,food,0.9,keyword_variation
+healthy meal,ic_utensils_line,food,0.8,template_generated
+flight,ic_car,travel,1.0,direct_keyword
+routine medical,ic_health,health,0.8,template_generated
+time to rest,ic_moon_line,sleep,0.8,template_generated
+getting some night,ic_moon_line,sleep,0.8,template_generated
+peaceful nap,ic_moon_line,sleep,0.8,template_generated
+admin,ic_briefcase_line,work,1.0,direct_keyword
+lunch,ic_people,social,1.0,direct_keyword
+go hospital,ic_health,health,0.9,keyword_variation
+doctor visit,ic_health,health,0.8,template_generated
+special visit,ic_people,social,0.8,template_generated
+skill learn,ic_note,learning,0.8,template_generated
+vegetable,ic_utensils_line,food,1.0,direct_keyword
+dinner at home,ic_utensils_line,food,1.0,realistic_pattern
+weekend trip,ic_car,travel,0.8,template_generated
+nap swssion,ic_moon_line,sleep,0.81,keyword_variation_typo
+team business,ic_briefcase_line,work,0.8,template_generated
+go relaxation,ic_tv,entertainment,0.9,keyword_variation
+go lunch,ic_utensils_line,food,0.9,keyword_variation
+skill,ic_note,learning,1.0,direct_keyword
+essen,ic_utensils_line,food,0.9,multilingual_german
+snack with family,ic_utensils_line,food,0.8,template_generated
+15 minute business,ic_briefcase_line,work,0.7,contextual
+walk the dog,ic_run,exercise,0.8,realistic_pattern
+medical session,ic_health,health,0.9,keyword_variation
+quick rest,ic_moon_line,sleep,0.8,template_generated
+go road,ic_car,travel,0.9,keyword_variation
+strategy session,ic_briefcase_line,work,0.9,keyword_variation
+research notes,ic_note,learning,0.8,template_generated
+cafe session,ic_utensils_line,food,0.9,keyword_variation
+golf session,ic_run,exercise,0.9,keyword_variation
+chocolate session,ic_utensils_line,food,0.9,keyword_variation
+watching game,ic_tv,entertainment,0.8,template_generated
+skiing,ic_run,exercise,1.0,direct_keyword
+pizza,ic_utensils_line,food,1.0,direct_keyword
+getting some relax,ic_moon_line,sleep,0.8,template_generated
+late night commute,ic_car,travel,0.7,contextual
+negotiation session,ic_briefcase_line,work,0.9,keyword_variation
+rest,ic_moon_line,sleep,1.0,direct_keyword
+morning work,ic_briefcase_line,work,0.7,contextual
+booking bus,ic_car,travel,0.8,template_generated
+homemade cooking,ic_utensils_line,food,0.8,template_generated
+research session,ic_note,learning,0.9,keyword_variation
+fun social,ic_people,social,0.8,template_generated
+diagnosis session,ic_health,health,0.9,keyword_variation
+early morning food,ic_utensils_line,food,0.7,contextual
+go development,ic_briefcase_line,work,0.9,keyword_variation
+transport session,ic_car,travel,0.9,keyword_variation
+fun visit,ic_people,social,0.8,template_generated
+basketball.,ic_run,exercise,1.0,direct_keyword_punct
+deadline session,ic_briefcase_line,work,0.9,keyword_variation
+presentation session,ic_briefcase_line,work,0.9,keyword_variation
+deep sleep,ic_moon_line,sleep,0.8,template_generated
+vacation,ic_car,travel,1.0,direct_keyword
+go colleague,ic_people,social,0.9,keyword_variation
+lecture session,ic_note,learning,0.9,keyword_variation
+business call,ic_briefcase_line,work,0.8,template_generated
+quick flight,ic_car,travel,0.8,template_generated
+booking commute,ic_car,travel,0.8,template_generated
+meeting,ic_briefcase_line,work,1.0,direct_keyword
+friends,ic_people,social,1.0,direct_keyword
+road session,ic_car,travel,0.9,keyword_variation
+30 hours of dream,ic_moon_line,sleep,0.8,template_generated
+fun chat,ic_people,social,0.8,template_generated
+early morning hospital,ic_health,health,0.7,contextual
+team project,ic_briefcase_line,work,0.8,template_generated
+bus,ic_car,travel,1.0,direct_keyword
+lesson,ic_note,learning,1.0,direct_keyword
+climbing session!,ic_run,exercise,0.9,keyword_variation_punct
+comedy,ic_tv,entertainment,1.0,direct_keyword
+evening checkup,ic_health,health,0.7,contextual
+peaceful relax,ic_moon_line,sleep,0.8,template_generated
+tv,ic_tv,entertainment,1.0,direct_keyword
+go course,ic_note,learning,0.9,keyword_variation
+grabbing food,ic_utensils_line,food,0.8,template_generated
+intensive research,ic_note,learning,0.8,template_generated
+miat,ic_utensils_line,food,0.9,direct_keyword_typo
+pilates,ic_run,exercise,1.0,direct_keyword
+weekend commute,ic_car,travel,0.8,template_generated
+work meeting,ic_briefcase_line,work,0.8,template_generated
+morning business,ic_briefcase_line,work,0.7,contextual
+60 hours of night,ic_moon_line,sleep,0.8,template_generated
+train adventure,ic_car,travel,0.8,template_generated
+go basketball!,ic_run,exercise,0.9,keyword_variation_punct
+meeting review,ic_briefcase_line,work,0.8,template_generated
+15 minute game,ic_tv,entertainment,0.7,contextual
+late night meal,ic_utensils_line,food,0.7,contextual
+evening trip,ic_car,travel,0.7,contextual
+quick snack,ic_utensils_line,food,0.8,template_generated
+30 minute meal,ic_utensils_line,food,0.7,contextual
+social talk,ic_people,social,0.8,template_generated
+early morning wellness,ic_health,health,0.7,contextual
+training with friends,ic_run,exercise,0.8,template_generated
+afternoon night,ic_moon_line,sleep,0.8,template_generated
+watching show,ic_tv,entertainment,0.8,template_generated
+evening game,ic_tv,entertainment,0.8,template_generated
+morning meeting,ic_briefcase_line,work,0.7,contextual
+afternoon health,ic_health,health,0.7,contextual
+bedroom session,ic_moon_line,sleep,0.9,keyword_variation
+fruit,ic_utensils_line,food,1.0,direct_keyword
+go golf,ic_run,exercise,0.9,keyword_variation
+afternoon hospital,ic_health,health,0.7,contextual
+afternoon gym,ic_run,exercise,0.7,contextual
+quick restaurant,ic_utensils_line,food,0.8,template_generated
+evening nap,ic_moon_line,sleep,0.7,contextual
+water session...,ic_utensils_line,food,0.9,keyword_variation_punct
+go bedroom,ic_moon_line,sleep,0.9,keyword_variation
+go film,ic_tv,entertainment,0.9,keyword_variation
+workshop,ic_note,learning,1.0,direct_keyword
+grab coffee,ic_utensils_line,food,0.8,realistic_pattern
+office review,ic_briefcase_line,work,0.8,template_generated
+kitchen break,ic_utensils_line,food,0.8,template_generated
+medicine consultation,ic_health,health,0.8,template_generated
+go chat,ic_people,social,0.9,keyword_variation
+hospital appointment,ic_health,health,0.8,template_generated
+road trip,ic_car,travel,0.8,template_generated
+afternoon dream,ic_moon_line,sleep,0.8,template_generated
+getting some bedroom,ic_moon_line,sleep,0.8,template_generated
+30 minute movie,ic_tv,entertainment,0.7,contextual
+social friends,ic_people,social,0.8,template_generated
+exam school,ic_note,learning,0.8,template_generated
+fun fun,ic_tv,entertainment,0.8,template_generated
+work review,ic_briefcase_line,work,0.8,template_generated
+afternoon nap,ic_moon_line,sleep,0.8,template_generated
+exam session...,ic_note,learning,0.9,keyword_variation_punct
+go swim,ic_run,exercise,0.9,keyword_variation
+gym at the gym,ic_run,exercise,0.8,template_generated
+hotel session,ic_car,travel,0.9,keyword_variation
+deep tired,ic_moon_line,sleep,0.8,template_generated
+1 hour sleep,ic_moon_line,sleep,0.7,contextual
+15 minute travel,ic_car,travel,0.7,contextual
+late night trip,ic_car,travel,0.7,contextual
+education notes,ic_note,learning,0.8,template_generated
+client meeting,ic_briefcase_line,work,0.8,template_generated
+vacation bus,ic_car,travel,0.8,template_generated
+quick drive,ic_car,travel,0.8,template_generated
+go negotiation,ic_briefcase_line,work,0.9,keyword_variation
+bed,ic_moon_line,sleep,1.0,direct_keyword
+health health,ic_health,health,0.8,template_generated
+booking,ic_car,travel,1.0,direct_keyword
+drinks with colleagues,ic_people,social,0.9,realistic_pattern
+go coffee,ic_people,social,0.9,keyword_variation
+vacation drive,ic_car,travel,0.8,template_generated
+afternoon meal,ic_utensils_line,food,0.7,contextual
+cafe,ic_utensils_line,food,1.0,direct_keyword
+programming,ic_briefcase_line,work,1.0,direct_keyword
+family with friends,ic_people,social,0.8,template_generated
+healing session,ic_health,health,0.9,keyword_variation
+medical therapy,ic_health,health,0.8,template_generated
+morning party,ic_people,social,0.7,contextual
+weekend flight,ic_car,travel,0.8,template_generated
+much needed rest,ic_moon_line,sleep,0.8,template_generated
+go professional,ic_briefcase_line,work,0.9,keyword_variation
+15 minute job,ic_briefcase_line,work,0.7,contextual
+bus adventure,ic_car,travel,0.8,template_generated
+focused research,ic_note,learning,0.8,template_generated
+go lesson,ic_note,learning,0.9,keyword_variation
+sport at the gym,ic_run,exercise,0.8,template_generated
+management session,ic_briefcase_line,work,0.9,keyword_variation
+go presentation,ic_briefcase_line,work,0.9,keyword_variation
+15 minute medical,ic_health,health,0.7,contextual
+assignment,ic_note,learning,1.0,direct_keyword
+playing play,ic_tv,entertainment,0.8,template_generated
+outdoor bike,ic_run,exercise,0.8,template_generated
+homemade meal,ic_utensils_line,food,0.8,template_generated
+deep bedroom,ic_moon_line,sleep,0.8,template_generated
+chat gathering,ic_people,social,0.8,template_generated
+station,ic_car,travel,1.0,direct_keyword
+water session,ic_utensils_line,food,0.9,keyword_variation
+course,ic_run,exercise,0.9,multilingual_french
+treatment,ic_health,health,1.0,direct_keyword
+early morning read,ic_note,learning,0.7,contextual
+go employment,ic_briefcase_line,work,0.9,keyword_variation
+preventive hospital,ic_health,health,0.8,template_generated
+late night dinner,ic_utensils_line,food,0.7,contextual
+morning job,ic_briefcase_line,work,0.7,contextual
+team meeting,ic_briefcase_line,work,0.8,template_generated
+train,ic_car,travel,1.0,direct_keyword
+fun people,ic_people,social,0.8,template_generated
+morning school,ic_note,learning,0.7,contextual
+15 minute commute,ic_car,travel,0.7,contextual
+binge game,ic_tv,entertainment,0.8,template_generated
+wellness,ic_health,health,1.0,direct_keyword
+relax,ic_moon_line,sleep,1.0,direct_keyword
+takeout cooking,ic_utensils_line,food,0.8,template_generated
+30 hours of bed,ic_moon_line,sleep,0.8,template_generated
+friends session,ic_people,social,0.9,keyword_variation
+quick swim,ic_run,exercise,0.8,template_generated
+early morning show,ic_tv,entertainment,0.7,contextual
+manger,ic_utensils_line,food,0.9,multilingual_french
+late night job,ic_briefcase_line,work,0.7,contextual
+early morning exercise,ic_run,exercise,0.7,contextual
+go strategy,ic_briefcase_line,work,0.9,keyword_variation
+takeout food,ic_utensils_line,food,0.8,template_generated
+early morning health,ic_health,health,0.7,contextual
+afternoon training,ic_run,exercise,0.7,contextual
+go eat,ic_utensils_line,food,0.9,keyword_variation
+30 minute office,ic_briefcase_line,work,0.7,contextual
+tennis session,ic_run,exercise,0.9,keyword_variation
+relaxing play,ic_tv,entertainment,0.8,template_generated
+dark session,ic_moon_line,sleep,0.9,keyword_variation
+1 hour social,ic_people,social,0.7,contextual
+go bedtime,ic_moon_line,sleep,0.9,keyword_variation
+relaxing fun,ic_tv,entertainment,0.8,template_generated
+education,ic_note,learning,1.0,direct_keyword
+long journey,ic_car,travel,0.8,template_generated
+quick sleep,ic_moon_line,sleep,0.8,template_generated
+tourism session,ic_car,travel,0.9,keyword_variation
+weekend date,ic_people,social,0.8,template_generated
+late night bus,ic_car,travel,0.7,contextual
+healthy food,ic_utensils_line,food,0.8,template_generated
+paperwork session,ic_briefcase_line,work,0.9,keyword_variation
+go pasta,ic_utensils_line,food,0.9,keyword_variation
+1 hour task,ic_briefcase_line,work,0.7,contextual
+go group,ic_people,social,0.9,keyword_variation
+catching up family,ic_people,social,0.8,template_generated
+watching entertainment,ic_tv,entertainment,0.8,template_generated
+dessert session!,ic_utensils_line,food,0.9,keyword_variation_punct
+restaurant session.,ic_utensils_line,food,0.9,keyword_variation_punct
+night,ic_moon_line,sleep,1.0,direct_keyword
+late night course,ic_note,learning,0.7,contextual
+30 minute dream,ic_moon_line,sleep,0.7,contextual
+video,ic_tv,entertainment,1.0,direct_keyword
+dentist visit,ic_health,health,0.8,template_generated
+intensive study,ic_note,learning,0.8,template_generated
+office,ic_briefcase_line,work,1.0,direct_keyword
+quick vacation,ic_car,travel,0.8,template_generated
+special gathering,ic_people,social,0.8,template_generated
+exam,ic_note,learning,1.0,direct_keyword
+late night study,ic_note,learning,0.7,contextual
+quick bike,ic_run,exercise,0.8,template_generated
+afternoon eat,ic_utensils_line,food,0.7,contextual
+early morning dream,ic_moon_line,sleep,0.7,contextual
+afternoon workout,ic_run,exercise,0.7,contextual
+task meeting,ic_briefcase_line,work,0.8,template_generated
+15 minute entertainment,ic_tv,entertainment,0.7,contextual
+follow-up medicine,ic_health,health,0.8,template_generated
+30 minute food,ic_utensils_line,food,0.7,contextual
+1 hour gathering,ic_people,social,0.7,contextual
+late night rest,ic_moon_line,sleep,0.7,contextual
+go yoga,ic_run,exercise,0.9,keyword_variation
+business trip,ic_car,travel,0.8,template_generated
+team work,ic_briefcase_line,work,0.8,template_generated
+1 hour health,ic_health,health,0.7,contextual
+time to tired,ic_moon_line,sleep,0.8,template_generated
+early morning train,ic_car,travel,0.7,contextual
+30 minute nap,ic_moon_line,sleep,0.7,contextual
+skill university,ic_note,learning,0.8,template_generated
+morning flight,ic_car,travel,0.8,template_generated
+grabbing restaurant,ic_utensils_line,food,0.8,template_generated
+business,ic_briefcase_line,work,1.0,direct_keyword
+group people,ic_people,social,0.8,template_generated
+professional,ic_briefcase_line,work,1.0,direct_keyword
+getting some bed,ic_moon_line,sleep,0.8,template_generated
+morning fitness,ic_run,exercise,0.8,template_generated
+1 hour training,ic_run,exercise,0.7,contextual
+meeting meeting,ic_briefcase_line,work,0.8,template_generated
+class session,ic_note,learning,0.9,keyword_variation
+go dark,ic_moon_line,sleep,0.9,keyword_variation
+early morning night,ic_moon_line,sleep,0.7,contextual
+online learn,ic_note,learning,0.8,template_generated
+evening travel,ic_car,travel,0.7,contextual
+office project,ic_briefcase_line,work,0.8,template_generated
+checkup consultation,ic_health,health,0.8,template_generated
+afternoon fitness,ic_run,exercise,0.7,contextual
+new game,ic_tv,entertainment,0.8,template_generated
+planning vacation,ic_car,travel,0.8,template_generated
+peaceful bedroom,ic_moon_line,sleep,0.8,template_generated
+rest session,ic_moon_line,sleep,0.9,keyword_variation
+fun movie,ic_tv,entertainment,0.8,template_generated
+nap,ic_moon_line,sleep,1.0,direct_keyword
+special social,ic_people,social,0.8,template_generated
+bedroom break,ic_moon_line,sleep,0.8,template_generated
+school,ic_note,learning,1.0,direct_keyword
+urgent meeting,ic_briefcase_line,work,0.8,template_generated
+exercício,ic_run,exercise,0.9,multilingual_portuguese
+evening career,ic_briefcase_line,work,0.7,contextual
+1 hour bed,ic_moon_line,sleep,0.7,contextual
+jog session,ic_run,exercise,0.9,keyword_variation
+45 minute gym,ic_run,exercise,0.8,template_generated
+work from cafe,ic_briefcase_line,work,0.7,realistic_pattern
+evening swim,ic_run,exercise,0.8,template_generated
+1 hour study,ic_note,learning,0.7,contextual
+1 hour work,ic_briefcase_line,work,0.7,contextual
+jog,ic_run,exercise,1.0,direct_keyword
+university notes,ic_note,learning,0.8,template_generated
+favorite entertainment,ic_tv,entertainment,0.8,template_generated
+swim session,ic_run,exercise,0.9,keyword_variation
+watching play,ic_tv,entertainment,0.8,template_generated
+youtube,ic_tv,entertainment,1.0,direct_keyword
+basketball,ic_run,exercise,1.0,direct_keyword
+health hospital,ic_health,health,0.8,template_generated
+homemade breakfast,ic_utensils_line,food,0.8,template_generated
+focused school,ic_note,learning,0.8,template_generated
+weekend party,ic_people,social,0.8,template_generated
+research,ic_note,learning,1.0,direct_keyword
+afternoon family,ic_people,social,0.7,contextual
+dinner prep,ic_utensils_line,food,0.8,template_generated
+afternoon tv,ic_tv,entertainment,0.7,contextual
+go relax,ic_moon_line,sleep,0.9,keyword_variation
+takeout meal,ic_utensils_line,food,0.8,template_generated
+weekend friends,ic_people,social,0.8,template_generated
+symptoms,ic_health,health,1.0,direct_keyword
+new movie,ic_tv,entertainment,0.8,template_generated
+early morning learn,ic_note,learning,0.7,contextual
+morning training,ic_run,exercise,0.8,template_generated
+go analyze,ic_note,learning,0.9,keyword_variation
+early morning walk,ic_run,exercise,0.7,contextual
+30 minute sleep,ic_moon_line,sleep,0.7,contextual
+30 minute video,ic_tv,entertainment,0.7,contextual
+team office,ic_briefcase_line,work,0.8,template_generated
+client professional,ic_briefcase_line,work,0.8,template_generated
+1 hour dream,ic_moon_line,sleep,0.7,contextual
+meeting session,ic_briefcase_line,work,0.9,keyword_variation
+takeout kitchen,ic_utensils_line,food,0.8,template_generated
+traffic,ic_car,travel,1.0,direct_keyword
+hanging out chat,ic_people,social,0.8,template_generated
+writing,ic_briefcase_line,work,1.0,direct_keyword
+new show,ic_tv,entertainment,0.8,template_generated
+go pilates,ic_run,exercise,0.9,keyword_variation
+weekend chat,ic_people,social,0.8,template_generated
+evening exercise,ic_run,exercise,0.8,template_generated
+1 hour family,ic_people,social,0.7,contextual
+watching film,ic_tv,entertainment,0.8,template_generated
+job review,ic_briefcase_line,work,0.8,template_generated
+morning chat,ic_people,social,0.7,contextual
+afternoon walk,ic_run,exercise,0.7,contextual
+early morning lunch,ic_utensils_line,food,0.7,contextual
+walk at the gym,ic_run,exercise,0.8,template_generated
+go diagnosis,ic_health,health,0.9,keyword_variation
+self course,ic_note,learning,0.8,template_generated
+early morning travel,ic_car,travel,0.7,contextual
+meeting call,ic_briefcase_line,work,0.8,template_generated
+30 minute training,ic_run,exercise,0.8,template_generated
+go workout,ic_run,exercise,0.9,keyword_variation
+morning walk,ic_run,exercise,0.8,template_generated
+pharmacy session,ic_health,health,0.9,keyword_variation
+30 minute workout,ic_run,exercise,0.7,contextual
+go tv,ic_tv,entertainment,0.9,keyword_variation
+morning food,ic_utensils_line,food,0.8,template_generated
+social date,ic_people,social,0.8,template_generated
+food session,ic_utensils_line,food,0.9,keyword_variation
+15 minute gym,ic_run,exercise,0.7,contextual
+go business,ic_briefcase_line,work,0.9,keyword_variation
+project career,ic_briefcase_line,work,0.8,template_generated
+homemade eat,ic_utensils_line,food,0.8,template_generated
+group social,ic_people,social,0.8,template_generated
+agreement session,ic_briefcase_line,work,0.9,keyword_variation
+hike session,ic_run,exercise,0.9,keyword_variation
+hanging out party,ic_people,social,0.8,template_generated
+catching up friends,ic_people,social,0.8,template_generated
+focused homework,ic_note,learning,0.8,template_generated
+binge film,ic_tv,entertainment,0.8,template_generated
+morning bus,ic_car,travel,0.8,template_generated
+bike session,ic_run,exercise,0.9,keyword_variation
+fish session,ic_utensils_line,food,0.9,keyword_variation
+golf,ic_run,exercise,1.0,direct_keyword
+road commute,ic_car,travel,0.8,template_generated
+go research,ic_note,learning,0.9,keyword_variation
+early morning flight,ic_car,travel,0.7,contextual
+evening task,ic_briefcase_line,work,0.7,contextual
+go nurse,ic_health,health,0.9,keyword_variation
+preventive appointment,ic_health,health,0.8,template_generated
+1 hour hospital,ic_health,health,0.7,contextual
+weekend family,ic_people,social,0.8,template_generated
+30 minute people,ic_people,social,0.7,contextual
+having breakfast,ic_utensils_line,food,0.8,template_generated
+afternoon job,ic_briefcase_line,work,0.7,contextual
+dentist,ic_health,health,1.0,direct_keyword
+planning,ic_briefcase_line,work,1.0,direct_keyword
+team job,ic_briefcase_line,work,0.8,template_generated
+hanging out social,ic_people,social,0.8,template_generated
+1 hour gym,ic_run,exercise,0.7,contextual
+medical appointment,ic_health,health,0.8,template_generated
+afternoon relax,ic_moon_line,sleep,0.8,template_generated
+trabalho,ic_briefcase_line,work,0.9,multilingual_portuguese
+road bus,ic_car,travel,0.8,template_generated
+fun leisure,ic_tv,entertainment,0.8,template_generated
+workout at the gym,ic_run,exercise,0.8,template_generated
+15 minute run,ic_run,exercise,0.8,template_generated
+30 minute family,ic_people,social,0.7,contextual
+late night gym,ic_run,exercise,0.7,contextual
+group visit,ic_people,social,0.8,template_generated
+afternoon game,ic_tv,entertainment,0.7,contextual
+fruit session,ic_utensils_line,food,0.9,keyword_variation
+restaurant break,ic_utensils_line,food,0.8,template_generated
+morning social,ic_people,social,0.7,contextual
+evening,ic_moon_line,sleep,1.0,direct_keyword
+online course,ic_note,learning,0.8,template_generated
+fun video,ic_tv,entertainment,0.8,template_generated
+exam read,ic_note,learning,0.8,template_generated
+traffic session,ic_car,travel,0.9,keyword_variation
+boxing session,ic_run,exercise,0.9,keyword_variation
+workout with friends,ic_run,exercise,0.8,template_generated
+exam homework,ic_note,learning,0.8,template_generated
+1 hour fitness,ic_run,exercise,0.7,contextual
+1 hour cooking,ic_utensils_line,food,0.7,contextual
+learn session,ic_note,learning,0.9,keyword_variation
+tired break,ic_moon_line,sleep,0.8,template_generated
+business commute,ic_car,travel,0.8,template_generated
+go video,ic_tv,entertainment,0.9,keyword_variation
+15 minute lunch,ic_utensils_line,food,0.7,contextual
+early morning family,ic_people,social,0.7,contextual
+peaceful night,ic_moon_line,sleep,0.8,template_generated
+go neighbor,ic_people,social,0.9,keyword_variation
+watch,ic_tv,entertainment,1.0,direct_keyword
+30 minute play,ic_tv,entertainment,0.7,contextual
+listen session,ic_tv,entertainment,0.9,keyword_variation
+quick meal,ic_utensils_line,food,0.8,template_generated
+medication,ic_health,health,1.0,direct_keyword
+course materials,ic_note,learning,0.8,template_generated
+30 minute show,ic_tv,entertainment,0.7,contextual
+evening run,ic_run,exercise,0.8,template_generated
+dream break,ic_moon_line,sleep,0.8,template_generated
+booking session,ic_car,travel,0.9,keyword_variation
+bed session,ic_moon_line,sleep,0.9,keyword_variation
+morning medicine,ic_health,health,0.7,contextual
+go date,ic_people,social,0.9,keyword_variation
+evening leisure,ic_tv,entertainment,0.8,template_generated
+class,ic_note,learning,1.0,direct_keyword
+outdoor exercise,ic_run,exercise,0.8,template_generated
+evening work,ic_briefcase_line,work,0.7,contextual
+social session,ic_people,social,0.9,keyword_variation
+1 hour party,ic_people,social,0.7,contextual
+morning read,ic_note,learning,0.7,contextual
+evening project,ic_briefcase_line,work,0.7,contextual
+evening meeting,ic_briefcase_line,work,0.7,contextual
+evening fitness,ic_run,exercise,0.8,template_generated
+booking train,ic_car,travel,0.8,template_generated
+client job,ic_briefcase_line,work,0.8,template_generated
+annual medical,ic_health,health,0.8,template_generated
+workout!,ic_run,exercise,1.0,direct_keyword_punct
+morning tv,ic_tv,entertainment,0.7,contextual
+go admin,ic_briefcase_line,work,0.9,keyword_variation
+planning transport,ic_car,travel,0.8,template_generated
+health medical,ic_health,health,0.8,template_generated
+fun,ic_tv,entertainment,1.0,direct_keyword
+gym with friends,ic_run,exercise,0.8,template_generated
+snack,ic_utensils_line,food,1.0,direct_keyword
+action,ic_tv,entertainment,1.0,direct_keyword
+bedtime session,ic_moon_line,sleep,0.9,keyword_variation
+go meeting,ic_briefcase_line,work,0.9,keyword_variation
+15 minute family,ic_people,social,0.7,contextual
+much needed bedroom,ic_moon_line,sleep,0.8,template_generated
+morning restaurant,ic_utensils_line,food,0.8,template_generated
+intensive school,ic_note,learning,0.8,template_generated
+15 minute hospital,ic_health,health,0.7,contextual
+go soup,ic_utensils_line,food,0.9,keyword_variation
+15 minute therapy,ic_health,health,0.7,contextual
+go drinks,ic_people,social,0.9,keyword_variation
+dinner with family,ic_utensils_line,food,0.8,template_generated
+15 minute relax,ic_moon_line,sleep,0.7,contextual
+15 minute flight,ic_car,travel,0.7,contextual
+dance session,ic_run,exercise,0.9,keyword_variation
+burger session,ic_utensils_line,food,0.9,keyword_variation
+doctor,ic_health,health,1.0,direct_keyword
+hangout,ic_people,social,1.0,direct_keyword
+quick train,ic_car,travel,0.8,template_generated
+date,ic_people,social,1.0,direct_keyword
+family,ic_people,social,1.0,direct_keyword
+afternoon snack,ic_utensils_line,food,0.7,contextual
+go legal,ic_briefcase_line,work,0.9,keyword_variation
+long trip,ic_car,travel,0.8,template_generated
+go rest,ic_moon_line,sleep,0.9,keyword_variation
+homework group,ic_note,learning,0.8,template_generated
+morning video,ic_tv,entertainment,0.7,contextual
+online study,ic_note,learning,0.8,template_generated
+skill book,ic_note,learning,0.8,template_generated
+late night travel,ic_car,travel,0.7,contextual
+rowing session,ic_run,exercise,0.9,keyword_variation
+go seminar,ic_note,learning,0.9,keyword_variation
+30 hours of nap,ic_moon_line,sleep,0.8,template_generated
+movie,ic_tv,entertainment,1.0,direct_keyword
+15 minute meeting,ic_briefcase_line,work,0.7,contextual
+hanging out visit,ic_people,social,0.8,template_generated
+afternoon friends,ic_people,social,0.7,contextual
+client employment,ic_briefcase_line,work,0.8,template_generated
+late night film,ic_tv,entertainment,0.7,contextual
+enjoying entertainment,ic_tv,entertainment,0.8,template_generated
+go music,ic_tv,entertainment,0.9,keyword_variation
+research session,ic_briefcase_line,work,0.9,keyword_variation
+university,ic_note,learning,1.0,direct_keyword
+healing,ic_health,health,1.0,direct_keyword
+writing session,ic_briefcase_line,work,0.9,keyword_variation
+action session,ic_tv,entertainment,0.9,keyword_variation
+new tv,ic_tv,entertainment,0.8,template_generated
+early morning gym,ic_run,exercise,0.7,contextual
+food,ic_utensils_line,food,1.0,direct_keyword
+entertainment,ic_tv,entertainment,1.0,direct_keyword
+go career,ic_briefcase_line,work,0.9,keyword_variation
+netflix,ic_tv,entertainment,1.0,direct_keyword
+go holiday,ic_car,travel,0.9,keyword_variation
+morning cooking,ic_utensils_line,food,0.8,template_generated
+tea,ic_utensils_line,food,1.0,direct_keyword
+health consultation,ic_health,health,0.8,template_generated
+design session,ic_briefcase_line,work,0.9,keyword_variation
+evening entertainment,ic_tv,entertainment,0.8,template_generated
+project professional,ic_briefcase_line,work,0.8,template_generated
+evening doctor,ic_health,health,0.7,contextual
+morning health,ic_health,health,0.7,contextual
+project review,ic_briefcase_line,work,0.8,template_generated
+special date,ic_people,social,0.8,template_generated
+sport with friends,ic_run,exercise,0.8,template_generated
+walk session,ic_run,exercise,0.9,keyword_variation
+event session,ic_people,social,0.9,keyword_variation
+binge tv,ic_tv,entertainment,0.8,template_generated
+30 minute book,ic_note,learning,0.7,contextual
+go drowsy,ic_moon_line,sleep,0.9,keyword_variation
+favorite show,ic_tv,entertainment,0.8,template_generated
+go rice,ic_utensils_line,food,0.9,keyword_variation
+go practice,ic_note,learning,0.9,keyword_variation
+outdoor gym,ic_run,exercise,0.8,template_generated
+health medicine,ic_health,health,0.8,template_generated
+go book,ic_note,learning,0.9,keyword_variation
+go dentist,ic_health,health,0.9,keyword_variation
+go hangout,ic_people,social,0.9,keyword_variation
+meal with family,ic_utensils_line,food,0.8,template_generated
+urgent employment,ic_briefcase_line,work,0.8,template_generated
+takeout dinner,ic_utensils_line,food,0.8,template_generated
+early morning movie,ic_tv,entertainment,0.7,contextual
+soup session,ic_utensils_line,food,0.9,keyword_variation
+go surgery,ic_health,health,0.9,keyword_variation
+arbeit,ic_briefcase_line,work,0.9,multilingual_german
+1 hour eat,ic_utensils_line,food,0.7,contextual
+bike,ic_run,exercise,1.0,direct_keyword
+skill course,ic_note,learning,0.8,template_generated
+strategy?,ic_briefcase_line,work,1.0,direct_keyword_punct
+coffee,ic_people,social,1.0,direct_keyword
+group party,ic_people,social,0.8,template_generated
+adventure session,ic_car,travel,0.9,keyword_variation
+takeout lunch,ic_utensils_line,food,0.8,template_generated
+routine health,ic_health,health,0.8,template_generated
+bike with friends,ic_run,exercise,0.8,template_generated
+time to bedroom,ic_moon_line,sleep,0.8,template_generated
+go checkup,ic_health,health,0.9,keyword_variation
+morning play,ic_tv,entertainment,0.7,contextual
+afternoon doctor,ic_health,health,0.7,contextual
+morning project,ic_briefcase_line,work,0.7,contextual
+morning snack,ic_utensils_line,food,0.8,template_generated
+evening sport,ic_run,exercise,0.8,template_generated
+go skiing,ic_run,exercise,0.9,keyword_variation
+having meal,ic_utensils_line,food,0.8,template_generated
+special people,ic_people,social,0.8,template_generated
+15 minute sleep,ic_moon_line,sleep,0.7,contextual
+gym workout legs,ic_run,exercise,0.9,realistic_pattern
+morning trip,ic_car,travel,0.8,template_generated
+design,ic_briefcase_line,work,1.0,direct_keyword
+fun family,ic_people,social,0.8,template_generated
+15 minute learn,ic_note,learning,0.7,contextual
+family visit,ic_people,social,0.8,template_generated
+pasta session,ic_utensils_line,food,0.9,keyword_variation
+contract,ic_briefcase_line,work,1.0,direct_keyword
+early morning sport,ic_run,exercise,0.7,contextual
+group friends,ic_people,social,0.8,template_generated
+run with friends,ic_run,exercise,0.8,template_generated
+escritório,ic_briefcase_line,work,0.9,multilingual_portuguese
+symptoms session,ic_health,health,0.9,keyword_variation
+project,ic_briefcase_line,work,1.0,direct_keyword
+journey,ic_car,travel,1.0,direct_keyword
+business train,ic_car,travel,0.8,template_generated
+eat session,ic_utensils_line,food,0.9,keyword_variation
+employment session,ic_briefcase_line,work,0.9,keyword_variation
+catching up chat,ic_people,social,0.8,template_generated
+go job,ic_briefcase_line,work,0.9,keyword_variation
+1 hour food,ic_utensils_line,food,0.7,contextual
+go adventure,ic_car,travel,0.9,keyword_variation
+report session,ic_briefcase_line,work,0.9,keyword_variation
+go snack,ic_utensils_line,food,0.9,keyword_variation
+übung,ic_run,exercise,0.9,multilingual_german
+go golf!,ic_run,exercise,0.9,keyword_variation_punct
+pasta?,ic_utensils_line,food,1.0,direct_keyword_punct
+client call,ic_briefcase_line,work,1.0,realistic_pattern
+focused book,ic_note,learning,0.8,template_generated
+road flight,ic_car,travel,0.8,template_generated
+exam book,ic_note,learning,0.8,template_generated
+go transport,ic_car,travel,0.9,keyword_variation
+early morning business,ic_briefcase_line,work,0.7,contextual
+urgent task,ic_briefcase_line,work,0.8,template_generated
+pillow session.,ic_moon_line,sleep,0.9,keyword_variation_punct
+agreement,ic_briefcase_line,work,1.0,direct_keyword
+late night snack,ic_utensils_line,food,0.7,contextual
+preventive doctor,ic_health,health,0.8,template_generated
+routine doctor,ic_health,health,0.8,template_generated
+learn materials,ic_note,learning,0.8,template_generated
+bread session,ic_utensils_line,food,0.9,keyword_variation
+evening education,ic_note,learning,0.7,contextual
+dream...,ic_moon_line,sleep,1.0,direct_keyword_punct
+late night chat,ic_people,social,0.7,contextual
+late night nap,ic_moon_line,sleep,0.7,contextual
+development session,ic_briefcase_line,work,0.9,keyword_variation
+hanging out friends,ic_people,social,0.8,template_generated
+appointment visit,ic_health,health,0.8,template_generated
+go therapy,ic_health,health,0.9,keyword_variation
+30 minute university,ic_note,learning,0.7,contextual
+exercise session,ic_run,exercise,0.9,keyword_variation
+meat,ic_utensils_line,food,1.0,direct_keyword
+chat session,ic_people,social,0.9,keyword_variation
+self homework,ic_note,learning,0.8,template_generated
+go review,ic_note,learning,0.9,keyword_variation
+drinks session,ic_people,social,0.9,keyword_variation
+30 minute doctor,ic_health,health,0.7,contextual
+fun party,ic_people,social,0.8,template_generated
+group date,ic_people,social,0.8,template_generated
+evening dream,ic_moon_line,sleep,0.7,contextual
+cake session,ic_utensils_line,food,0.9,keyword_variation
+reunión,ic_briefcase_line,work,0.9,multilingual_spanish
+go climbing,ic_run,exercise,0.9,keyword_variation
+kitchen prep,ic_utensils_line,food,0.8,template_generated
+juice,ic_utensils_line,food,1.0,direct_keyword
+daily employment,ic_briefcase_line,work,0.8,template_generated
+assignment session,ic_note,learning,0.9,keyword_variation
+hospital session,ic_health,health,0.9,keyword_variation
+relaxing leisure,ic_tv,entertainment,0.8,template_generated
+afternoon read,ic_note,learning,0.7,contextual
+deep rest,ic_moon_line,sleep,0.8,template_generated
+outdoor run,ic_run,exercise,0.8,template_generated
+hangout session,ic_people,social,0.9,keyword_variation
+go leisure,ic_tv,entertainment,0.9,keyword_variation
+15 minute drive,ic_car,travel,0.7,contextual
+document session,ic_briefcase_line,work,0.9,keyword_variation
+ejercicio,ic_run,exercise,0.9,multilingual_spanish
+getting some nap,ic_moon_line,sleep,0.8,template_generated
+weekend vacation,ic_car,travel,0.8,template_generated
+weekend entertainment,ic_tv,entertainment,0.8,template_generated
+go homework?,ic_note,learning,0.9,keyword_variation_punct
+people,ic_people,social,1.0,direct_keyword
+call,ic_briefcase_line,work,1.0,direct_keyword
+evening read,ic_note,learning,0.7,contextual
+go burger,ic_utensils_line,food,0.9,keyword_variation
+60 hours of pillow,ic_moon_line,sleep,0.8,template_generated
+morning friends,ic_people,social,0.7,contextual
+early morning bus,ic_car,travel,0.7,contextual
+1 hour relax,ic_moon_line,sleep,0.7,contextual
+30 minute breakfast,ic_utensils_line,food,0.7,contextual
+dinner session,ic_people,social,0.9,keyword_variation
+go recover,ic_moon_line,sleep,0.9,keyword_variation
+afternoon exercise,ic_run,exercise,0.7,contextual
+pasta,ic_utensils_line,food,1.0,direct_keyword
+vacation vacation,ic_car,travel,0.8,template_generated
+study materials,ic_note,learning,0.8,template_generated
+finally rest,ic_moon_line,sleep,0.8,template_generated
+planning commute,ic_car,travel,0.8,template_generated
+dance,ic_run,exercise,1.0,direct_keyword
+social social,ic_people,social,0.8,template_generated
+routine wellness,ic_health,health,0.8,template_generated
+15 minute trip,ic_car,travel,0.7,contextual
+weekend visit,ic_people,social,0.8,template_generated
+kitchen session?,ic_utensils_line,food,0.9,keyword_variation_punct
+1 hour run,ic_run,exercise,0.7,contextual
+go bread,ic_utensils_line,food,0.9,keyword_variation
+employment call,ic_briefcase_line,work,0.8,template_generated
+exam study,ic_note,learning,0.8,template_generated
+wake?,ic_moon_line,sleep,1.0,direct_keyword_punct
+trip session,ic_car,travel,0.9,keyword_variation
+transport,ic_car,travel,1.0,direct_keyword
+bed.,ic_moon_line,sleep,1.0,direct_keyword_punct
+social,ic_people,social,1.0,direct_keyword
+gym routine,ic_run,exercise,0.8,template_generated
+wedding reception,ic_people,social,1.0,realistic_pattern
+enjoying play,ic_tv,entertainment,0.8,template_generated
+15 minute office,ic_briefcase_line,work,0.7,contextual
+early morning meeting,ic_briefcase_line,work,0.7,contextual
+go drive,ic_car,travel,0.9,keyword_variation
+morning university,ic_note,learning,0.7,contextual
+restaurant with family,ic_utensils_line,food,0.8,template_generated
+study,ic_note,learning,1.0,direct_keyword
+relationship,ic_people,social,1.0,direct_keyword
+30 minute medical,ic_health,health,0.7,contextual
+date with friends,ic_people,social,0.8,template_generated
+binge video,ic_tv,entertainment,0.8,template_generated
+kitchen session,ic_utensils_line,food,0.9,keyword_variation
+soccer.,ic_run,exercise,1.0,direct_keyword_punct
+1 hour meeting,ic_briefcase_line,work,0.7,contextual
+treatment session,ic_health,health,0.9,keyword_variation
+client office,ic_briefcase_line,work,0.8,template_generated
+mittagessen,ic_utensils_line,food,0.9,multilingual_german
+takeout restaurant,ic_utensils_line,food,0.8,template_generated
+work call,ic_briefcase_line,work,0.8,template_generated
+1 hour school,ic_note,learning,0.7,contextual
+go wellness,ic_health,health,0.9,keyword_variation
+research project,ic_note,learning,0.8,realistic_pattern
+go commute,ic_car,travel,0.9,keyword_variation
+weights,ic_run,exercise,1.0,direct_keyword
+online book,ic_note,learning,0.8,template_generated
+workshop session,ic_note,learning,0.9,keyword_variation
+binge show,ic_tv,entertainment,0.8,template_generated
+15 hours of sleep,ic_moon_line,sleep,0.8,template_generated
+medical health,ic_health,health,0.8,template_generated
+go homework,ic_note,learning,0.9,keyword_variation
+15 minute training,ic_run,exercise,0.7,contextual
+morning game,ic_tv,entertainment,0.7,contextual
+routine dentist,ic_health,health,0.8,template_generated
+long bus,ic_car,travel,0.8,template_generated
+group,ic_people,social,1.0,direct_keyword
+go night,ic_moon_line,sleep,0.9,keyword_variation
+30 minute relax,ic_moon_line,sleep,0.7,contextual
+doctor appointment,ic_health,health,0.8,template_generated
+quick eat,ic_utensils_line,food,0.8,template_generated
+afternoon food,ic_utensils_line,food,0.7,contextual
+morning film,ic_tv,entertainment,0.7,contextual
+neighbor,ic_people,social,1.0,direct_keyword
+homemade lunch,ic_utensils_line,food,0.8,template_generated
+much needed tired,ic_moon_line,sleep,0.8,template_generated
+concert session,ic_tv,entertainment,0.9,keyword_variation
+nurse session,ic_health,health,0.9,keyword_variation
+family people,ic_people,social,0.8,template_generated
+go rowing,ic_run,exercise,0.9,keyword_variation
+early morning social,ic_people,social,0.7,contextual
+15 minute movie,ic_tv,entertainment,0.7,contextual
+social chat,ic_people,social,0.8,template_generated
+morning bike,ic_run,exercise,0.8,template_generated
+finally night,ic_moon_line,sleep,0.8,template_generated
+airport session,ic_car,travel,0.9,keyword_variation
+deep dream,ic_moon_line,sleep,0.8,template_generated
+early morning work,ic_briefcase_line,work,0.7,contextual
+go client,ic_briefcase_line,work,0.9,keyword_variation
+recharge,ic_moon_line,sleep,1.0,direct_keyword
+morning learn,ic_note,learning,0.7,contextual
+15 minute chat,ic_people,social,0.7,contextual
+talk?,ic_people,social,1.0,direct_keyword_punct
+sport routine,ic_run,exercise,0.8,template_generated
+business drive,ic_car,travel,0.8,template_generated
+early morning education,ic_note,learning,0.7,contextual
+group session,ic_people,social,0.9,keyword_variation
+15 minute social,ic_people,social,0.7,contextual
+vacation flight,ic_car,travel,0.8,template_generated
+quick sport,ic_run,exercise,0.8,template_generated
+school.,ic_note,learning,1.0,direct_keyword_punct
+medical checkup,ic_health,health,0.8,template_generated
+morning task,ic_briefcase_line,work,0.7,contextual
+playing game,ic_tv,entertainment,0.8,template_generated
+transport adventure,ic_car,travel,0.8,template_generated
+healthy snack,ic_utensils_line,food,0.8,template_generated
+learn notes,ic_note,learning,0.8,template_generated
+late night entertainment,ic_tv,entertainment,0.7,contextual
+weekend social,ic_people,social,0.8,template_generated
+afternoon medical,ic_health,health,0.7,contextual
+work session,ic_briefcase_line,work,0.9,keyword_variation
+weekend movie,ic_tv,entertainment,0.8,template_generated
+professional session,ic_briefcase_line,work,0.9,keyword_variation
+early morning workout,ic_run,exercise,0.7,contextual
+tv session,ic_tv,entertainment,0.9,keyword_variation
+30 minute tired,ic_moon_line,sleep,0.7,contextual
+late night walk,ic_run,exercise,0.7,contextual
+morning entertainment,ic_tv,entertainment,0.7,contextual
+recharge session,ic_moon_line,sleep,0.9,keyword_variation
+dinner...,ic_people,social,1.0,direct_keyword_punct
+evening film,ic_tv,entertainment,0.8,template_generated
+1 hour entertainment,ic_tv,entertainment,0.7,contextual
+quick dinner,ic_utensils_line,food,0.8,template_generated
+practice,ic_note,learning,1.0,direct_keyword
+afternoon bedroom,ic_moon_line,sleep,0.8,template_generated
+meat!,ic_utensils_line,food,1.0,direct_keyword_punct
+evening meal,ic_utensils_line,food,0.7,contextual
+morning office,ic_briefcase_line,work,0.7,contextual
+outdoor training,ic_run,exercise,0.8,template_generated
+go dream,ic_moon_line,sleep,0.9,keyword_variation
+soccer,ic_run,exercise,1.0,direct_keyword
+catching up date,ic_people,social,0.8,template_generated
+drinks,ic_people,social,1.0,direct_keyword
+urgent dentist,ic_health,health,0.8,template_generated
+kitchen,ic_utensils_line,food,1.0,direct_keyword
+read notes,ic_note,learning,0.8,template_generated
+lunch session,ic_utensils_line,food,0.9,keyword_variation
+go people,ic_people,social,0.9,keyword_variation
+lesson session,ic_note,learning,0.9,keyword_variation
+film session,ic_tv,entertainment,0.9,keyword_variation
+contracttsession,ic_briefcase_line,work,0.81,keyword_variation_typo
+evening show,ic_tv,entertainment,0.8,template_generated
+go event,ic_people,social,0.9,keyword_variation
+takeout breakfast,ic_utensils_line,food,0.8,template_generated
+pilates session,ic_run,exercise,0.9,keyword_variation
+30 minute course,ic_note,learning,0.7,contextual
+relationship session,ic_people,social,0.9,keyword_variation
+30 minute night,ic_moon_line,sleep,0.7,contextual
+evening night,ic_moon_line,sleep,0.7,contextual
+late night dream,ic_moon_line,sleep,0.7,contextual
+go vacation,ic_car,travel,0.9,keyword_variation
+training,ic_run,exercise,1.0,direct_keyword
+stretch,ic_run,exercise,1.0,direct_keyword
+journey adventure,ic_car,travel,0.8,template_generated
+intensive learn,ic_note,learning,0.8,template_generated
+homework session,ic_note,learning,0.9,keyword_variation
+road train,ic_car,travel,0.8,template_generated
+go conference,ic_briefcase_line,work,0.9,keyword_variation
+go action,ic_tv,entertainment,0.9,keyword_variation
+school notes,ic_note,learning,0.8,template_generated
+go hotel,ic_car,travel,0.9,keyword_variation
+drive adventure,ic_car,travel,0.8,template_generated
+much needed bed,ic_moon_line,sleep,0.8,template_generated
+urgent work,ic_briefcase_line,work,0.8,template_generated
+travail,ic_briefcase_line,work,0.9,multilingual_french
+1 hour snack,ic_utensils_line,food,0.7,contextual
+health session,ic_health,health,0.9,keyword_variation
+medicine visit,ic_health,health,0.8,template_generated
+morning medical,ic_health,health,0.7,contextual
+drink session,ic_utensils_line,food,0.9,keyword_variation
+self study,ic_note,learning,0.8,template_generated
+lunch break,ic_utensils_line,food,0.8,template_generated
+go dance,ic_run,exercise,0.9,keyword_variation
+new entertainment,ic_tv,entertainment,0.8,template_generated
+30 minute gym,ic_run,exercise,0.7,contextual
+evening university,ic_note,learning,0.7,contextual
+evening bus,ic_car,travel,0.7,contextual
+grabbing snack,ic_utensils_line,food,0.8,template_generated
+getting some sleep,ic_moon_line,sleep,0.8,template_generated
+nurse,ic_health,health,1.0,direct_keyword
+school group,ic_note,learning,0.8,template_generated
+dentist session,ic_health,health,0.9,keyword_variation
+15 minute book,ic_note,learning,0.7,contextual
+explore session,ic_car,travel,0.9,keyword_variation
+client task,ic_briefcase_line,work,0.8,template_generated
+evening social,ic_people,social,0.7,contextual
+30 minute work,ic_briefcase_line,work,0.7,contextual
+go fitness,ic_run,exercise,0.9,keyword_variation
+go tea,ic_utensils_line,food,0.9,keyword_variation
+go tourism,ic_car,travel,0.9,keyword_variation
+daily business,ic_briefcase_line,work,0.8,template_generated
+go boxing,ic_run,exercise,0.9,keyword_variation
+talk,ic_people,social,1.0,direct_keyword
+study notes,ic_note,learning,0.8,template_generated
+evening eat,ic_utensils_line,food,0.7,contextual
+annual wellness,ic_health,health,0.8,template_generated
+holiday session,ic_car,travel,0.9,keyword_variation
+alarm,ic_moon_line,sleep,1.0,direct_keyword
+planning bus,ic_car,travel,0.8,template_generated
+recover session,ic_moon_line,sleep,0.9,keyword_variation
+urgent medicine,ic_health,health,0.8,template_generated
+go streaming,ic_tv,entertainment,0.9,keyword_variation
+show,ic_tv,entertainment,1.0,direct_keyword
+medication session,ic_health,health,0.9,keyword_variation
+highway,ic_car,travel,1.0,direct_keyword
+special family,ic_people,social,0.8,template_generated
+workout,ic_run,exercise,1.0,direct_keyword
+read materials,ic_note,learning,0.8,template_generated
+playing movie,ic_tv,entertainment,0.8,template_generated
+late night gathering,ic_people,social,0.7,contextual
+medicine,ic_health,health,1.0,direct_keyword
+date gathering,ic_people,social,0.8,template_generated
+read,ic_note,learning,1.0,direct_keyword
+hike,ic_run,exercise,1.0,direct_keyword
+early morning drive,ic_car,travel,0.7,contextual
+coffee session,ic_utensils_line,food,0.9,keyword_variation
+fun show,ic_tv,entertainment,0.8,template_generated
+urgent health,ic_health,health,0.8,template_generated
+medical dentist,ic_health,health,0.8,template_generated
+go walk!,ic_run,exercise,0.9,keyword_variation_punct
+wake,ic_moon_line,sleep,1.0,direct_keyword
+late night medical,ic_health,health,0.7,contextual
+relaxation,ic_tv,entertainment,1.0,direct_keyword
+late night sport,ic_run,exercise,0.7,contextual
+climbing,ic_run,exercise,1.0,direct_keyword
+lunch,ic_utensils_line,food,1.0,direct_keyword
+morning vacation,ic_car,travel,0.8,template_generated
+management,ic_briefcase_line,work,1.0,direct_keyword
+vacation transport,ic_car,travel,0.8,template_generated
+binge leisure,ic_tv,entertainment,0.8,template_generated
+doctor consultation,ic_health,health,0.8,template_generated
+fitness,ic_run,exercise,1.0,direct_keyword
+skill homework,ic_note,learning,0.8,template_generated
+medical,ic_health,health,1.0,direct_keyword
+lecture,ic_note,learning,1.0,direct_keyword
+chocolate,ic_utensils_line,food,1.0,direct_keyword
+strategy,ic_briefcase_line,work,1.0,direct_keyword
+celebration session,ic_people,social,0.9,keyword_variation
+late night doctor,ic_health,health,0.7,contextual
+evening family,ic_people,social,0.7,contextual
+planning flight,ic_car,travel,0.8,template_generated
+sleep break,ic_moon_line,sleep,0.8,template_generated
+work,ic_briefcase_line,work,1.0,direct_keyword
+appointment session,ic_health,health,0.9,keyword_variation
+team task,ic_briefcase_line,work,0.8,template_generated
+30 minute exercise,ic_run,exercise,0.7,contextual
+breakfast break,ic_utensils_line,food,0.8,template_generated
+afternoon pillow,ic_moon_line,sleep,0.8,template_generated
+commute session,ic_car,travel,0.9,keyword_variation
+go bus,ic_car,travel,0.9,keyword_variation
+sandwich session,ic_utensils_line,food,0.9,keyword_variation
+go university,ic_note,learning,0.9,keyword_variation
+eat prep,ic_utensils_line,food,0.8,template_generated
+1 hour travel,ic_car,travel,0.7,contextual
+relaxing show,ic_tv,entertainment,0.8,template_generated
+go hike,ic_run,exercise,0.9,keyword_variation
+water,ic_utensils_line,food,1.0,direct_keyword
+evening study,ic_note,learning,0.7,contextual
+afternoon journey,ic_car,travel,0.7,contextual
+evening session,ic_moon_line,sleep,0.9,keyword_variation
+restaurant!,ic_utensils_line,food,1.0,direct_keyword_punct
+client business,ic_briefcase_line,work,0.8,template_generated
+watching tv,ic_tv,entertainment,0.8,template_generated
+streaming,ic_tv,entertainment,1.0,direct_keyword
+peaceful pillow,ic_moon_line,sleep,0.8,template_generated
+go football,ic_run,exercise,0.9,keyword_variation
+go visit,ic_people,social,0.9,keyword_variation
+focused read,ic_note,learning,0.8,template_generated
+task session,ic_briefcase_line,work,0.9,keyword_variation
+go team,ic_people,social,0.9,keyword_variation
+late night task,ic_briefcase_line,work,0.7,contextual
+job meeting,ic_briefcase_line,work,0.8,template_generated
+afternoon trip,ic_car,travel,0.7,contextual
+early morning meal,ic_utensils_line,food,0.7,contextual
+go tennis,ic_run,exercise,0.9,keyword_variation
+music session,ic_tv,entertainment,0.9,keyword_variation
+go office,ic_briefcase_line,work,0.9,keyword_variation
+lunch with sarah,ic_people,social,0.6,realistic_pattern
+finish presentation,ic_briefcase_line,work,0.8,realistic_pattern
+30 minute commute,ic_car,travel,0.7,contextual
+planning travel,ic_car,travel,0.8,template_generated
+drama session,ic_tv,entertainment,0.9,keyword_variation
+homemade kitchen,ic_utensils_line,food,0.8,template_generated
+travel,ic_car,travel,1.0,direct_keyword
+go celebration,ic_people,social,0.9,keyword_variation
+document,ic_briefcase_line,work,1.0,direct_keyword
+peaceful bed,ic_moon_line,sleep,0.8,template_generated
+gym,ic_run,exercise,1.0,direct_keyword
+swim at the gym,ic_run,exercise,0.8,template_generated
+much needed night,ic_moon_line,sleep,0.8,template_generated
+explore,ic_car,travel,1.0,direct_keyword
+go school,ic_note,learning,0.9,keyword_variation
+1 hour wellness,ic_health,health,0.7,contextual
+routine hospital,ic_health,health,0.8,template_generated
+1 hour trip,ic_car,travel,0.7,contextual
+30 minute snack,ic_utensils_line,food,0.7,contextual
+fun film,ic_tv,entertainment,0.8,template_generated
+late night checkup,ic_health,health,0.7,contextual
+finally bedroom,ic_moon_line,sleep,0.8,template_generated
+booking drive,ic_car,travel,0.8,template_generated
+early morning doctor,ic_health,health,0.7,contextual
+medical hospital,ic_health,health,0.8,template_generated
+employment session?,ic_briefcase_line,work,0.9,keyword_variation_punct
+tired,ic_moon_line,sleep,1.0,direct_keyword
+deep nap,ic_moon_line,sleep,0.8,template_generated
+preventive checkup,ic_health,health,0.8,template_generated
+early morning university,ic_note,learning,0.7,contextual
+morning session,ic_moon_line,sleep,0.9,keyword_variation
+go bed,ic_moon_line,sleep,0.9,keyword_variation
+dentist appointment,ic_health,health,0.8,template_generated
+morning wellness,ic_health,health,0.7,contextual
+airport,ic_car,travel,1.0,direct_keyword
+medical medical,ic_health,health,0.8,template_generated
+annual doctor,ic_health,health,0.8,template_generated
+late night therapy,ic_health,health,0.7,contextual
+evening train,ic_car,travel,0.7,contextual
+30 minute drive,ic_car,travel,0.7,contextual
+fun talk,ic_people,social,0.8,template_generated
+morning tired,ic_moon_line,sleep,0.7,contextual
+skill study,ic_note,learning,0.8,template_generated
+evening breakfast,ic_utensils_line,food,0.7,contextual
+morning,ic_moon_line,sleep,1.0,direct_keyword
+deep pillow,ic_moon_line,sleep,0.8,template_generated
+new play,ic_tv,entertainment,0.8,template_generated
+urgent appointment,ic_health,health,0.8,template_generated
+binge play,ic_tv,entertainment,0.8,template_generated
+eat with family,ic_utensils_line,food,0.8,template_generated
+online university,ic_note,learning,0.8,template_generated
+restaurant,ic_utensils_line,food,1.0,direct_keyword
+go play,ic_tv,entertainment,0.9,keyword_variation
+talk with friends,ic_people,social,0.8,template_generated
+weekend train,ic_car,travel,0.8,template_generated
+food prep,ic_utensils_line,food,0.8,template_generated
+1 hour sport,ic_run,exercise,0.7,contextual
+exam learn,ic_note,learning,0.8,template_generated
+30 minute lunch,ic_utensils_line,food,0.7,contextual
+medical doctor,ic_health,health,0.8,template_generated
+30 minute visit,ic_people,social,0.7,contextual
+morning people,ic_people,social,0.7,contextual
+morning family,ic_people,social,0.7,contextual
+homework,ic_note,learning,1.0,direct_keyword
+contract session,ic_briefcase_line,work,0.9,keyword_variation
+sandwich,ic_utensils_line,food,1.0,direct_keyword
+afternoon visit,ic_people,social,0.7,contextual
+go friends,ic_people,social,0.9,keyword_variation
+takeout snack,ic_utensils_line,food,0.8,template_generated
+hanging out talk,ic_people,social,0.8,template_generated
+long train,ic_car,travel,0.8,template_generated
+early morning medicine,ic_health,health,0.7,contextual
+test,ic_note,learning,1.0,direct_keyword
+1 hour nap,ic_moon_line,sleep,0.7,contextual
+time to dream,ic_moon_line,sleep,0.8,template_generated
+study group,ic_note,learning,0.8,template_generated
+quick bedroom,ic_moon_line,sleep,0.8,template_generated
+go quiet,ic_moon_line,sleep,0.9,keyword_variation
+workout routine,ic_run,exercise,0.8,template_generated
+group chat,ic_people,social,0.8,template_generated
+restaurant prep,ic_utensils_line,food,0.8,template_generated
+grabbing eat,ic_utensils_line,food,0.8,template_generated
+research materials,ic_note,learning,0.8,template_generated
+course session,ic_note,learning,0.9,keyword_variation
+evening school,ic_note,learning,0.7,contextual
+afternoon people,ic_people,social,0.7,contextual
+employment,ic_briefcase_line,work,1.0,direct_keyword
+yoga session,ic_run,exercise,0.9,keyword_variation
+go knowledge,ic_note,learning,0.9,keyword_variation
+exercise.,ic_run,exercise,1.0,direct_keyword_punct
+online read,ic_note,learning,0.8,template_generated
+office call,ic_briefcase_line,work,0.8,template_generated
+homemade snack,ic_utensils_line,food,0.8,template_generated
+project employment,ic_briefcase_line,work,0.8,template_generated
+go kitchen,ic_utensils_line,food,0.9,keyword_variation
+morning kitchen,ic_utensils_line,food,0.8,template_generated
+morning nap,ic_moon_line,sleep,0.7,contextual
+playing fun,ic_tv,entertainment,0.8,template_generated
+go concert,ic_tv,entertainment,0.9,keyword_variation
+go wake,ic_moon_line,sleep,0.9,keyword_variation
+weekend show,ic_tv,entertainment,0.8,template_generated
+wellness visit,ic_health,health,0.8,template_generated
+homemade food,ic_utensils_line,food,0.8,template_generated
+quick workout,ic_run,exercise,0.8,template_generated
+fitness at the gym,ic_run,exercise,0.8,template_generated
+relaxation session,ic_tv,entertainment,0.9,keyword_variation
+workshop session!,ic_note,learning,0.9,keyword_variation_punct
+healthy eat,ic_utensils_line,food,0.8,template_generated
+comer,ic_utensils_line,food,0.9,multilingual_spanish
+urgent job,ic_briefcase_line,work,0.8,template_generated
+30 minute friends,ic_people,social,0.7,contextual
+project project,ic_briefcase_line,work,0.8,template_generated
+catching up visit,ic_people,social,0.8,template_generated
+morning show,ic_tv,entertainment,0.7,contextual
+friends gathering,ic_people,social,0.8,template_generated
+email session,ic_briefcase_line,work,0.9,keyword_variation
+pillow break,ic_moon_line,sleep,0.8,template_generated
+15 minute career,ic_briefcase_line,work,0.7,contextual
+study session,ic_note,learning,0.9,keyword_variation
+hospital visit,ic_health,health,0.8,template_generated
+cooking with family,ic_utensils_line,food,0.8,template_generated
+trip,ic_car,travel,1.0,direct_keyword
+visit gathering,ic_people,social,0.8,template_generated
+office job,ic_briefcase_line,work,0.8,template_generated
+exam session,ic_note,learning,0.9,keyword_variation
+conference,ic_briefcase_line,work,1.0,direct_keyword
+quick training,ic_run,exercise,0.8,template_generated
+early morning rest,ic_moon_line,sleep,0.7,contextual
+fish,ic_utensils_line,food,1.0,direct_keyword
+finally nap,ic_moon_line,sleep,0.8,template_generated
+binge entertainment,ic_tv,entertainment,0.8,template_generated
+cooking session,ic_utensils_line,food,0.9,keyword_variation
+tourism,ic_car,travel,1.0,direct_keyword
+course notes,ic_note,learning,0.8,template_generated
+morning study,ic_note,learning,0.7,contextual
+holiday,ic_car,travel,1.0,direct_keyword
+game,ic_tv,entertainment,1.0,direct_keyword
+audit,ic_briefcase_line,work,1.0,direct_keyword
+run,ic_run,exercise,1.0,direct_keyword
+colleague,ic_people,social,1.0,direct_keyword
+dinner,ic_utensils_line,food,1.0,direct_keyword
+quick bus,ic_car,travel,0.8,template_generated
+business bus,ic_car,travel,0.8,template_generated
+business vacation,ic_car,travel,0.8,template_generated
+go clinic,ic_health,health,0.9,keyword_variation
+walk with friends,ic_run,exercise,0.8,template_generated
+30 minute wellness,ic_health,health,0.7,contextual
+visit with friends,ic_people,social,0.8,template_generated
+cooking prep,ic_utensils_line,food,0.8,template_generated
+dentist consultation,ic_health,health,0.8,template_generated
+go gathering,ic_people,social,0.9,keyword_variation
+urgent project,ic_briefcase_line,work,0.8,template_generated
+walk routine,ic_run,exercise,0.8,template_generated
+30 minute project,ic_briefcase_line,work,0.7,contextual
+quiet,ic_moon_line,sleep,1.0,direct_keyword
+afternoon breakfast,ic_utensils_line,food,0.7,contextual
+appointment,ic_health,health,1.0,direct_keyword
+morning run 5km,ic_run,exercise,1.0,realistic_pattern
+coffee session,ic_people,social,0.9,keyword_variation
+outdoor walk,ic_run,exercise,0.8,template_generated
+peaceful sleep,ic_moon_line,sleep,0.8,template_generated
+favorite play,ic_tv,entertainment,0.8,template_generated
+gathering with friends,ic_people,social,0.8,template_generated
+routine appointment,ic_health,health,0.8,template_generated
+quick cooking,ic_utensils_line,food,0.8,template_generated
+road vacation,ic_car,travel,0.8,template_generated
+early morning nap,ic_moon_line,sleep,0.7,contextual
+late night read,ic_note,learning,0.7,contextual
+early morning task,ic_briefcase_line,work,0.7,contextual
+review,ic_note,learning,1.0,direct_keyword
+wake session,ic_moon_line,sleep,0.9,keyword_variation
+quick travel,ic_car,travel,0.8,template_generated
+go restaurant,ic_utensils_line,food,0.9,keyword_variation
+playing video,ic_tv,entertainment,0.8,template_generated
+meal break,ic_utensils_line,food,0.8,template_generated
+15 minute people,ic_people,social,0.7,contextual
+gathering,ic_people,social,1.0,direct_keyword
+employment meeting,ic_briefcase_line,work,0.8,template_generated
+go run,ic_run,exercise,0.9,keyword_variation
+health,ic_health,health,1.0,direct_keyword
+tea session,ic_utensils_line,food,0.9,keyword_variation
+relaxing movie,ic_tv,entertainment,0.8,template_generated
+daily work,ic_briefcase_line,work,0.8,template_generated
+test session,ic_note,learning,0.9,keyword_variation
+go drama,ic_tv,entertainment,0.9,keyword_variation
+go vegetable,ic_utensils_line,food,0.9,keyword_variation
+go people...,ic_people,social,0.9,keyword_variation_punct
+weekend journey,ic_car,travel,0.8,template_generated
+evening commute,ic_car,travel,0.7,contextual
+client career,ic_briefcase_line,work,0.8,template_generated
+fun friends,ic_people,social,0.8,template_generated
+annual dentist,ic_health,health,0.8,template_generated
+swim,ic_run,exercise,1.0,direct_keyword
+social party,ic_people,social,0.8,template_generated
+weekend play,ic_tv,entertainment,0.8,template_generated
+annual checkup,ic_health,health,0.8,template_generated
+stretch session,ic_run,exercise,0.9,keyword_variation
+30 minute trip,ic_car,travel,0.7,contextual
+planning session.,ic_briefcase_line,work,0.9,keyword_variation_punct
+late night wellness,ic_health,health,0.7,contextual
+go cafe,ic_utensils_line,food,0.9,keyword_variation
+15 minute swim,ic_run,exercise,0.8,template_generated
+skill session,ic_note,learning,0.9,keyword_variation
+late night show,ic_tv,entertainment,0.7,contextual
+playing leisure,ic_tv,entertainment,0.8,template_generated
+1 hour therapy,ic_health,health,0.7,contextual
+family social,ic_people,social,0.8,template_generated
+vacation session,ic_car,travel,0.9,keyword_variation
+15 minute play,ic_tv,entertainment,0.7,contextual

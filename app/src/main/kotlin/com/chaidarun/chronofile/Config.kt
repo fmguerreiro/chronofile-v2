@@ -21,6 +21,8 @@ data class Config(
   @Expose @SerializedName("weeklyGoals") val weeklyGoals: List<WeeklyGoal>? = null,
   /** Whether to send Monday morning notifications with weekly results. */
   @Expose @SerializedName("weeklyNotificationsEnabled") val weeklyNotificationsEnabled: Boolean = true,
+  /** Whether to use dark theme. */
+  @Expose @SerializedName("isDarkTheme") val isDarkTheme: Boolean = false,
 ) {
   private val activityGroups by lazy {
     mutableMapOf<String, String>().apply {

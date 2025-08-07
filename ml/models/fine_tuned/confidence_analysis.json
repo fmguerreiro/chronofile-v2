@@ -1,0 +1,10 @@
+{
+  "mean_confidence": 0.16246795654296875,
+  "std_confidence": 0.019441386684775352,
+  "min_confidence": 0.1222357302904129,
+  "max_confidence": 0.20172791182994843,
+  "confidence_by_correctness": {
+    "correct_mean": 0.1649932563304901,
+    "incorrect_mean": 0.15701612830162048
+  }
+}

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewbinding.ViewBinding
 import io.reactivex.disposables.CompositeDisposable
 
@@ -31,10 +32,33 @@ abstract class BaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     logLifecycleEvent("onCreate")
+    
+    // Apply theme before super.onCreate
+    val isDarkTheme = Store.state.config?.isDarkTheme ?: false
+    AppCompatDelegate.setDefaultNightMode(
+      if (isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES
+      else AppCompatDelegate.MODE_NIGHT_NO
+    )
+    
     super.onCreate(savedInstanceState)
 
     // Keep screen awake
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    
+    // Subscribe to theme changes
+    disposables = CompositeDisposable()
+    disposables?.add(
+      Store.observable
+        .map { it.config?.isDarkTheme ?: false }
+        .distinctUntilChanged()
+        .skip(1) // Skip initial value
+        .subscribe { isDark ->
+          AppCompatDelegate.setDefaultNightMode(
+            if (isDark) AppCompatDelegate.MODE_NIGHT_YES
+            else AppCompatDelegate.MODE_NIGHT_NO
+          )
+        }
+    )
   }
 
   override fun onStart() {

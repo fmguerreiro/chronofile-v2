@@ -55,6 +55,9 @@ sealed class Action {
   data class DismissRecommendation(val recommendationId: String) : Action()
   data class AcceptRecommendation(val recommendation: SmartRecommendation) : Action()
   data class UpdateHabitMetrics(val metrics: Map<String, HabitMetrics>) : Action()
+  
+  // Theme Action
+  data class SetDarkTheme(val isDarkTheme: Boolean) : Action()
 }
 
 /** This class must be deeply immutable and preferably printable */
@@ -67,7 +70,8 @@ data class State(
   val lifeBalance: LifeBalanceMetrics? = null,
   val habitMetrics: Map<String, HabitMetrics> = emptyMap(),
   val achievements: List<Achievement> = emptyList(),
-  val dismissedRecommendations: Set<String> = emptySet()
+  val dismissedRecommendations: Set<String> = emptySet(),
+  val isDarkTheme: Boolean = false
 )
 
 private val reducer: (State, Action) -> State = { state, action ->
@@ -170,6 +174,12 @@ private val reducer: (State, Action) -> State = { state, action ->
           copy(dismissedRecommendations = dismissedRecommendations + action.recommendation.id)
         }
         is Action.UpdateHabitMetrics -> copy(habitMetrics = action.metrics)
+        is Action.SetDarkTheme -> {
+          val oldConfig = config ?: Config()
+          val newConfig = oldConfig.copy(isDarkTheme = action.isDarkTheme)
+          newConfig.save()
+          copy(config = newConfig, isDarkTheme = action.isDarkTheme)
+        }
       }
 
     Log.i(TAG, "Reduced $action in ${System.currentTimeMillis() - start} ms")

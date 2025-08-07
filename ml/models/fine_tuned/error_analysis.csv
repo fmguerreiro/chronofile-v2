@@ -1,0 +1,51 @@
+user_input,icon_label,category,confidence_score,source,predicted,correct
+long commute,ic_car,travel,0.8,template_generated,work,False
+go workshop,ic_note,learning,0.9,keyword_variation,work,False
+course,ic_note,learning,1.0,direct_keyword,sleep,False
+1 hour play,ic_tv,entertainment,0.7,contextual,work,False
+evening course,ic_note,learning,0.7,contextual,sleep,False
+1 hour walk,ic_run,exercise,0.7,contextual,sleep,False
+theater,ic_tv,entertainment,1.0,direct_keyword,work,False
+business journey,ic_car,travel,0.8,template_generated,work,False
+go falad,ic_utensils_line,food,0.81,keyword_variation_typo,work,False
+late night social,ic_people,social,0.7,contextual,sleep,False
+bus session,ic_car,travel,0.9,keyword_variation,work,False
+1 hour train,ic_car,travel,0.7,contextual,work,False
+go explore,ic_car,travel,0.9,keyword_variation,work,False
+go birthday,ic_people,social,0.9,keyword_variation,sleep,False
+go entertainment,ic_tv,entertainment,0.9,keyword_variation,work,False
+15 minute school,ic_note,learning,0.7,contextual,exercise,False
+road journey,ic_car,travel,0.8,template_generated,work,False
+road travel,ic_car,travel,0.8,template_generated,work,False
+hanging out date,ic_people,social,0.8,template_generated,sleep,False
+booking vacation,ic_car,travel,0.8,template_generated,work,False
+go travel,ic_car,travel,0.9,keyword_variation,work,False
+late night people,ic_people,social,0.7,contextual,sleep,False
+repas,ic_utensils_line,food,0.9,multilingual_french,sleep,False
+follow-up wellness,ic_health,health,0.8,template_generated,food,False
+analyze session,ic_note,learning,0.9,keyword_variation,work,False
+weekend tv,ic_tv,entertainment,0.8,template_generated,work,False
+weekend film,ic_tv,entertainment,0.8,template_generated,work,False
+smoothie session,ic_utensils_line,food,0.9,keyword_variation,sleep,False
+party session,ic_people,social,0.9,keyword_variation,work,False
+exercice,ic_run,exercise,0.9,multilingual_french,sleep,False
+1 hour video,ic_tv,entertainment,0.7,contextual,work,False
+15 minute show,ic_tv,entertainment,0.7,contextual,work,False
+early morning tv,ic_tv,entertainment,0.7,contextual,work,False
+quick run,ic_run,exercise,0.8,template_generated,sleep,False
+late night tv,ic_tv,entertainment,0.7,contextual,work,False
+booking transport,ic_car,travel,0.8,template_generated,work,False
+coding,ic_briefcase_line,work,1.0,direct_keyword,exercise,False
+swim with friends,ic_run,exercise,0.8,template_generated,food,False
+go dance?,ic_run,exercise,0.9,keyword_variation_punct,food,False
+road transport,ic_car,travel,0.8,template_generated,work,False
+course group,ic_note,learning,0.8,template_generated,social,False
+late night run,ic_run,exercise,0.7,contextual,sleep,False
+go jog,ic_run,exercise,0.9,keyword_variation,sleep,False
+comida,ic_utensils_line,food,0.9,multilingual_spanish,work,False
+early morning film,ic_tv,entertainment,0.7,contextual,work,False
+vacation trip,ic_car,travel,0.8,template_generated,entertainment,False
+binge fun,ic_tv,entertainment,0.8,template_generated,social,False
+go study,ic_note,learning,0.9,keyword_variation,work,False
+show session,ic_tv,entertainment,0.9,keyword_variation,work,False
+long travel,ic_car,travel,0.8,template_generated,work,False
