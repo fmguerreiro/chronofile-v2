@@ -28,7 +28,8 @@ data class WeeklyGoal(
   fun getWeekEndTimestamp(): Long = weekStartTimestamp + (7 * 24 * 60 * 60 * 1000)
   
   fun isCurrentWeek(): Boolean {
-    val now = System.currentTimeMillis()
-    return now >= weekStartTimestamp && now < getWeekEndTimestamp()
+    // For recurring goals, they should always be considered "current" if active
+    // The weekStartTimestamp is just for historical tracking, not for filtering visibility
+    return isActive
   }
 }

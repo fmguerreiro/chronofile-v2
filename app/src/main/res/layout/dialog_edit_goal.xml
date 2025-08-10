@@ -2,11 +2,52 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical"
-  android:padding="24dp"
 >
+  <!-- Header with title and delete button -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="8dp"
+  >
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:text="Edit Goal"
+      android:textAppearance="?attr/textAppearanceHeadlineSmall"
+      android:textColor="?attr/colorOnSurface"
+    />
+    
+    <ImageButton
+      android:id="@+id/deleteGoalButton"
+      android:layout_width="48dp"
+      android:layout_height="48dp"
+      android:background="?attr/selectableItemBackgroundBorderless"
+      android:src="@android:drawable/ic_menu_delete"
+      android:contentDescription="Delete goal"
+      android:tint="?attr/colorError"
+      tools:ignore="UseAppTint"
+    />
+  </LinearLayout>
+  
+  <!-- Form content -->
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="24dp"
+  >
   
   <com.google.android.material.textfield.TextInputLayout
     android:layout_width="match_parent"
@@ -62,4 +103,5 @@
     android:textAppearance="?attr/textAppearanceBodySmall"
     android:textColor="?attr/colorOnSurfaceVariant"
   />
+  </LinearLayout>
 </LinearLayout>
