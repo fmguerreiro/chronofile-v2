@@ -35,7 +35,12 @@ class GraphActivity : BaseActivity() {
           val intent = Intent(this, MainActivity::class.java)
           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
@@ -46,14 +51,24 @@ class GraphActivity : BaseActivity() {
         R.id.nav_goals -> {
           val intent = Intent(this, GoalsActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_insights -> {
           val intent = Intent(this, RecommendationActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }

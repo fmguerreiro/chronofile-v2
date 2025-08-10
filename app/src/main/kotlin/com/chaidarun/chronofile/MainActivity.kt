@@ -131,19 +131,34 @@ class MainActivity : BaseActivity() {
         R.id.nav_timeline -> true
         R.id.nav_stats -> {
           startActivity(Intent(this, GraphActivity::class.java))
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_goals -> {
           startActivity(Intent(this, GoalsActivity::class.java))
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_insights -> {
           startActivity(Intent(this, RecommendationActivity::class.java))
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }

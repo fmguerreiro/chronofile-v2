@@ -4,6 +4,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.ResultReceiver
 import android.util.Log
 import android.view.ActionMode
@@ -50,7 +51,7 @@ class HistoryListAdapter(private val appActivity: MainActivity) :
   private var selectedEntry: Entry? = null
   private var selectedDateTimestamp: Long? = null
   private val receiver by lazy {
-    object : ResultReceiver(Handler()) {
+    object : ResultReceiver(Handler(Looper.getMainLooper())) {
       override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
         if (resultCode == FetchAddressIntentService.SUCCESS_CODE) {
           resultData.getString(FetchAddressIntentService.RESULT_DATA_KEY)?.let { App.toast(it) }

@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.reflect.TypeToken
 
 class EditorActivity : BaseActivity() {
   private val binding by viewBinding(ActivityEditorBinding::inflate)
@@ -93,10 +94,17 @@ class EditorActivity : BaseActivity() {
     config?.let { cfg ->
       val jsonString = cfg.serialize()
       try {
-        val jsonMap = com.google.gson.Gson().fromJson(jsonString, Map::class.java) as? Map<String, Any>
-        val activityGroups = jsonMap?.get("activityGroups") as? Map<String, List<String>>
-        activityGroups?.forEach { (groupName, activities) ->
-          groups[groupName] = activities.toMutableList()
+        val gson = com.google.gson.Gson()
+        val type = object : TypeToken<Map<String, Any>>() {}.type
+        val jsonMap = gson.fromJson<Map<String, Any>>(jsonString, type)
+        val activityGroupsJson = jsonMap["activityGroups"]
+        if (activityGroupsJson != null) {
+          // Convert the nested structure safely
+          val groupsType = object : TypeToken<Map<String, List<String>>>() {}.type
+          val activityGroups = gson.fromJson<Map<String, List<String>>>(gson.toJson(activityGroupsJson), groupsType)
+          activityGroups.forEach { (groupName, activities) ->
+            groups[groupName] = activities.toMutableList()
+          }
         }
       } catch (e: Exception) {
         Log.w(TAG, "Failed to parse activity groups", e)
@@ -336,28 +344,48 @@ class EditorActivity : BaseActivity() {
           val intent = Intent(this, MainActivity::class.java)
           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_stats -> {
           val intent = Intent(this, GraphActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_goals -> {
           val intent = Intent(this, GoalsActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_insights -> {
           val intent = Intent(this, RecommendationActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }

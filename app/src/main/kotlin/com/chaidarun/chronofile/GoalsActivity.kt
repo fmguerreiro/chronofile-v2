@@ -389,6 +389,9 @@ class GoalsActivity : BaseActivity() {
     frequencyInput.setText(currentFrequency.displayName(), false)
     updateHintTextAndConvertHours(currentFrequency)
     
+    // Setup delete button (will be set after dialog creation)
+    val deleteButton = dialogView.findViewById<android.widget.ImageButton>(R.id.deleteGoalButton)
+    
     // Listen for frequency changes
     frequencyInput.setOnItemClickListener { _, _, position, _ ->
       val selectedFrequency = GoalFrequency.values()[position]
@@ -396,7 +399,6 @@ class GoalsActivity : BaseActivity() {
     }
     
     val dialog = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
-      .setTitle("Edit Goal")
       .setView(dialogView)
       .setPositiveButton("Save") { _, _ ->
         val newActivity = activityInput.text.toString().trim()
@@ -428,6 +430,12 @@ class GoalsActivity : BaseActivity() {
       }
       .setNegativeButton("Cancel", null)
       .create()
+      
+    // Setup delete button click listener now that dialog is created
+    deleteButton.setOnClickListener {
+      dialog.dismiss()
+      deleteGoal(goal)
+    }
       
     dialog.setOnShowListener {
       val saveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -510,14 +518,24 @@ class GoalsActivity : BaseActivity() {
           val intent = Intent(this, MainActivity::class.java)
           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
         R.id.nav_stats -> {
           val intent = Intent(this, GraphActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
@@ -528,7 +546,12 @@ class GoalsActivity : BaseActivity() {
         R.id.nav_insights -> {
           val intent = Intent(this, RecommendationActivity::class.java)
           startActivity(intent)
-          overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(OVERRIDE_TRANSITION_OPEN, R.anim.fade_in, R.anim.fade_out)
+          } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+          }
           finish()
           true
         }
