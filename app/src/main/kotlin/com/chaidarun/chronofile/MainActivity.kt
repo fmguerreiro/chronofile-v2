@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,6 +35,21 @@ class MainActivity : BaseActivity() {
   private lateinit var dayNavigationManager: DayNavigationManager
   private lateinit var activitySuggestionManager: ActivitySuggestionManager
   private lateinit var insightsAnalyzer: InsightsAnalyzer
+
+  // Activity result launcher for document tree selection
+  private val documentTreeLauncher = registerForActivityResult(
+    ActivityResultContracts.OpenDocumentTree()
+  ) { uri ->
+    if (uri != null) {
+      binding.changeSaveDirBanner.visibility = View.GONE
+      App.toast("Successfully changed storage location")
+      IOUtil.persistAndCheckStoragePermission()
+      IOUtil.setPref(IOUtil.STORAGE_DIR_PREF, uri.toString())
+      hydrateStoreFromFiles()
+    } else {
+      App.toast("Storage location not changed")
+    }
+  }
 
   private data class NfcFlow(
     val id1: String,
@@ -294,23 +310,6 @@ class MainActivity : BaseActivity() {
     }
   }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
-    super.onActivityResult(requestCode, resultCode, resultData)
-    when (requestCode) {
-      STORAGE_REQUEST_CODE -> {
-        val uri = resultData?.data
-        if (resultCode != RESULT_OK || uri == null) {
-          App.toast("Storage location not changed")
-          return
-        }
-        binding.changeSaveDirBanner.visibility = View.GONE
-        App.toast("Successfully changed storage location")
-        IOUtil.persistAndCheckStoragePermission()
-        IOUtil.setPref(IOUtil.STORAGE_DIR_PREF, uri.toString())
-        hydrateStoreFromFiles()
-      }
-    }
-  }
 
   override fun onRequestPermissionsResult(
     requestCode: Int,
@@ -332,7 +331,12 @@ class MainActivity : BaseActivity() {
   @OptIn(ExperimentalStdlibApi::class, ExperimentalUnsignedTypes::class)
   private fun processNfcIntent(intent: Intent) {
     setIntent(Intent())
-    val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG) ?: return
+    val tag = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+      intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, android.nfc.Tag::class.java)
+    } else {
+      @Suppress("DEPRECATION")
+      intent.getParcelableExtra<android.nfc.Tag>(NfcAdapter.EXTRA_TAG)
+    } ?: return
     val id = tag.id.toHexString().uppercase()
     Log.i(TAG, "Detected NFC tag: $id")
     val nfcFlow = nfcFlow
@@ -397,7 +401,7 @@ class MainActivity : BaseActivity() {
   }
 
   private fun requestStorageAccess() {
-    startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE), STORAGE_REQUEST_CODE)
+    documentTreeLauncher.launch(null)
   }
 
   private fun hydrateStoreFromFiles() {
@@ -485,6 +489,5 @@ class MainActivity : BaseActivity() {
       NfcAdapter.ACTION_TAG_DISCOVERED
     )
     private const val PERMISSION_REQUEST_CODE = 1
-    private const val STORAGE_REQUEST_CODE = 2
   }
 }

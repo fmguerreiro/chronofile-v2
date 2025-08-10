@@ -8,6 +8,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
+import java.util.Locale
 import android.os.Bundle
 
 class ChronofileWidgetProvider : AppWidgetProvider() {
@@ -91,7 +92,7 @@ class ChronofileWidgetProvider : AppWidgetProvider() {
                         // Full width: emoji + text
                         val emoji = getActivityIcon(activity)
                         val text = if (activity.length > 6) activity.take(4) + ".." else activity
-                        "$emoji ${text.capitalize()}"
+                        "$emoji ${text.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}"
                     }
                     views.setTextViewText(buttonIds[i], displayText)
                     views.setOnClickPendingIntent(buttonIds[i], 

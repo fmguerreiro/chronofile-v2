@@ -4,6 +4,7 @@ package com.chaidarun.chronofile
 
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import kotlin.math.abs
 
 class InsightsAnalyzer {
@@ -139,7 +140,7 @@ class InsightsAnalyzer {
       // Check if activity is missing this week but had a streak ≥3 days
       val weekActivities = weekEntries.map { normalizeActivityName(it.activity, config) }.toSet()
       if (streakLength >= 3 && !weekActivities.contains(activity)) {
-        insights.add("${activity.capitalize()} streak broken ($streakLength-day streak)")
+        insights.add("${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} streak broken ($streakLength-day streak)")
       }
     }
     
@@ -191,7 +192,7 @@ class InsightsAnalyzer {
             "-${((historicalAvg - currentAvg) * 60).toInt()}min"
           }
           val percentage = (variance * 100).toInt()
-          insights.add("${activity.capitalize()}: ${String.format("%.1f", currentAvg)}hr avg, $change ($percentage% change)")
+          insights.add("${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: ${String.format("%.1f", currentAvg)}hr avg, $change ($percentage% change)")
         }
       }
     }
@@ -237,7 +238,7 @@ class InsightsAnalyzer {
         // Only flag if timing shift > 2 hours
         if (hourDiff >= 2) {
           val timeShift = if (currentAvgHour > historicalAvgHour) "later" else "earlier"
-          insights.add("${activity.capitalize()}: usually ${formatHour(historicalAvgHour)}, this week ${formatHour(currentAvgHour)} (${hourDiff}hr $timeShift)")
+          insights.add("${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: usually ${formatHour(historicalAvgHour)}, this week ${formatHour(currentAvgHour)} (${hourDiff}hr $timeShift)")
         }
       }
     }
@@ -280,7 +281,7 @@ class InsightsAnalyzer {
     newActivities.forEach { activity ->
       // Count occurrences this week to prioritize by frequency
       val weekCount = weekEntries.count { normalizeActivityName(it.activity, config) == activity }
-      insights.add("New activity: ${activity.capitalize()} (${weekCount}x this week)")
+      insights.add("New activity: ${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} (${weekCount}x this week)")
     }
     
     return insights.sortedByDescending { 
@@ -315,11 +316,11 @@ class InsightsAnalyzer {
       val historicalWeeklyAvg = (historicalFrequency[topActivity.key] ?: 0) / 4.0 
       
       return if (weeklyCount > historicalWeeklyAvg * 1.25) {
-        "${topActivity.key.capitalize()}: ${weeklyCount}x this week (usual: ${historicalWeeklyAvg.toInt()}x)"
+        "${topActivity.key.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: ${weeklyCount}x this week (usual: ${historicalWeeklyAvg.toInt()}x)"
       } else if (weeklyCount < historicalWeeklyAvg * 0.75) {
-        "${topActivity.key.capitalize()}: ${weeklyCount}x this week (down from usual ${historicalWeeklyAvg.toInt()}x)"
+        "${topActivity.key.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: ${weeklyCount}x this week (down from usual ${historicalWeeklyAvg.toInt()}x)"
       } else {
-        "${topActivity.key.capitalize()}: ${weeklyCount}x this week (consistent with usual)"
+        "${topActivity.key.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: ${weeklyCount}x this week (consistent with usual)"
       }
     }
     
@@ -362,7 +363,7 @@ class InsightsAnalyzer {
         
         if (variance > historicalAvg * 0.25) {
           val change = if (currentAvg > historicalAvg) "+${((currentAvg - historicalAvg) * 60).toInt()}min" else "-${((historicalAvg - currentAvg) * 60).toInt()}min"
-          insights.add("${activity.capitalize()}: ${String.format("%.1f", currentAvg)}hr average, $change from usual")
+          insights.add("${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: ${String.format("%.1f", currentAvg)}hr average, $change from usual")
         }
       }
     }
@@ -402,7 +403,7 @@ class InsightsAnalyzer {
         
         if (hourDiff >= 2) {
           val timeShift = if (currentAvgHour > historicalAvgHour) "later" else "earlier"
-          return "${activity.capitalize()}: typically ${formatHour(historicalAvgHour)}, today at ${formatHour(currentAvgHour)} (${hourDiff}hr $timeShift)"
+          return "${activity.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}: typically ${formatHour(historicalAvgHour)}, today at ${formatHour(currentAvgHour)} (${hourDiff}hr $timeShift)"
         }
       }
     }
@@ -439,7 +440,7 @@ class InsightsAnalyzer {
       if (historicalTotal > 0) {
         val confidence = (historicalCount * 100) / historicalTotal
         if (confidence >= 50) {
-          return "${topSequence.key.first.capitalize()} → ${topSequence.key.second.capitalize()} ${confidence}% of time"
+          return "${topSequence.key.first.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} → ${topSequence.key.second.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} ${confidence}% of time"
         }
       }
     }
@@ -469,9 +470,9 @@ class InsightsAnalyzer {
       if (topMissing != null) {
         val streakDays = calculateStreakLength(historicalEntries, topMissing, config)
         return if (streakDays > 0) {
-          "No ${topMissing.capitalize()} logged, ${streakDays}-day streak broken"
+          "No ${topMissing.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} logged, ${streakDays}-day streak broken"
         } else {
-          "Missing usual ${topMissing.capitalize()} activity this week"
+          "Missing usual ${topMissing.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }} activity this week"
         }
       }
     }
