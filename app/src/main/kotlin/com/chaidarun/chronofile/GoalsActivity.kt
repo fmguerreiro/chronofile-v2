@@ -237,6 +237,12 @@ class GoalsActivity : BaseActivity() {
     val hoursInput = dialogView.findViewById<EditText>(R.id.editGoalHours)
     val frequencyInput = dialogView.findViewById<AutoCompleteTextView>(R.id.editGoalFrequency)
     
+    // Update header for Add Goal and hide delete button
+    val headerTitle = dialogView.findViewById<TextView>(R.id.headerTitle)
+    val deleteButton = dialogView.findViewById<android.widget.ImageButton>(R.id.deleteGoalButton)
+    headerTitle?.text = "Add Goal"
+    deleteButton.visibility = android.view.View.GONE
+    
     // Setup frequency dropdown
     val frequencies = GoalFrequency.values().map { it.displayName() }
     val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, frequencies)
@@ -278,7 +284,6 @@ class GoalsActivity : BaseActivity() {
     }
     
     val dialog = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
-      .setTitle("Add Goal")
       .setView(dialogView)
       .setPositiveButton("Add") { _, _ ->
         val activity = activityInput.text.toString().trim()
